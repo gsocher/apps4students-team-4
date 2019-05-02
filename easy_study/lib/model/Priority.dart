@@ -1,0 +1,3 @@
+enum Priority {
+  WANT_TO_PASS, MINIMALISM, NORMAL
+}
