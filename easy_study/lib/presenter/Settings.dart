@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Map extends StatelessWidget {
+class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
           alignment: Alignment.center,
-          child: Text("Map in construction!"),
-        ));
+          child: Text("Settings in construction!"),
+    ));
   }
 }
