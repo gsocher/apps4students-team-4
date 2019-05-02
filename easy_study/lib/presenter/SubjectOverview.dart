@@ -5,8 +5,9 @@ import 'package:easy_study/model/Subject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SubjectCard extends StatelessWidget {
+class SubjectOverview extends StatelessWidget {
 
+  // TODO: 02.05.2019 Should be a list
   Subject subject = new Subject.name("title", Type.WRITTEN_EXAM, "R1.001", Priority.MINIMALISM, "description", Color.fromARGB(0, 0, 0, 0), 0, DateTime.now(), 5);
 
   @override

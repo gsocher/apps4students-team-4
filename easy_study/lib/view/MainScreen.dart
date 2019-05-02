@@ -1,41 +1,43 @@
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/presenter/addSubject.dart';
-import 'package:easy_study/presenter/subjectCard.dart';
+import 'package:easy_study/presenter/SubjectAdd.dart';
+import 'package:easy_study/presenter/SubjectOverview.dart';
+import 'package:easy_study/presenter/Map.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SubjectList extends StatefulWidget{
+class MainScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SubjectListState();
-  }
+  State<StatefulWidget> createState() => _MainScreenState();
+}
 
-class _SubjectListState extends State<SubjectList>{
-
-  Subject _subject;
+class _MainScreenState extends State<MainScreen> {
+  Widget _widget = SubjectOverview();
 
   Widget build(BuildContext context) {
-    return
-      new Scaffold(
-          appBar: AppBar(
-            actions: <Widget>[
-              FlatButton(
-                child: Icon(Icons.add, color: Colors.white),
-                onPressed: ()=> _addPage(context, SubjectAdd()),
-              ),
-            ],
-          ),
-          body: new ListView(
-            children: <Widget>[
-              SubjectCard(),
-            ],
-          )
+    return new Scaffold(
+        // TODO: 02.05.2019 create bottom app bar with icons for map new subject and overview.
+        appBar: AppBar(
+          actions: <Widget>[
+            FlatButton(
+              child: Icon(Icons.add, color: Colors.white),
+              onPressed: () => _addPage(context, SubjectAdd()),
+            ),
+          ],
+        ),
+        body: _widget);
+  }
 
-    );
+  void _changeView(Widget widget) {
+    setState(() {
+      _widget = Map();
+    });
   }
 
   static void _addPage(BuildContext context, Widget widget) {
-    Navigator.pop(context); //remove a page from the widget stack (close navigation)
-    Navigator.pushReplacement( //replace the top view(widget) from the stack with the new one
-        context, MaterialPageRoute(builder: (BuildContext context) => widget));
+    Navigator.pop(
+        context); //remove a page from the widget stack (close navigation)
+    Navigator.pushReplacement(
+        //replace the top view(widget) from the stack with the new one
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => widget));
   }
 }

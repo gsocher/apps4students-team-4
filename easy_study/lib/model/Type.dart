@@ -1,3 +1,3 @@
-enum SubjectType {
-  PRESENTATION, ORAL_EXAM_, 
+enum Type {
+  PRESENTATION, ORAL_EXAM_, WRITTEN_EXAM
 }
