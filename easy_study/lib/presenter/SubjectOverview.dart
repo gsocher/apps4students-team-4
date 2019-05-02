@@ -1,31 +1,13 @@
-import 'dart:ui';
 
+import 'package:easy_study/model/Priority.dart';
+import 'package:easy_study/model/Type.dart';
+import 'package:easy_study/model/Subject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-
 class SubjectCard extends StatelessWidget {
-  String title;
-  String type;
-  String room;
-  String priority;
-  String description;
-  Color color;
-  int timeSpent;
-  DateTime dueDate;
-  int hoursWeek;
-  double textSizeFactor;
 
-  SubjectCard(this.title, {
-    this.color=Colors.green ,
-    this.hoursWeek=10,
-    this.type = 'type',
-    this.timeSpent=0,
-    this.priority="High",
-    this.description='',
-    this.room='',
-    this.textSizeFactor = 1.0});
+  Subject subject = new Subject.name("title", Type.WRITTEN_EXAM, "R1.001", Priority.MINIMALISM, "description", Color.fromARGB(0, 0, 0, 0), 0, DateTime.now(), 5);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +18,7 @@ class SubjectCard extends StatelessWidget {
             child: new Row(
               children: [
                 new Text(
-                    title,
-                    textScaleFactor: textSizeFactor,
+                    subject.title,
                     style: Theme
                         .of(context)
                         .textTheme
@@ -46,7 +27,7 @@ class SubjectCard extends StatelessWidget {
                 new Padding(
                     padding: new EdgeInsets.only(left: 5.0),
                     child: new RaisedButton(
-                        color: color,
+                        color: subject.color,
                         onPressed: null,
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(1.0))
                     )
@@ -56,7 +37,7 @@ class SubjectCard extends StatelessWidget {
             ),
           ),
           new Padding(
-            child: new Text(title),
+            child: new Text(subject.title),
             padding: new EdgeInsets.only(bottom: 8.0),
           ),
         ],

@@ -1,5 +1,6 @@
-import 'package:easy_study/pages/addSubject.dart';
-import 'package:easy_study/widgets/subjectCard.dart';
+import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/presenter/addSubject.dart';
+import 'package:easy_study/presenter/subjectCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,9 @@ class SubjectList extends StatefulWidget{
   State<StatefulWidget> createState() => _SubjectListState();
   }
 
-
 class _SubjectListState extends State<SubjectList>{
+
+  Subject _subject;
 
   Widget build(BuildContext context) {
     return
@@ -24,9 +26,7 @@ class _SubjectListState extends State<SubjectList>{
           ),
           body: new ListView(
             children: <Widget>[
-              new SubjectCard(
-                'title',
-              ),
+              SubjectCard(),
             ],
           )
 
