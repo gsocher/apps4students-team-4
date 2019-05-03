@@ -19,6 +19,8 @@ class _SubjectAddState extends State<SubjectAdd> {
   Priority _priority;
   Type _type;
 
+  // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
+  // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -82,6 +84,7 @@ class _SubjectAddState extends State<SubjectAdd> {
             ])));
   }
 
+  // TODO: 03.05.2019 This will be removed as soon as we are able to use MVVM architecture.
   Subject getSubject() {
     return Subject.name(_title, _type, _room, _priority, _description,
         int.parse(_hoursPerWeek));
