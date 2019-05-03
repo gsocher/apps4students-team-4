@@ -14,6 +14,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
+  // TODO: 03.05.2019 Implement MVVM architecture.
   List<Subject> _subjects;
   Widget _widget;
   AppBar _appBar;
@@ -22,7 +23,8 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _appBar = AppBar(title: Text("Exam Planer"));
-    // TODO: 02.05.2019 hard coded for now. remove later
+    // TODO: 02.05.2019 hard coded for now. remove later. We should be using a Database. Or a file containing jsons?
+    // TODO: 03.05.2019 If we use database, think about a detailed structure and create a sql lite database.
     _subjects = new List<Subject>();
     _subjects.add(new Subject.name(
         "Software Engineering II",
@@ -56,6 +58,7 @@ class _MainScreenState extends State<MainScreen> {
           child: new Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // TODO: 03.05.2019 The buttons should be seperated by a line and be wider. So you can click next to the icon and also hit it.
             children: <Widget>[
               IconButton(
                   icon: Icon(Icons.storage),
@@ -78,6 +81,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   _addSubject(Subject subject) {
+    // TODO: 03.05.2019 this has to be part of the mvvm too
     setState(() {
       _subjects.add(subject);
     });
@@ -90,4 +94,5 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 }
+// TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
 typedef SubjectCallback = void Function(Subject subject);

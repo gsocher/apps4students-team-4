@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class SubjectCard extends StatelessWidget {
 
+  // TODO: 03.05.2019 if we use mvvm this view shouldnt contain any field variable.
   Subject _subject;
   SubjectCard(this._subject);
 
