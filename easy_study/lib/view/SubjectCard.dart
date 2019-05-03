@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class SubjectCard extends StatelessWidget {
 
   Subject _subject;
-
   SubjectCard(this._subject);
 
   @override
