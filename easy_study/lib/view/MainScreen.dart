@@ -1,3 +1,4 @@
+import 'package:easy_study/Database/DBHelper.dart';
 import 'package:easy_study/model/Subject.dart';
 import 'package:easy_study/model/Type.dart';
 import 'package:easy_study/model/Priority.dart';
@@ -18,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Subject> _subjects;
   Widget _widget;
   AppBar _appBar;
+  DBHelper _dbHelper = DBHelper();
 
   @override
   void initState() {
@@ -25,28 +27,12 @@ class _MainScreenState extends State<MainScreen> {
     _appBar = AppBar(title: Text("Exam Planer"));
     // TODO: 02.05.2019 hard coded for now. remove later. We should be using a Database. Or a file containing jsons?
     // TODO: 03.05.2019 If we use database, think about a detailed structure and create a sql lite database.
-    _subjects = new List<Subject>();
-    _subjects.add(new Subject.name(
-        "Software Engineering II",
-        Type.WRITTEN_EXAM,
-        "T1.011",
-        Priority.MINIMALISM,
-        "A funny subject.",
-        5));
-    _subjects.add(new Subject.name(
-        "Lineare Algebra",
-        Type.PRESENTATION,
-        "R1.049",
-        Priority.WANT_TO_PASS,
-        "I don't know why I am here?",
-        7));
-    _subjects.add(new Subject.name(
-        "Compiler",
-        Type.ORAL_EXAM_,
-        "A1.001",
-        Priority.NORMAL,
-        "I love this subject so much. Pls let me pass!",
-        13));
+
+    //_addInitialSubjects();
+     _dbHelper.getSubjects().then((list) {
+       _subjects = new List<Subject>.from(list);
+     });
+
     _widget = SubjectOverview(_subjects);
   }
 
@@ -92,6 +78,31 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _widget = widget;
     });
+  }
+  //just for test reasons.
+  void _addInitialSubjects(){
+    _dbHelper.addNewSubject(new Subject.name(
+        "Software Engineering II",
+        Type.WRITTEN_EXAM,
+        "T1.011",
+        Priority.MINIMALISM,
+        "A funny subject.",
+        5));
+    _dbHelper.addNewSubject(new Subject.name(
+        "Lineare Algebra",
+        Type.PRESENTATION,
+        "R1.049",
+        Priority.WANT_TO_PASS,
+        "I don't know why I am here?",
+        7));
+    _dbHelper.addNewSubject(new Subject.name(
+        "Compiler",
+        Type.ORAL_EXAM_,
+        "A1.001",
+        Priority.NORMAL,
+        "I love this subject so much. Pls let me pass!",
+        13));
+
   }
 }
 // TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
