@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/build" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/build" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/easy_study/ios/.symlinks/plugins/add_2_calendar/example/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
