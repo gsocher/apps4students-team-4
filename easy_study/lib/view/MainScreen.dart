@@ -16,10 +16,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   // TODO: 03.05.2019 Implement MVVM architecture.
-  List<Subject> _subjects;
+  //List<Subject> _subjects;
   Widget _widget;
   AppBar _appBar;
-  DBHelper _dbHelper = DBHelper();
+
 
   @override
   void initState() {
@@ -27,13 +27,10 @@ class _MainScreenState extends State<MainScreen> {
     _appBar = AppBar(title: Text("Exam Planer"));
     // TODO: 02.05.2019 hard coded for now. remove later. We should be using a Database. Or a file containing jsons?
     // TODO: 03.05.2019 If we use database, think about a detailed structure and create a sql lite database.
-
     //_addInitialSubjects();
-     _dbHelper.getSubjects().then((list) {
-       _subjects = new List<Subject>.from(list);
-     });
-
-    _widget = SubjectOverview(_subjects);
+    //deleteSubject();
+    //updateSubject();
+    _widget = SubjectOverview();
   }
 
   @override
@@ -48,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
             children: <Widget>[
               IconButton(
                   icon: Icon(Icons.storage),
-                  onPressed: () => _changeView(SubjectOverview(_subjects))),
+                  onPressed: () => _changeView(SubjectOverview())),
               IconButton(
                   icon: Icon(Icons.add),
                   onPressed: () => _changeView(SubjectAdd(onSubjectAdd: (Subject subject) => _addSubject(subject),))),
@@ -69,9 +66,10 @@ class _MainScreenState extends State<MainScreen> {
   _addSubject(Subject subject) {
     // TODO: 03.05.2019 this has to be part of the mvvm too
     setState(() {
-      _subjects.add(subject);
+      var dbHelper = DBHelper();
+      dbHelper.addNewSubject(subject);
     });
-    _changeView(SubjectOverview(_subjects));
+    _changeView(SubjectOverview());
   }
 
   void _changeView(Widget widget) {
@@ -79,31 +77,50 @@ class _MainScreenState extends State<MainScreen> {
       _widget = widget;
     });
   }
-  //just for test reasons.
+/*  //just for test reasons.
   void _addInitialSubjects(){
-    _dbHelper.addNewSubject(new Subject.name(
+     var dbHelper = DBHelper();
+    dbHelper.addNewSubject(new Subject.name(
         "Software Engineering II",
-        Type.WRITTEN_EXAM,
+        Type.WRITTEN_EXAM.toString(),
         "T1.011",
-        Priority.MINIMALISM,
+        Priority.MINIMALISM.toString(),
         "A funny subject.",
         5));
-    _dbHelper.addNewSubject(new Subject.name(
-        "Lineare Algebra",
-        Type.PRESENTATION,
-        "R1.049",
-        Priority.WANT_TO_PASS,
-        "I don't know why I am here?",
-        7));
-    _dbHelper.addNewSubject(new Subject.name(
-        "Compiler",
-        Type.ORAL_EXAM_,
-        "A1.001",
-        Priority.NORMAL,
-        "I love this subject so much. Pls let me pass!",
-        13));
+     dbHelper.addNewSubject(new Subject.name(
+         "Lineare Algebra",
+         Type.PRESENTATION.toString(),
+         "R1.049",
+         Priority.WANT_TO_PASS.toString(),
+         "I don't know why I am here?",
+         7));
+     dbHelper.addNewSubject(new Subject.name(
+         "Compiler",
+         Type.ORAL_EXAM.toString(),
+         "A1.001",
+         Priority.NORMAL.toString(),
+         "I love this subject so much. Pls let me pass!",
+         13));
 
   }
+  //just for test Reasons
+void deleteSubject(){
+    var dbHelper = DBHelper();
+    dbHelper.deleteSubject(1);
+    dbHelper.deleteSubject(2);
+}
+void updateSubject(){
+    var dbHelper = DBHelper();
+    var x =new Subject.name(
+        "Software Engineering II",
+        Type.WRITTEN_EXAM.toString(),
+        "T1.011",
+        Priority.MINIMALISM.toString(),
+        "A funny subject.",
+        5);
+    x.id = 3;
+    dbHelper.updateSubject(x);
+}*/
 }
 // TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
 typedef SubjectCallback = void Function(Subject subject);

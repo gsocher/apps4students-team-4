@@ -86,7 +86,7 @@ class _SubjectAddState extends State<SubjectAdd> {
 
   // TODO: 03.05.2019 This will be removed as soon as we are able to use MVVM architecture.
   Subject getSubject() {
-    return Subject.name(_title, _type, _room, _priority, _description,
+    return Subject.name(_title, _type.toString(), _room, _priority.toString(), _description,
         int.parse(_hoursPerWeek));
   }
 }

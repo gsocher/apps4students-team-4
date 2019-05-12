@@ -2,40 +2,59 @@
 import 'dart:async';
 import 'dart:io' as io;
 import 'package:easy_study/model/Subject.dart';
-import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper{
 
-  //Definal
   final String TABLE_NAME = 'Subject';
-  static Database _db_instance;
+  final String ID = 'id';
+  final String TITLE = 'title';
+  final String TYPE  = 'type';
+  final String ROOM  = 'room';
+  final String PRIORITY  = 'priority';
+  final String DESCRIPTION  = 'description';
+  final String HOURSWEEK = 'hoursWeek';
 
-  Future<Database> get db async {
-    if(_db_instance == null){
-      _db_instance = await initDB();
-      return _db_instance;
+  static DBHelper _databaseHelper; // Singleton DatabaseHelper
+  static Database _database;           //Singleton Database
+
+
+  DBHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
+
+  factory DBHelper() {
+
+    if (_databaseHelper == null) {
+      _databaseHelper = DBHelper._createInstance(); // This is executed only once, singleton object
     }
+    return _databaseHelper;
   }
 
-  initDB() async {
+  Future<Database> get database async {
+    if(_database == null) {
+      _database = await initDB();
+    }
+      return _database;
+
+  }
+
+  Future<Database> initDB() async {
 
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path,"EDMTDev.db");
-    var db = await openDatabase(path,version: 1,onCreate: onCreateFunc);
+    String path = documentsDirectory.path + '/subject_test.db';
+    var db = await openDatabase(path,version: 1,onCreate: _createDB);
     return db;
   }
 
 
-  void onCreateFunc(Database db, int version) async{
+  void _createDB(Database db, int version) async{
     // Create Table
-    await db.execute('CREATE TABLE $TABLE_NAME(title TEXT PRIMARY KEY, '
-        'type TEXT,'
-        'room TEXT,'
-        'priority TEXT,'
-        'description TEXT,'
-        'hoursWeek INTEGER);');
+    await db.execute('CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT, '
+        ' $TITLE TEXT, $TYPE TEXT, $ROOM TEXT,'
+        ' $PRIORITY TEXT,'
+        ' $DESCRIPTION TEXT,'
+        ' $HOURSWEEK INTEGER);');
+
     
   }
 
@@ -44,10 +63,13 @@ class DBHelper{
    */
 
   Future<List<Subject>> getSubjects() async {
-    var db_connection = await db;
-    List<Map> list = await db_connection.rawQuery('SELECT * FROM $TABLE_NAME');
+    Database db_connection = await this.database;
+    List<Map> list = await db_connection.query(TABLE_NAME);
+    print('lenghtOfList '+ list.length.toString());
     List<Subject> subjects = new List();
-    for(int index = 0; index < list.length; index){
+    for(int index = 0; index < list.length; index++){
+
+
       Subject subject = new Subject.name(
         list[index]['title'],
         list[index]['type'],
@@ -56,46 +78,28 @@ class DBHelper{
         list[index]['description'],
         list[index]['hoursWeek'],
       );
+      subject.id = list[index]['id'];
       subjects.add(subject);
     }
     return subjects;
   }
 
-  void addNewSubject(Subject subject) async {
-    var db_connection = await db;
-    String query = 'INSERT INTO $TABLE_NAME(title,type,room,priority,'
-        'description,hoursWeek)'
-        ' VALUES(\'${subject.title}\','
-                '\'${subject.type}\','
-                '\'${subject.room}\','
-                '\'${subject.priority}\','
-                '\'${subject.description}\','
-                '\'${subject.hoursWeek}\')';
-
-    await db_connection.transaction((transaction) async {
-      return await transaction.rawInsert(query);
-    });
+  Future<int> addNewSubject(Subject subject) async {
+    var db_connection = await this.database;
+    var result = await db_connection.insert(TABLE_NAME, subject.toMap());
+    return result;
   }
 
-  void updateSubject(Subject subject) async {
-    var db_connection = await db;
-    String query = 'UPDATE INTO $TABLE_NAME SET title= \' ${subject.title}\','
-        'type= \'${subject.type}\','
-        'room=\'${subject.room}\','
-        'priority=\'${subject.priority}\','
-        'description=\'${subject.description}\','
-        'hoursWeek=\'${subject.hoursWeek}\''
-        ' WHERE title =${subject.title}';
-    await db_connection.transaction((transaction) async {
-      return await transaction.rawInsert(query);
-    });
+  Future<int> updateSubject(Subject subject) async {
+    var db_connection = await this.database;
+    var result = await db_connection.update(TABLE_NAME, subject.toMap(),where: '$ID = ?',whereArgs: [subject.id]);
+    return result;
   }
 
-  void deleteSubject(Subject subject) async {
-    var db_connection = await db;
-    String query = 'DELETE FROM $TABLE_NAME WHERE title =${subject.title}';
-    await db_connection.transaction((transaction) async {
-      return await transaction.rawInsert(query);
-    });
+
+  Future<int> deleteSubject(int id) async {
+    var db_connection = await this.database;
+    var result = await db_connection.delete(TABLE_NAME,where: '$ID = ?',whereArgs: [id]);
+    return result;
   }
 }
