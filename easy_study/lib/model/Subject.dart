@@ -7,8 +7,8 @@ class Subject {
 
   String _title, _room, _description;
   int _id, _timeSpent = 0, _hoursWeek;
-  String _type;
-  String _priority;
+  Type _type;
+  Priority _priority;
   Color _color = Color.fromARGB(255, 0, 0, 0);
   // TODO: 02.05.2019 Change due date. For now its today or right now.
   DateTime _dueDate = DateTime.now();
@@ -38,11 +38,11 @@ class Subject {
 
   String get description => _description;
 
-  String get priority => _priority;
+  Priority get priority => _priority;
 
   String get room => _room;
 
-  String get type => _type;
+  Type get type => _type;
 
   String get title => _title;
 
@@ -54,9 +54,9 @@ class Subject {
       map['id'] = _id;
     }
     map['title'] = _title;
-    map['type'] = _type;
+    map['type'] = _type.toString();
     map['room'] = _room;
-    map['priority'] = _priority;
+    map['priority'] = _priority.toString();
     map['description'] = _description;
     map['hoursWeek'] = _hoursWeek;
 

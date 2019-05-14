@@ -2,6 +2,8 @@
 import 'dart:async';
 import 'dart:io' as io;
 import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/model/Type.dart';
+import 'package:easy_study/model/Priority.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -55,7 +57,6 @@ class DBHelper{
         ' $DESCRIPTION TEXT,'
         ' $HOURSWEEK INTEGER);');
 
-    
   }
 
   /*
@@ -72,9 +73,9 @@ class DBHelper{
 
       Subject subject = new Subject.name(
         list[index]['title'],
-        list[index]['type'],
+        Type.getType(list[index]['type']),
         list[index]['room'],
-        list[index]['priority'],
+        Priority.getPriority(list[index]['priority']),
         list[index]['description'],
         list[index]['hoursWeek'],
       );
