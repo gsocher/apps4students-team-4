@@ -43,7 +43,7 @@ class DBHelper{
   Future<Database> initDB() async {
 
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_two.db';
+    String path = documentsDirectory.path + '/subject_three.db';
     var db = await openDatabase(path,version: 1,onCreate: _createDB);
     return db;
   }
@@ -66,11 +66,8 @@ class DBHelper{
   Future<List<Subject>> getSubjects() async {
     Database db_connection = await this.database;
     List<Map> list = await db_connection.query(TABLE_NAME);
-    print('lenghtOfList '+ list.length.toString());
     List<Subject> subjects = new List();
     for(int index = 0; index < list.length; index++){
-
-
       Subject subject = new Subject.name(
         list[index]['title'],
         Type.getType(list[index]['type']),
@@ -82,6 +79,7 @@ class DBHelper{
       subject.id = list[index]['id'];
       subjects.add(subject);
     }
+
     return subjects;
   }
 
