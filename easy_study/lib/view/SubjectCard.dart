@@ -11,7 +11,9 @@ class SubjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 5,
-        child: Column(
+        child: Container(
+          color: Colors.limeAccent,
+          child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           verticalDirection: VerticalDirection.down,
@@ -39,6 +41,7 @@ class SubjectCard extends StatelessWidget {
               ],
             )
           ],
-        ));
+        ),
+    ));
   }
 }
