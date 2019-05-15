@@ -26,7 +26,6 @@ class _SubjectOverviewState extends State<SubjectOverview> {
         builder: (context, snapshot) {
           if (snapshot.data != null) {
             if (snapshot.hasData) {
-              print(snapshot.data[0].toString());
               return ListView.builder(
                   itemCount: snapshot.data.length,
                   scrollDirection: Axis.vertical,

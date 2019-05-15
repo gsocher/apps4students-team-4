@@ -77,28 +77,28 @@ class _MainScreenState extends State<MainScreen> {
       _widget = widget;
     });
   }
-/*  //just for test reasons.
+  //just for test reasons.
   void _addInitialSubjects(){
      var dbHelper = DBHelper();
     dbHelper.addNewSubject(new Subject.name(
         "Software Engineering II",
-        Type.WRITTEN_EXAM.toString(),
+        Type.WRITTEN_EXAM,
         "T1.011",
-        Priority.MINIMALISM.toString(),
+        Priority.MINIMALISM,
         "A funny subject.",
         5));
      dbHelper.addNewSubject(new Subject.name(
          "Lineare Algebra",
-         Type.PRESENTATION.toString(),
+         Type.PRESENTATION,
          "R1.049",
-         Priority.WANT_TO_PASS.toString(),
+         Priority.WANT_TO_PASS,
          "I don't know why I am here?",
          7));
      dbHelper.addNewSubject(new Subject.name(
          "Compiler",
-         Type.ORAL_EXAM.toString(),
+         Type.ORAL_EXAM,
          "A1.001",
-         Priority.NORMAL.toString(),
+         Priority.NORMAL,
          "I love this subject so much. Pls let me pass!",
          13));
 
@@ -113,14 +113,14 @@ void updateSubject(){
     var dbHelper = DBHelper();
     var x =new Subject.name(
         "Software Engineering II",
-        Type.WRITTEN_EXAM.toString(),
+        Type.WRITTEN_EXAM,
         "T1.011",
-        Priority.MINIMALISM.toString(),
+        Priority.MINIMALISM,
         "A funny subject.",
         5);
     x.id = 3;
     dbHelper.updateSubject(x);
-}*/
+}
 }
 // TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
 typedef SubjectCallback = void Function(Subject subject);
