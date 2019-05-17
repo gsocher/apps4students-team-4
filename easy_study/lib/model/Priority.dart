@@ -5,7 +5,7 @@ class Priority {
 
   static Priority getPriority(String string){
     Map<String,Priority> stringToPrio = new Map();
-    stringToPrio["Want to pass"] = Priority.WANT_TO_PASS;
+    stringToPrio["Want to pass!"] = Priority.WANT_TO_PASS;
     stringToPrio["Minimalism"] = Priority.MINIMALISM;
     stringToPrio["Normal"] = Priority.NORMAL;
     if(!stringToPrio.containsKey(string)){

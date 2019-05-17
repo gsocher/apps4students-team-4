@@ -15,8 +15,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  // TODO: 03.05.2019 Implement MVVM architecture.
-  //List<Subject> _subjects;
   Widget _widget;
   AppBar _appBar;
 
@@ -25,11 +23,6 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _appBar = AppBar(title: Text("Exam Planer"));
-    // TODO: 02.05.2019 hard coded for now. remove later. We should be using a Database. Or a file containing jsons?
-    // TODO: 03.05.2019 If we use database, think about a detailed structure and create a sql lite database.
-    //_addInitialSubjects();
-    //deleteSubject();
-    //updateSubject();
     _widget = SubjectOverview();
   }
 
@@ -64,7 +57,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   _addSubject(Subject subject) {
-    // TODO: 03.05.2019 this has to be part of the mvvm too
     setState(() {
       var dbHelper = DBHelper();
       dbHelper.addNewSubject(subject);

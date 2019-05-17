@@ -26,6 +26,7 @@ dependencies:
   path_provider: any
   sqflite: any
   fluttertoast: any
+  flutter_hsvcolor_picker: ^0.0.1
 
 dev_dependencies:
   flutter_test:
