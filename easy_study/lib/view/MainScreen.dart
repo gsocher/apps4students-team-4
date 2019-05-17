@@ -1,10 +1,8 @@
+import 'package:easy_study/model/Priority.dart';
 import 'package:easy_study/model/Subject.dart';
 import 'package:easy_study/model/Type.dart';
-import 'package:easy_study/model/Priority.dart';
-import 'package:easy_study/presenter/Settings.dart';
-import 'package:easy_study/presenter/SubjectAdd.dart';
+import 'package:easy_study/model/testEnum.dart';
 import 'package:easy_study/view/SubjectOverview.dart';
-import 'package:easy_study/presenter/Map.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -54,7 +52,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: _appBar,
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          items: ,
           child: new Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,6 +76,7 @@ class _MainScreenState extends State<MainScreen> {
               )
             ],
           ),
+
         ),
         body: _widget);
   }
@@ -93,6 +94,7 @@ class _MainScreenState extends State<MainScreen> {
       _widget = widget;
     });
   }
+
 }
 // TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
 typedef SubjectCallback = void Function(Subject subject);
