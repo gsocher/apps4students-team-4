@@ -5,6 +5,7 @@ import 'package:easy_study/view/MainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectAdd extends StatefulWidget {
   final SubjectCallback onSubjectAdd;
