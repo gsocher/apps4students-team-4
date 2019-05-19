@@ -55,35 +55,16 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
             ),
-            body: callback.state.widget);
+            body: callback.state.widget,
+            floatingActionButton: Visibility(
+              visible: ChangeView(callback.state.widget).showFAB(),
+              child: FloatingActionButton(
+                onPressed: () => callback..dispatch(ChangeView(SubjectAdd())),
+                child: Icon(Icons.add),
+              ),
+            ));
       },
     );
-  }
-
-  //just for test reasons.
-  void _addInitialSubjects() {
-    var dbHelper = DBHelper();
-    dbHelper.addNewSubject(new Subject.name(
-        "Software Engineering II",
-        Type.WRITTEN_EXAM,
-        "T1.011",
-        Priority.MINIMALISM,
-        "A funny subject.",
-        5));
-    dbHelper.addNewSubject(new Subject.name(
-        "Lineare Algebra",
-        Type.PRESENTATION,
-        "R1.049",
-        Priority.WANT_TO_PASS,
-        "I don't know why I am here?",
-        7));
-    dbHelper.addNewSubject(new Subject.name(
-        "Compiler",
-        Type.ORAL_EXAM,
-        "A1.001",
-        Priority.NORMAL,
-        "I love this subject so much. Pls let me pass!",
-        13));
   }
 }
 

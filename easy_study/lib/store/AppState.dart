@@ -10,6 +10,8 @@ class AppState {
 
   AppState({this.widget, this.dbHelper});
 
+
+
   factory AppState.initial() =>
       new AppState(dbHelper: DBHelper(), widget: new SubjectOverview());
 
@@ -24,25 +26,24 @@ final searchReducer = combineReducers<AppState>([
 
 class AddNewSubject {
   final Subject subject;
-
   AddNewSubject(this.subject);
 
 }
 class UpdateSubject {
   final Subject subject;
-
   UpdateSubject(this.subject);
 }
 class DeleteSubject {
   final int id;
-
   DeleteSubject(this.id);
 }
 
 class ChangeView {
   final Widget widget;
-
   ChangeView(this.widget);
+  bool showFAB(){
+    return widget.toString() == "SubjectOverview";
+  }
 }
 
 AppState _addNewSubject(AppState state, AddNewSubject action) =>
@@ -55,4 +56,5 @@ AppState _deleteSubject(AppState state, DeleteSubject action) =>
     new AppState(dbHelper: state.dbHelper)..dbHelper.deleteSubject(action.id);
 
 AppState _changeView(AppState state, ChangeView action) =>
-    new AppState(dbHelper: state.dbHelper, widget: action.widget);
+    new AppState(dbHelper: state.dbHelper,
+        widget: action.widget);
