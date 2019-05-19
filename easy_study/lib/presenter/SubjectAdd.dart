@@ -1,6 +1,7 @@
 import 'package:easy_study/model/Priority.dart';
 import 'package:easy_study/model/Subject.dart';
 import 'package:easy_study/model/Type.dart';
+import 'package:easy_study/store/AppState.dart';
 import 'package:easy_study/view/MainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,6 @@ import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectAdd extends StatefulWidget {
-  final SubjectCallback onSubjectAdd;
-
-  const SubjectAdd({this.onSubjectAdd});
 
   @override
   State<StatefulWidget> createState() => _SubjectAddState();
@@ -46,13 +44,13 @@ class _SubjectAddState extends State<SubjectAdd> {
                     scrollDirection: Axis.vertical))));
   }
 
-  void _submit() {
+  Subject _submit() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       Subject result = Subject.name(_title, _type, _room, _priority,
           _description, int.parse(_hoursPerWeek));
       result.color = color.toColor();
-      widget.onSubjectAdd(result);
+      return result;
     }
   }
 
@@ -132,33 +130,36 @@ class _SubjectAddState extends State<SubjectAdd> {
             keyboardType: TextInputType.number,
           ),
           Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-              ),
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.only(top: 20),
-              width: 500,
-              height: 400,
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'choose the subjects color:',
-                    style: TextStyle(fontSize: 25.0),
-                  ),
-                  new PaletteValuePicker(
-                      color: this.color,
-                      onChanged: (value) =>
-                          super.setState(() => this.onChanged(value)),
-                    )
-                ]),
-              ),
-          IconButton(
-            icon: Icon(
-              Icons.save,
-              size: 30,
+            decoration: BoxDecoration(
+              border: Border.all(),
             ),
-            onPressed: _submit,
-          )
+            margin: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: 20),
+            width: 500,
+            height: 400,
+            child: Column(children: <Widget>[
+              Text(
+                'choose the subjects color:',
+                style: TextStyle(fontSize: 25.0),
+              ),
+              new PaletteValuePicker(
+                color: this.color,
+                onChanged: (value) =>
+                    super.setState(() => this.onChanged(value)),
+              )
+            ]),
+          ),
+          new StoreConnector<AppState, VoidCallback>(converter: (store) {
+            return () => store..dispatch(AddNewSubject(_submit()));
+          }, builder: (context, callback) {
+            return new IconButton(
+              icon: Icon(
+                Icons.save,
+                size: 30,
+              ),
+              onPressed: callback,
+            );
+          })
         ]);
   }
 }

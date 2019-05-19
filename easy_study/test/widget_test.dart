@@ -14,7 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    final newState = searchReducer(new AppState.inital(), AddNewSubject(Subject.name("Software Engineering II", Type.WRITTEN_EXAM,
+    final newState = searchReducer(new AppState.initial(), AddNewSubject(Subject.name("Software Engineering II", Type.WRITTEN_EXAM,
         "T1.011", Priority.MINIMALISM, "A funny subject.", 5)));
 
     // this test is not working

@@ -1,17 +1,16 @@
-import 'package:easy_study/Database/DBHelper.dart';
 import 'package:easy_study/store/AppState.dart';
-import 'package:redux/redux.dart';
 import 'package:easy_study/view/MainScreen.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 void main() {
-  final store = new Store<AppState>(searchReducer, initialState: AppState.inital());
+  final store = new Store<AppState>(searchReducer,
+      initialState: AppState.initial());
   runApp(new EasyStudyApp(
     title: 'Easy Study',
     store: store,
   ));
-
 }
 
 class EasyStudyApp extends StatelessWidget {
@@ -22,14 +21,11 @@ class EasyStudyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new StoreProvider<AppState>(
       store: store,
-        child: new MaterialApp(
+      child: new MaterialApp(
           title: title,
-          home: MainScreen()
-        ),
+          home: new MainScreen()),
     );
   }
 }
-

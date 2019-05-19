@@ -1,5 +1,6 @@
 import 'package:easy_study/Database/DBHelper.dart';
 import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/store/AppState.dart';
 import 'package:easy_study/view/MainScreen.dart';
 import 'package:easy_study/view/SubjectCard.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,15 +15,9 @@ class SubjectOverview extends StatefulWidget {
 
 class _SubjectOverviewState extends State<SubjectOverview> {
 
-  Future<List<Subject>> _getSubjectsFromDB() async {
-    var dbHelper = DBHelper();
-    var result = await dbHelper.getSubjects();
-    return result;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector(
+    return new StoreConnector<AppState, AppStateViewModel>(
       converter: (store) {
         return new AppStateViewModel(store.state);
       },
