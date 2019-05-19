@@ -1,6 +1,6 @@
-
 import 'dart:async';
 import 'dart:io' as io;
+import 'dart:ui';
 import 'package:easy_study/model/Subject.dart';
 import 'package:easy_study/model/Type.dart';
 import 'package:easy_study/model/Priority.dart';
@@ -17,6 +17,10 @@ class DBHelper{
   final String PRIORITY  = 'priority';
   final String DESCRIPTION  = 'description';
   final String HOURSWEEK = 'hoursWeek';
+  final String COLOR_ALPHA = 'color_alpha';
+  final String COLOR_RED = 'color_red';
+  final String COLOR_GREEN = 'color_green';
+  final String COLOR_BLUE = 'color_blue';
 
   static DBHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database;           //Singleton Database
@@ -43,7 +47,7 @@ class DBHelper{
   Future<Database> initDB() async {
 
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_three.db';
+    String path = documentsDirectory.path + '/subject_15.db';
     var db = await openDatabase(path,version: 1,onCreate: _createDB);
     return db;
   }
@@ -55,7 +59,12 @@ class DBHelper{
         ' $TITLE TEXT, $TYPE TEXT, $ROOM TEXT,'
         ' $PRIORITY TEXT,'
         ' $DESCRIPTION TEXT,'
-        ' $HOURSWEEK INTEGER);');
+        ' $HOURSWEEK INTEGER,'
+        ' $COLOR_ALPHA INTEGER,'
+        ' $COLOR_RED INTEGER,'
+        ' $COLOR_GREEN INTEGER,'
+        ' $COLOR_BLUE INTEGER);');
+
 
   }
 
@@ -68,18 +77,25 @@ class DBHelper{
     List<Map> list = await db_connection.query(TABLE_NAME);
     List<Subject> subjects = new List();
     for(int index = 0; index < list.length; index++){
+
+
       Subject subject = new Subject.name(
-        list[index]['title'],
-        Type.getType(list[index]['type']),
-        list[index]['room'],
-        Priority.getPriority(list[index]['priority']),
-        list[index]['description'],
-        list[index]['hoursWeek'],
+        list[index][TITLE],
+        Type.getType(list[index][TYPE]),
+        list[index][ROOM],
+        Priority.getPriority(list[index][PRIORITY]),
+        list[index][DESCRIPTION],
+        list[index][HOURSWEEK],
       );
       subject.id = list[index]['id'];
+      subject.color = Color.fromARGB(
+          list[index][COLOR_ALPHA],
+          list[index][COLOR_RED],
+          list[index][COLOR_GREEN],
+          list[index][COLOR_BLUE]);
+
       subjects.add(subject);
     }
-
     return subjects;
   }
 

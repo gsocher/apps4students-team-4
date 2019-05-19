@@ -28,6 +28,10 @@ class Subject {
     _id = value;
   }
 
+  set color(Color value) {
+    _color = value;
+  }
+
   int get hoursWeek => _hoursWeek;
 
   DateTime get dueDate => _dueDate;
@@ -59,6 +63,12 @@ class Subject {
     map['priority'] = _priority.toString();
     map['description'] = _description;
     map['hoursWeek'] = _hoursWeek;
+    map['color_alpha'] = _color.alpha;
+    map['color_red'] = _color.red;
+    map['color_green'] = _color.green;
+    map['color_blue'] = _color.blue;
+
+    print("color alpha" + _color.alpha.toString());
 
     return map;
   }
