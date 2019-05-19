@@ -9,7 +9,6 @@ import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectAdd extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => _SubjectAddState();
 }
@@ -18,6 +17,7 @@ class _SubjectAddState extends State<SubjectAdd> {
   HSVColor color = new HSVColor.fromColor(Colors.blue);
 
   void onChanged(HSVColor value) => this.color = value;
+
 
   final String TITLE = 'title';
   final String ROOM = 'room';
@@ -128,6 +128,7 @@ class _SubjectAddState extends State<SubjectAdd> {
                 alignLabelWithHint: true,
                 labelText: HOURSPERWEEK),
             keyboardType: TextInputType.number,
+            autovalidate: true,
           ),
           Container(
             decoration: BoxDecoration(
@@ -149,9 +150,9 @@ class _SubjectAddState extends State<SubjectAdd> {
               )
             ]),
           ),
-          new StoreConnector<AppState, VoidCallback>(
-              converter: (store) {
-            return () => store..dispatch(AddNewSubject(_submit()));
+          //TODO: 19.05.2019 check if all inputs are correct before saving.
+          new StoreConnector<AppState, VoidCallback>(converter: (store) {
+            return  () => store..dispatch(AddNewSubject(_submit()));
           }, builder: (context, callback) {
             return new IconButton(
               icon: Icon(

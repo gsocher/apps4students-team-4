@@ -1,7 +1,5 @@
-import 'package:easy_study/Database/DBHelper.dart';
-import 'package:easy_study/model/Priority.dart';
 import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/model/Type.dart';
+import 'package:easy_study/presenter/Home.dart';
 import 'package:easy_study/presenter/Map.dart';
 import 'package:easy_study/presenter/Settings.dart';
 import 'package:easy_study/presenter/SubjectAdd.dart';
@@ -40,10 +38,10 @@ class _MainScreenState extends State<MainScreen> {
                 children: <Widget>[
                   IconButton(
                       icon: Icon(Icons.storage),
-                      onPressed: () => callback..dispatch(ChangeView(SubjectOverview()))),
+                      onPressed: () => callback..dispatch(ChangeView(Home()))),
                   IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: () => callback..dispatch(ChangeView(SubjectAdd()))),
+                      onPressed: () => callback..dispatch(ChangeView(SubjectOverview()))),
                   IconButton(
                     icon: Icon(Icons.settings),
                     onPressed: () => callback..dispatch(ChangeView(Settings())),
