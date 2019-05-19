@@ -50,11 +50,10 @@ AppState _addNewSubject(AppState state, AddNewSubject action) =>
     new AppState(dbHelper: state.dbHelper, widget: new SubjectOverview())..dbHelper.addNewSubject(action.subject);
 
 AppState _updateSubject(AppState state, UpdateSubject action) =>
-  new AppState(dbHelper: state.dbHelper)..dbHelper.updateSubject(action.subject);
+  new AppState(dbHelper: state.dbHelper,widget: new SubjectOverview())..dbHelper.updateSubject(action.subject);
 
 AppState _deleteSubject(AppState state, DeleteSubject action) =>
-    new AppState(dbHelper: state.dbHelper)..dbHelper.deleteSubject(action.id);
+    new AppState(dbHelper: state.dbHelper,widget: new SubjectOverview())..dbHelper.deleteSubject(action.id);
 
 AppState _changeView(AppState state, ChangeView action) =>
-    new AppState(dbHelper: state.dbHelper,
-        widget: action.widget);
+    new AppState(dbHelper: state.dbHelper, widget: action.widget);

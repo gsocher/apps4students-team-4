@@ -32,7 +32,7 @@ class _SubjectOverviewState extends State<SubjectOverview> {
                       itemCount: snapshot.data.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return new SubjectCard(snapshot.data[index]);
+                        return new SubjectCard(subject: snapshot.data[index]);
                       });
                 }
               }
