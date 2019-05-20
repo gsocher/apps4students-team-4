@@ -6,7 +6,7 @@ import 'package:easy_study/presenter/SubjectAdd.dart';
 import 'package:easy_study/view/SubjectOverview.dart';
 import 'package:easy_study/presenter/Map.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_study/view/ProgressSummary.dart';
 class MainScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _MainScreenState();
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
 
   // TODO: 03.05.2019 Implement MVVM architecture.
   List<Subject> _subjects;
-  Widget _widget;
+  Widget _widget, _progressSummary;
   AppBar _appBar;
 
   @override
@@ -31,23 +31,26 @@ class _MainScreenState extends State<MainScreen> {
         Type.WRITTEN_EXAM,
         "T1.011",
         Priority.MINIMALISM,
-        "A funny subject.",
-        5));
+        "A funny subject.",10,
+      Colors.red,10,
+        ));
     _subjects.add(new Subject.name(
         "Lineare Algebra",
         Type.PRESENTATION,
         "R1.049",
         Priority.WANT_TO_PASS,
-        "I don't know why I am here?",
-        7));
+        "I don't know why I am here?",20,Colors.blue,20,
+        ));
     _subjects.add(new Subject.name(
         "Compiler",
         Type.ORAL_EXAM_,
         "A1.001",
         Priority.NORMAL,
-        "I love this subject so much. Pls let me pass!",
-        13));
+        "I love this subject so much. Pls let me pass!",10,Colors.green,10,
+    ));
     _widget = SubjectOverview(_subjects);
+    _progressSummary = ProgressSummary(_subjects);
+
   }
 
   @override
@@ -77,7 +80,18 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ),
-        body: _widget);
+        body: new Center(
+          child : new Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            verticalDirection: VerticalDirection.down,
+            children: <Widget>[
+              Expanded(child:_widget),
+            ],
+    ),
+        ),
+
+        );
   }
 
   _addSubject(Subject subject) {

@@ -15,8 +15,9 @@ class SubjectAdd extends StatefulWidget {
 }
 
 class _SubjectAddState extends State<SubjectAdd> {
-  String _title, _room, _description, _hoursPerWeek;
+  String _title, _room, _description, _hoursPerWeek, _timeSpent;
   Priority _priority;
+  Color _color;
   Type _type;
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
@@ -87,6 +88,6 @@ class _SubjectAddState extends State<SubjectAdd> {
   // TODO: 03.05.2019 This will be removed as soon as we are able to use MVVM architecture.
   Subject getSubject() {
     return Subject.name(_title, _type, _room, _priority, _description,
-        int.parse(_hoursPerWeek));
+        int.parse(_hoursPerWeek),_color,int.parse(_timeSpent));
   }
 }

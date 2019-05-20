@@ -2,14 +2,15 @@ import 'dart:ui';
 
 import 'package:easy_study/model/Priority.dart';
 import 'package:easy_study/model/Type.dart';
+import 'package:flutter/material.dart';
 
 class Subject {
 
   String _title, _room, _description;
-  int _timeSpent = 0, _hoursWeek;
+  int _timeSpent = 100, _hoursWeek;
   Type _type;
   Priority _priority;
-  Color _color = Color.fromARGB(255, 0, 0, 0);
+  Color _color;
   // TODO: 02.05.2019 Change due date. For now its today or right now.
   DateTime _dueDate = DateTime.now();
 
@@ -20,7 +21,11 @@ class Subject {
       this._room,
       this._priority,
       this._description,
-      this._hoursWeek);
+      this._hoursWeek,
+      this._color,
+      this._timeSpent,
+     )
+  ;
 
   int get hoursWeek => _hoursWeek;
 
