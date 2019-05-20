@@ -13,7 +13,8 @@ class SubjectOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
+    return new Container(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
@@ -23,6 +24,7 @@ class SubjectOverview extends StatelessWidget {
       children: _subjects.map((subject) => new SubjectCard(subject)).toList(),
       scrollDirection: Axis.vertical,),),
     ],
+        ),
     );
   }
 }

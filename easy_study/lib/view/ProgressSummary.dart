@@ -5,7 +5,7 @@ import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/animation.dart';
 import 'tween.dart';
-
+import 'package:date_format/date_format.dart';
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
   ProgressSummary(this._subjects);
@@ -18,12 +18,15 @@ class ProgressSummaryState extends State<ProgressSummary>{
 
   Widget build(BuildContext context) {
     return Container(
+      decoration: new BoxDecoration(color:Colors.white),
       child: new Column(
+
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
           new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 _total(_subjects),
@@ -32,35 +35,28 @@ class ProgressSummaryState extends State<ProgressSummary>{
                   color: Colors.black,
                 ),
               ),
+
+              Text(
+                formatDate(DateTime.now(), [dd, '/', mm, '/', yyyy]).toString(),
+                style: new TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
+              )
             ],
           ),
           new Row(
             children: <Widget>[
               ChartPage(_subjects),
             ],),
-          new Row(
-            ),
-        ],
-      ),
+          Container(
+            height: 50.0,
+
+             child: ListView( children: _subjects.map((subject) => new SubjectCardProgressBar(subject)).toList(),scrollDirection: Axis.horizontal, addRepaintBoundaries: false,),
+    ),],
+          ),
     );
   }
 
-  static List<int> timeSpentMin(List<Subject>subjects) {
-    final min = <int>[];
-    for (int i = 0; i < subjects.length; i++) {
-      min.add(subjects[i].timeSpent - (subjects[i].timeSpent % 60) * 60);
-    }
-    return min;
-  }
-
-
-  static List<int> timeSpentHr(List<Subject>subjects) {
-    final hr = <int>[];
-    for (int i = 0; i < subjects.length; i++) {
-      hr.add(subjects[i].timeSpent % 60);
-    }
-    return hr;
-  }
 
   static String _total(List<Subject> subjects) {
     int total = 0;
@@ -70,12 +66,35 @@ class ProgressSummaryState extends State<ProgressSummary>{
     for (int i = 0; i < subjects.length; i++) {
       total += subjects[i].timeSpent;
     }
-    totalh=total%60;
-    totalmn=total-total%60;
-    debugPrint(totalh.toString());
+    totalmn=total%60;
+    totalh=(total/60).truncate();
     sb.writeAll([totalh,"h ",totalmn,"mn"]);
     return sb.toString();
   }
+}
+
+ // ignore: must_be_immutable
+ class SubjectCardProgressBar extends StatelessWidget{
+  Subject _subject;
+  SubjectCardProgressBar(this._subject);
+
+  Widget build (BuildContext context){
+    return Container(
+        child: Card(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(_subject.title,style: TextStyle(color: _subject.color, fontSize: 10),),
+          Text(((_subject.timeSpent/60).truncate()).toString()+"h"+(_subject.timeSpent % 60).toString()+"mn"),
+
+
+
+              ],
+            ),
+          ),
+        );
+  }
+
 }
 
 class ChartPage extends StatefulWidget {
@@ -87,7 +106,7 @@ class ChartPage extends StatefulWidget {
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
 
   ChartPageState(this.subjects);
-  static const size = const Size(200, 100.0);
+  static const size = const Size(400, 20.0);
   final random = Random();
 
   List<Subject> subjects;
@@ -117,15 +136,10 @@ class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 100.0,
-        width: 400.0,
-       child: CustomPaint(
+    return
+       CustomPaint(
           size: size,
           painter: BarChartPainter(tween.animate(animation)),
-    ),
-      ),
     );
   }
 }
@@ -140,12 +154,14 @@ class BarChart {
   }
 
   factory BarChart.random(Size size, List<Subject> subjects) {
-    const stackWidthFraction = 0.75;
+    const stackWidthFraction = 0.9;
     final stackRanks = [0];
     final stackCount = stackRanks.length;
     final stackDistance = size.width;
-    final stackWidth = stackDistance * stackWidthFraction;
-    final startX =  stackWidth;
+    final stackWidth = stackDistance *stackWidthFraction;
+    final startX =  (1-stackWidthFraction)*stackWidth/2;
+    debugPrint(startX.toString());
+    debugPrint(stackWidth.toString());
     final list = _selectSize(subjects);
     final stacks = List.generate(
       stackCount,
@@ -155,12 +171,11 @@ class BarChart {
           barRanks.length,
           (j) => Bar(
                 barRanks[j],
-                1.9*list[j]* size.width,
+                list[j]* stackWidth,
                 subjects[j].color,
               ),
 
         );
-        debugPrint((list[0]* size.width).toString());
         return BarStack(
           stackRanks[i],
           startX,
@@ -296,12 +311,12 @@ class BarChartPainter extends CustomPainter {
     final linePath = Path();
     final chart = animation.value;
     for (final stack in chart.stacks) {
-      var x = size.width;
+      var x = stack.x;
       for (final bar in stack.bars) {
         barPaint.color = bar.color;
         canvas.drawRect(
           Rect.fromLTWH(
-            x-bar.height,
+            x,
             0,
             bar.height,
             stack.width,
@@ -312,7 +327,7 @@ class BarChartPainter extends CustomPainter {
           linePath.moveTo(x, 0);
           linePath.lineTo(x, 10);
         }
-        x -= bar.height;
+        x += bar.height;
       }
       canvas.drawPath(linePath, linePaint);
       linePath.reset();
