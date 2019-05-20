@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         "T1.011",
         Priority.MINIMALISM,
         "A funny subject.",10,
-      Colors.red,10,
+      Colors.red,120,
         ));
     _subjects.add(new Subject.name(
         "Lineare Algebra",
