@@ -5,9 +5,20 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      alignment: Alignment.center,
-      child: Text("Settings in construction!"),
-      // TODO: 03.05.2019 what could be good settings to set?
-    ));
+            alignment: Alignment.center,
+            // TODO: 03.05.2019 what could be good settings to set?
+            child: RaisedButton(
+              child: Text('Export to Calendar'),
+              onPressed: () {
+//                final Event event = Event(
+//                  title: 'Event title',
+//                  description: 'Event description',
+//                  location: 'Event location',
+//                  startDate: DateTime(2019, 5, 24, 12, 0, 0, 0, 0),
+//                  endDate: DateTime(2019, 5, 24, 13, 0, 0, 0, 0),
+//                );
+              //  Add2Calendar.addEvent2Cal(event);
+              },
+            )));
   }
 }
