@@ -68,6 +68,21 @@ packages:
       name: flutter_redux
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "0.1.10"
+  flutter_hsvcolor_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_hsvcolor_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
+  flutter_redux:
+    dependency: "direct main"
+    description:
+      name: flutter_redux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.3"
     version: "0.5.3"
   flutter_test:
     dependency: "direct dev"
@@ -129,6 +144,13 @@ packages:
       name: redux
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "0.3.4"
+  redux:
+    dependency: transitive
+    description:
+      name: redux
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "3.0.0"
   sky_engine:
     dependency: transitive
@@ -141,7 +163,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.4"
+    version: "1.5.5"
   sqflite:
     dependency: "direct main"
     description:
@@ -206,5 +228,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.1.0 <3.0.0"
+  dart: ">=2.2.0 <3.0.0"
   flutter: ">=1.2.1 <2.0.0"

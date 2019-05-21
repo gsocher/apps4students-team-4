@@ -47,28 +47,28 @@
         <entry key="flutter_hsvcolor_picker">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hsvcolor_picker-0.0.1/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hsvcolor_picker-0.0.1/lib" />
             </list>
           </value>
         </entry>
         <entry key="flutter_redux">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.3/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.3/lib" />
             </list>
           </value>
         </entry>
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/packages/flutter_test/lib" />
+              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-3.1.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="fluttertoast">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-3.1.0/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-3.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -96,7 +96,7 @@
         <entry key="path_provider">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.1.0/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -117,7 +117,7 @@
         <entry key="redux">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/redux-3.0.0/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/redux-3.0.0/lib" />
             </list>
           </value>
         </entry>
@@ -138,7 +138,7 @@
         <entry key="sqflite">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.5/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.5/lib" />
             </list>
           </value>
         </entry>
@@ -159,7 +159,7 @@
         <entry key="string_scanner">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.4/lib" />
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.4/lib" />
             </list>
           </value>
         </entry>
