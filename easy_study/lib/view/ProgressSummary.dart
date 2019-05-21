@@ -41,7 +41,8 @@ class ProgressSummaryState extends State<ProgressSummary>{
                 style: new TextStyle(
                   fontSize: 20.0,
                   color: Colors.black,
-              )
+              ),
+              ),
             ],
           ),
           new Row(

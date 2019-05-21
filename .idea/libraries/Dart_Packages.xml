@@ -65,10 +65,31 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_hsvcolor_picker">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hsvcolor_picker-0.0.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="flutter_redux">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_test">
           <value>
             <list>
               <option value="C:/src/flutter/packages/flutter_test/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="fluttertoast">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-3.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -93,6 +114,13 @@
             </list>
           </value>
         </entry>
+        <entry key="path_provider">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.1.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="pedantic">
           <value>
             <list>
@@ -114,6 +142,13 @@
             </list>
           </value>
         </entry>
+        <entry key="redux">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/redux-3.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -125,6 +160,13 @@
           <value>
             <list>
               <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.5.5/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="sqflite">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.5/lib" />
             </list>
           </value>
         </entry>
@@ -146,6 +188,13 @@
           <value>
             <list>
               <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.4/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="synchronized">
+          <value>
+            <list>
+              <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/synchronized-2.1.0/lib" />
             </list>
           </value>
         </entry>
@@ -188,16 +237,23 @@
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/date_format-1.0.6/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/decimal-0.3.3/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_charts-0.1.10/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_hsvcolor_picker-0.0.1/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_redux-0.5.3/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-3.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.5/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.1.6/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.2/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.5.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.0.2/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/rational-0.3.4/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/redux-3.0.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.5.5/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.5/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.9.3/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.0.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.4/lib" />
+      <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/synchronized-2.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.1.0/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.4/lib" />
       <root url="file://C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.1.6/lib" />
