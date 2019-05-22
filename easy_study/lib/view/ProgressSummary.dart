@@ -87,9 +87,6 @@ class ProgressSummaryState extends State<ProgressSummary>{
           children: <Widget>[
             Text(_subject.title,style: TextStyle(color: _subject.color, fontSize: 10),),
           Text(((_subject.timeSpent/60).truncate()).toString()+"h"+(_subject.timeSpent % 60).toString()+"mn"),
-
-
-
               ],
             ),
           ),
@@ -123,7 +120,7 @@ class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
     );
     tween = BarChartTween(
       BarChart.empty(size),
-      BarChart.random(size, subjects),
+      BarChart.create(size, subjects),
     );
     animation.forward();
   }
@@ -154,7 +151,7 @@ class BarChart {
     return BarChart(<BarStack>[]);
   }
 
-  factory BarChart.random(Size size, List<Subject> subjects) {
+  factory BarChart.create(Size size, List<Subject> subjects) {
     const stackWidthFraction = 0.9;
     final stackRanks = [0];
     final stackCount = stackRanks.length;
