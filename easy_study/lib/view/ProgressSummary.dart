@@ -158,8 +158,6 @@ class BarChart {
     final stackDistance = size.width;
     final stackWidth = stackDistance *stackWidthFraction;
     final startX =  (1-stackWidthFraction)*stackWidth/2;
-    debugPrint(startX.toString());
-    debugPrint(stackWidth.toString());
     final list = _selectSize(subjects);
     final stacks = List.generate(
       stackCount,
@@ -204,7 +202,7 @@ class BarChart {
     for (int i =0; i<subjects.length ;i++){
       size.add(subjects[i].timeSpent/total);
     }
-    debugPrint(size.toString());
+
     return size;
   }
 
@@ -308,28 +306,34 @@ class BarChartPainter extends CustomPainter {
       ..strokeWidth = 2.0;
     final linePath = Path();
     final chart = animation.value;
-    for (final stack in chart.stacks) {
-      var x = stack.x;
-      for (final bar in stack.bars) {
-        barPaint.color = bar.color;
-        canvas.drawRect(
-          Rect.fromLTWH(
-            x,
-            0,
-            bar.height,
-            stack.width,
-          ),
-          barPaint,
-        );
-        if (x < size.width) {
-          linePath.moveTo(x, 0);
-          linePath.lineTo(x, 10);
+      for (final stack in chart.stacks) {
+        var x = stack.x;
+        for (final bar in stack.bars) {
+          barPaint.color = bar.color;
+          if (!bar.height.isNaN) {
+            debugPrint(bar.height.toString());
+            canvas.drawRect(
+              Rect.fromLTWH(
+                x,
+                0,
+                bar.height,
+                stack.width,
+              ),
+              barPaint,
+            );
+            if (x < size.width) {
+              linePath.moveTo(x, 0);
+              linePath.lineTo(x, 10);
+            }
+            x += bar.height;
+          }
         }
-        x += bar.height;
+        canvas.drawPath(linePath, linePaint);
+        linePath.reset();
       }
-      canvas.drawPath(linePath, linePaint);
-      linePath.reset();
-    }
+
+
+
   }
 
   @override
