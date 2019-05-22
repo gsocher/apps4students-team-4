@@ -1,10 +1,10 @@
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/model/Type.dart';
-import 'package:easy_study/model/Priority.dart';
-import 'package:easy_study/presenter/Settings.dart';
-import 'package:easy_study/presenter/SubjectAdd.dart';
-import 'package:easy_study/view/SubjectOverview.dart';
-import 'package:easy_study/presenter/Map.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/model/type.dart';
+import 'package:easy_study/model/priority.dart';
+import 'package:easy_study/presenter/settings.dart';
+import 'package:easy_study/presenter/subject_add.dart';
+import 'package:easy_study/view/subject_overview.dart';
+import 'package:easy_study/presenter/map.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

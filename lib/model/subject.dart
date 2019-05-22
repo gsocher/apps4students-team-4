@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:easy_study/model/Priority.dart';
-import 'package:easy_study/model/Type.dart';
+import 'package:easy_study/model/priority.dart';
+import 'package:easy_study/model/type.dart';
 
 class Subject {
 

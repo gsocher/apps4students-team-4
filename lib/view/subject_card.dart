@@ -1,4 +1,4 @@
-import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
 class SubjectCard extends StatelessWidget {
