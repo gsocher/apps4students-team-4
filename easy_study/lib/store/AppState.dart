@@ -10,11 +10,8 @@ class AppState {
 
   AppState({this.widget, this.dbHelper});
 
-
-
   factory AppState.initial() =>
       new AppState(dbHelper: DBHelper(), widget: new SubjectOverview());
-
 }
 
 final searchReducer = combineReducers<AppState>([

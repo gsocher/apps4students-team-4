@@ -44,6 +44,7 @@ class _SubjectAddState extends State<SubjectAdd> {
                     scrollDirection: Axis.vertical))));
   }
 
+  // TODO: 22.05.2019 This method does not return a subject, if the statement is false
   Subject _submit() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();

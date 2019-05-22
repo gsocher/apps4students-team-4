@@ -1,4 +1,3 @@
-import 'package:easy_study/model/Subject.dart';
 import 'package:easy_study/presenter/Home.dart';
 import 'package:easy_study/presenter/Map.dart';
 import 'package:easy_study/presenter/Settings.dart';
@@ -72,6 +71,3 @@ class AppStateViewModel {
   AppStateViewModel(this.state);
 
 }
-
-// TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
-typedef SubjectCallback = void Function(Subject subject);
