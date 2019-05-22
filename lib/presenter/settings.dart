@@ -4,10 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 
 class Settings extends StatelessWidget {
+
+  List<Event> events;
+  Event event;
+
   @override
   Widget build(BuildContext context) {
-    Future<List<Subject>> subjects = DBHelper().getSubjects();
-    print(subjects);
+    Future<List<Subject>> subjects =  DBHelper().getSubjects();
+    subjects.then((value) {
+      for (var subject in value)  {
+      print(subject.hoursWeek);
+      event = Event(
+        title: 'Event title',
+        description: 'Event description',
+        location: 'Event location',
+        startDate: DateTime(subject.dueDate.year, subject.dueDate.month, subject.dueDate.day, 1, 0, 0, 0, 0),
+        endDate: DateTime(subject.dueDate.year, subject.dueDate.month, subject.dueDate.day, 1 + subject.hoursWeek, 0, 0, 0, 0),
+      );
+    }
+    });
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
@@ -15,13 +30,6 @@ class Settings extends StatelessWidget {
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {
-                final Event event = Event(
-                  title: 'Event title',
-                  description: 'Event description',
-                  location: 'Event location',
-                  startDate: DateTime(2019, 5, 24, 12, 0, 0, 0, 0),
-                  endDate: DateTime(2019, 5, 24, 13, 0, 0, 0, 0),
-                );
                 Add2Calendar.addEvent2Cal(event);
               },
             )));
