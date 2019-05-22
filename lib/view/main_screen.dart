@@ -72,6 +72,3 @@ class AppStateViewModel {
 
   AppStateViewModel(this.state);
 }
-
-// TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.
-typedef SubjectCallback = void Function(Subject subject);
