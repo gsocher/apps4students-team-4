@@ -1,4 +1,3 @@
-
 import 'package:easy_study/view/main_screen.dart';
 import 'package:flutter/material.dart';
 
