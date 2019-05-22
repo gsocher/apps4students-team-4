@@ -1,3 +1,5 @@
+import 'package:easy_study/Database/DBHelper.dart';
+import 'package:easy_study/model/Subject.dart';
 import 'package:flutter/material.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 
