@@ -6,6 +6,8 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future<List<Subject>> subjects = DBHelper().getSubjects();
+    print(subjects);
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
