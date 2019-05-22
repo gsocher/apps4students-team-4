@@ -4,7 +4,7 @@ import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/view/subject_overview.dart';
-import 'package:easy_study/presenter/map.dart';
+import 'package:easy_study/presenter/mymap.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -72,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               IconButton(
                 icon: Icon(Icons.map),
-                onPressed: () => _changeView(Map()),
+                onPressed: () => _changeView(MyMap()),
               )
             ],
           ),
