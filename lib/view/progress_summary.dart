@@ -18,6 +18,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
 
   Widget build(BuildContext context) {
     return Container(
+      width: 400,
       decoration: new BoxDecoration(color: Colors.white),
       child: new Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +50,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
             ],
           ),
           Container(
-            height: 50.0,
+            height: 75.0,
             child: ListView(
               children: _subjects
                   .map((subject) => new SubjectCardProgressBar(subject))
@@ -67,13 +68,15 @@ class ProgressSummaryState extends State<ProgressSummary> {
     int total = 0;
     int totalh = 0;
     int totalmn = 0;
+    int totalsec = 0;
     StringBuffer sb = new StringBuffer();
     for (int i = 0; i < subjects.length; i++) {
       total += subjects[i].timeSpent;
     }
-    totalmn = total % 60;
-    totalh = (total / 60).truncate();
-    sb.writeAll([totalh, "h ", totalmn, "mn"]);
+    totalsec = total % 60;
+    totalmn = (total / 60).truncate();
+    totalh = (total / 36000).truncate();
+    sb.writeAll([totalh, "h ", totalmn, "mn ", totalsec, 's']);
     return sb.toString();
   }
 }
@@ -91,12 +94,15 @@ class SubjectCardProgressBar extends StatelessWidget {
           children: <Widget>[
             Text(
               _subject.title,
-              style: TextStyle(color: _subject.color, fontSize: 10),
+              style: TextStyle(color: _subject.color, fontSize: 20),
             ),
-            Text(((_subject.timeSpent / 60).truncate()).toString() +
-                "h" +
-                (_subject.timeSpent % 60).toString() +
-                "mn"),
+            Text(
+              ((_subject.timeSpent / 3600).truncate()).toString() +
+                  "h" +
+                  (_subject.timeSpent / 60).truncate().toString() +
+                  "mn",
+              style: TextStyle(color: Colors.black, fontSize: 20),
+            ),
           ],
         ),
       ),
@@ -112,7 +118,7 @@ class ChartPage extends StatefulWidget {
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
-  static const size = const Size(200, 20.0);
+  static const size = const Size(390, 50.0);
   final random = Random();
 
   final List<Subject> _subjects;
@@ -123,7 +129,7 @@ class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _animation = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _tween = BarChartTween(
@@ -316,19 +322,18 @@ class BarChartPainter extends CustomPainter {
       for (final bar in stack.bars) {
         barPaint.color = bar.color;
         if (!bar.height.isNaN) {
-          debugPrint(bar.height.toString());
           canvas.drawRect(
             Rect.fromLTWH(
               x,
-              0,
+              20,
               bar.height,
               stack.width,
             ),
             barPaint,
           );
           if (x < size.width) {
-            linePath.moveTo(x, 0);
-            linePath.lineTo(x, 10);
+            linePath.moveTo(x, 20);
+            linePath.lineTo(x, 30);
           }
           x += bar.height;
         }

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8d19d5c-9065-426f-92bc-326d0cd843c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/presenter/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presenter/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/progressSummary.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/progressSummary.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/view/tween.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/tween.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/progressSummary.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/progress_summary.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/view/subject_progress_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/view/subject_progress_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,20 +20,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/debug.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4437">
+            <state relative-caret-position="370">
               <caret line="269" column="6" selection-start-line="269" selection-start-column="6" selection-end-line="269" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/view/progressSummary.dart">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/view/home.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="64">
+              <caret line="39" column="63" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="63" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/view/progress_summary.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/view/subject_progress_bar.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/basic.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-109">
+              <caret line="4006" column="2" selection-start-line="4006" selection-start-column="2" selection-end-line="4006" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -80,6 +115,7 @@
         <option value="$PROJECT_DIR$/lib/view/ProgressSummary.dart" />
         <option value="$PROJECT_DIR$/lib/presenter/home.dart" />
         <option value="$PROJECT_DIR$/lib/view/progressSummary.dart" />
+        <option value="$PROJECT_DIR$/lib/view/subject_progress_bar.dart" />
       </list>
     </option>
   </component>
@@ -268,11 +304,11 @@
       <window_info id="Resources Explorer" order="8" weight="0.3295302" />
       <window_info anchor="bottom" id="Find" order="0" />
       <window_info anchor="bottom" id="Dart Analysis" order="1" weight="0.3001464" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" visible="true" weight="0.32064423" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986577" weight="0.32064423" />
       <window_info anchor="bottom" id="TODO" order="3" weight="0.329429" />
       <window_info anchor="bottom" id="Android Profiler" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="5" />
-      <window_info anchor="bottom" id="Debug" order="6" weight="0.32996634" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.329429" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.16837482" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5013423" side_tool="true" weight="0.32064423" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
@@ -382,7 +418,6 @@
     <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/framework.dart" />
     <entry file="file://$PROJECT_DIR$/easy_study/lib/presenter/SubjectAdd.dart" />
     <entry file="file://$PROJECT_DIR$/easy_study/lib/view/SubjectCard.dart" />
-    <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/basic.dart" />
     <entry file="file://C:/src/flutter/packages/flutter/lib/src/material/card.dart" />
     <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/container.dart" />
     <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/scroll_view.dart" />
@@ -439,13 +474,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/presenter/home.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/presenter/home.dart" />
     <entry file="file://$PROJECT_DIR$/lib/presenter/hm_map.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -483,15 +512,42 @@
     </entry>
     <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/debug.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4437">
+        <state relative-caret-position="370">
           <caret line="269" column="6" selection-start-line="269" selection-start-column="6" selection-end-line="269" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/view/progressSummary.dart">
+    <entry file="file://$PROJECT_DIR$/lib/view/home.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        <state relative-caret-position="64">
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/src/flutter/packages/flutter/lib/src/widgets/basic.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-109">
+          <caret line="4006" column="2" selection-start-line="4006" selection-start-column="2" selection-end-line="4006" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/view/progress_summary.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/view/subject_progress_bar.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>

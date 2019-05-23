@@ -32,7 +32,7 @@ class SubjectProgressBar extends StatelessWidget {
                               Text(
                                 subject.title,
                                 style: TextStyle(
-                                    color: Colors.green, fontSize: 25),
+                                    color: Colors.black, fontSize: 25),
                               ),
                               Container(
                                 width: 20.0,

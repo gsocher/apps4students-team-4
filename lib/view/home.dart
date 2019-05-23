@@ -1,7 +1,7 @@
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/main_screen.dart';
-import 'package:easy_study/view/progressSummary.dart';
+import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_progress_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
