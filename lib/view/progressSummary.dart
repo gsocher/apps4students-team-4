@@ -105,7 +105,7 @@ class SubjectCardProgressBar extends StatelessWidget {
 }
 
 class ChartPage extends StatefulWidget {
-  List<Subject> _subjects;
+  final List<Subject> _subjects;
   ChartPage(this._subjects);
   ChartPageState createState() => ChartPageState(_subjects);
 }
@@ -115,7 +115,7 @@ class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   static const size = const Size(200, 20.0);
   final random = Random();
 
-  List<Subject> _subjects;
+  final List<Subject> _subjects;
   AnimationController _animation;
   BarChartTween _tween;
 
