@@ -57,6 +57,7 @@ jobs:
     #      script:
     #        - ../flutter/bin/flutter -v build ios --no-codesign
     - stage: Deploying
+      language: Dart
       if: branch = master
       skript: skip
       before_deploy:
