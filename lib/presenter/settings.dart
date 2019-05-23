@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Future<List<Subject>> subjects = DBHelper().getSubjects();
+    final Future<List<Subject>> subjects = DBHelper().getSubjects();
+    Event event;
     subjects.then((value) {
       for (var subject in value) {
-        final event = Event(
+        event = Event(
           title: 'Event title',
           description: 'Event description',
           location: 'Event location',
