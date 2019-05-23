@@ -4,6 +4,16 @@ import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 
 class Subject {
+  static Subject copy(Subject org) {
+    Subject copy = Subject.name(org.title, org.type, org.room, org.priority,
+        org.description, org.hoursWeek);
+    copy.id = org.id;
+    copy.color = org.color;
+    copy.timeSpent = org.timeSpent;
+    copy.startedTimetrackingAt = org.startedTimetrackingAt;
+    return copy;
+  }
+
   String title, room, description;
   int id, timeSpent = 0, hoursWeek;
   ExamType type;
