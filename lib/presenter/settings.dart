@@ -4,7 +4,6 @@ import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
-  List<Event> events;
   Event event;
 
   @override
