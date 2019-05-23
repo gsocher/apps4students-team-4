@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
               child: new Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                // TODO: 03.05.2019 The buttons should be seperated by a line and be wider. So you can click next to the icon and also hit it.
+                // TODO: 03.05.2019 The buttons should be separated by a line and be wider. So you can click next to the icon and also hit it.
                 children: <Widget>[
                   IconButton(
                       icon: Icon(Icons.storage),

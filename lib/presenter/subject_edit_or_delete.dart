@@ -19,10 +19,10 @@ class SubjectEditOrDelete extends StatefulWidget {
 class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void onChanged(HSVColor value) => _color = value.toColor();
 
-  final String TITLE = 'title';
-  final String ROOM = 'room';
-  final String DESCRIPTION = 'descprition';
-  final String HOURSPERWEEK = 'hours per week';
+  static const String TITLE = 'title';
+  static const String ROOM = 'room';
+  static const String DESCRIPTION = 'descprition';
+  static const String HOURS_PER_WEEK = 'hours per week';
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
@@ -54,14 +54,15 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   }
 
   Subject _submit() {
+    Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      Subject result = Subject.name(_title, _type, _room, _priority,
-          _description, int.parse(_hoursPerWeek));
+      result = Subject.name(_title, _type, _room, _priority, _description,
+          int.parse(_hoursPerWeek));
       result.color = _color;
       result.id = widget.subject.id;
-      return result;
     }
+    return result;
   }
 
   Widget _buildColumnItems(BuildContext context, int index) {
@@ -132,7 +133,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           TextFormField(
             initialValue: _hoursPerWeek,
             validator: (String input) =>
-                input.length <= 0 ? 'please enter the $HOURSPERWEEK' : null,
+                input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
             onSaved: (String value) => _hoursPerWeek = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -140,7 +141,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                 border: UnderlineInputBorder(),
                 filled: true,
                 alignLabelWithHint: true,
-                labelText: HOURSPERWEEK),
+                labelText: HOURS_PER_WEEK),
             keyboardType: TextInputType.number,
           ),
           Container(

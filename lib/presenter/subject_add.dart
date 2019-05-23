@@ -1,6 +1,6 @@
+import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
-import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +17,10 @@ class _SubjectAddState extends State<SubjectAdd> {
 
   void onChanged(HSVColor value) => this.color = value;
 
-  final String TITLE = 'title';
-  final String ROOM = 'room';
-  final String DESCRIPTION = 'descprition';
-  final String HOURSPERWEEK = 'hours per week';
+  static const String TITLE = 'title';
+  static const String ROOM = 'room';
+  static const String DESCRIPTION = 'descprition';
+  static const String HOURS_PER_WEEK = 'hours per week';
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
@@ -28,7 +28,7 @@ class _SubjectAddState extends State<SubjectAdd> {
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
   // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
-  // TODO: 16.05.2019 if the dropdown is not choosen, it wont work. Fix it.
+  // TODO: 16.05.2019 if the dropdown is not chosen, it wont work. Fix it.
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -43,13 +43,14 @@ class _SubjectAddState extends State<SubjectAdd> {
   }
 
   Subject _submit() {
+    Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      Subject result = Subject.name(_title, _type, _room, _priority,
-          _description, int.parse(_hoursPerWeek));
+      result = Subject.name(_title, _type, _room, _priority, _description,
+          int.parse(_hoursPerWeek));
       result.color = color.toColor();
-      return result;
     }
+    return result;
   }
 
   Widget _buildColumnItems(BuildContext context, int index) {
@@ -116,7 +117,7 @@ class _SubjectAddState extends State<SubjectAdd> {
                   })),
           TextFormField(
             validator: (String input) =>
-                input.length <= 0 ? 'please enter the $HOURSPERWEEK' : null,
+                input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
             onSaved: (String value) => _hoursPerWeek = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -124,7 +125,7 @@ class _SubjectAddState extends State<SubjectAdd> {
                 border: UnderlineInputBorder(),
                 filled: true,
                 alignLabelWithHint: true,
-                labelText: HOURSPERWEEK),
+                labelText: HOURS_PER_WEEK),
             keyboardType: TextInputType.number,
             autovalidate: true,
           ),

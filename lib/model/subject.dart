@@ -4,74 +4,46 @@ import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 
 class Subject {
-  String _title, _room, _description;
-  int _id, _timeSpent = 0, _hoursWeek;
-  ExamType _type;
-  Priority _priority;
-  Color _color = Color.fromARGB(255, 0, 0, 0);
+  String title, room, description;
+  int id, timeSpent = 0, hoursWeek;
+  ExamType type;
+  Priority priority;
+  Color color = Color.fromARGB(255, 0, 0, 0);
 
   // TODO: 02.05.2019 Change due date. For now its today or right now.
-  DateTime _dueDate = DateTime.now();
+  DateTime dueDate = DateTime.now();
 
   // TODO: 02.05.2019 refactor to initialization and naming
-  Subject.name(this._title, this._type, this._room, this._priority,
-      this._description, this._hoursWeek);
-
-  int get id => _id;
-
-  set id(int value) {
-    _id = value;
-  }
-
-  set color(Color value) {
-    _color = value;
-  }
-
-  int get hoursWeek => _hoursWeek;
-
-  DateTime get dueDate => _dueDate;
-
-  int get timeSpent => _timeSpent;
-
-  Color get color => _color;
-
-  String get description => _description;
-
-  Priority get priority => _priority;
-
-  String get room => _room;
-
-  ExamType get type => _type;
-
-  String get title => _title;
+  Subject.name(this.title, this.type, this.room, this.priority,
+      this.description, this.hoursWeek);
 
   //puts the ObjectVariables to a map so the database can read it easily
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
     if (id != null) {
-      map['id'] = _id;
+      map['id'] = id;
     }
-    map['title'] = _title;
-    map['type'] = _type.toString();
-    map['room'] = _room;
-    map['priority'] = _priority.toString();
-    map['description'] = _description;
-    map['hoursWeek'] = _hoursWeek;
-    map['color_alpha'] = _color.alpha;
-    map['color_red'] = _color.red;
-    map['color_green'] = _color.green;
-    map['color_blue'] = _color.blue;
+    map['title'] = title;
+    map['type'] = type.toString();
+    map['room'] = room;
+    map['priority'] = priority.toString();
+    map['description'] = description;
+    map['hoursWeek'] = hoursWeek;
+    map['color_alpha'] = color.alpha;
+    map['color_red'] = color.red;
+    map['color_green'] = color.green;
+    map['color_blue'] = color.blue;
 
-    print("color alpha" + _color.alpha.toString());
+    print("color alpha" + color.alpha.toString());
 
     return map;
   }
 
   @override
   String toString() {
-    return 'Subject{_title: $_title, _room: $_room,'
-        ' _description: $_description, _id: $_id, _timeSpent:'
-        ' $_timeSpent, _hoursWeek: $_hoursWeek, _type: $_type, '
-        '_priority: $_priority, _color: $_color, _dueDate: $_dueDate}';
+    return 'Subject{_title: $title, _room: $room,'
+        ' _description: $description, _id: $id, _timeSpent:'
+        ' $timeSpent, _hoursWeek: $hoursWeek, _type: $type, '
+        '_priority: $priority, _color: $color, _dueDate: $dueDate}';
   }
 }
