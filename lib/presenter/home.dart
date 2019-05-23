@@ -1,4 +1,3 @@
-
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/progressSummary.dart';
@@ -10,16 +9,16 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
-        converter: (store) {
-          return new AppStateViewModel(store.state);
-        },
+      converter: (store) {
+        return new AppStateViewModel(store.state);
+      },
       builder: (BuildContext context, AppStateViewModel vm) {
         return new Container(
           child: FutureBuilder<List<Subject>>(
             future: vm.state.dbHelper.getSubjects(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
-                if (snapshot.data.length !=0) {
+                if (snapshot.data.length != 0) {
                   return ProgressSummary(snapshot.data);
                 }
               }
@@ -27,11 +26,10 @@ class Home extends StatelessWidget {
                 alignment: AlignmentDirectional.center,
                 child: new CircularProgressIndicator(),
               );
-
             },
           ),
         );
       },
     );
-    }
+  }
 }

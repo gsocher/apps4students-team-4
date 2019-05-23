@@ -6,22 +6,20 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/animation.dart';
 import 'tween.dart';
 
-
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
   ProgressSummary(this._subjects);
   State<StatefulWidget> createState() => ProgressSummaryState(_subjects);
-
 }
-class ProgressSummaryState extends State<ProgressSummary>{
+
+class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
   ProgressSummaryState(this._subjects);
 
   Widget build(BuildContext context) {
     return Container(
-      decoration: new BoxDecoration(color:Colors.white),
+      decoration: new BoxDecoration(color: Colors.white),
       child: new Column(
-
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
@@ -36,64 +34,74 @@ class ProgressSummaryState extends State<ProgressSummary>{
                   color: Colors.black,
                 ),
               ),
-
               Text(
                 formatDate(DateTime.now(), [dd, '/', mm, '/', yyyy]).toString(),
                 style: new TextStyle(
                   fontSize: 20.0,
                   color: Colors.black,
-              ),
+                ),
               ),
             ],
           ),
           new Row(
             children: <Widget>[
               ChartPage(_subjects),
-            ],),
+            ],
+          ),
           Container(
             height: 50.0,
-
-             child: ListView( children: _subjects.map((subject) => new SubjectCardProgressBar(subject)).toList(),scrollDirection: Axis.horizontal, addRepaintBoundaries: false,),
-    ),],
+            child: ListView(
+              children: _subjects
+                  .map((subject) => new SubjectCardProgressBar(subject))
+                  .toList(),
+              scrollDirection: Axis.horizontal,
+              addRepaintBoundaries: false,
+            ),
           ),
+        ],
+      ),
     );
   }
 
-
   static String _total(List<Subject> subjects) {
     int total = 0;
-    int totalh=0;
-    int totalmn=0;
+    int totalh = 0;
+    int totalmn = 0;
     StringBuffer sb = new StringBuffer();
     for (int i = 0; i < subjects.length; i++) {
       total += subjects[i].timeSpent;
     }
-    totalmn=total%60;
-    totalh=(total/60).truncate();
-    sb.writeAll([totalh,"h ",totalmn,"mn"]);
+    totalmn = total % 60;
+    totalh = (total / 60).truncate();
+    sb.writeAll([totalh, "h ", totalmn, "mn"]);
     return sb.toString();
   }
 }
 
- // ignore: must_be_immutable
- class SubjectCardProgressBar extends StatelessWidget{
+// ignore: must_be_immutable
+class SubjectCardProgressBar extends StatelessWidget {
   Subject _subject;
   SubjectCardProgressBar(this._subject);
 
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
-        child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(_subject.title,style: TextStyle(color: _subject.color, fontSize: 10),),
-          Text(((_subject.timeSpent/60).truncate()).toString()+"h"+(_subject.timeSpent % 60).toString()+"mn"),
-              ],
+            Text(
+              _subject.title,
+              style: TextStyle(color: _subject.color, fontSize: 10),
             ),
-          ),
-        );
+            Text(((_subject.timeSpent / 60).truncate()).toString() +
+                "h" +
+                (_subject.timeSpent % 60).toString() +
+                "mn"),
+          ],
+        ),
+      ),
+    );
   }
-
 }
 
 class ChartPage extends StatefulWidget {
@@ -103,42 +111,39 @@ class ChartPage extends StatefulWidget {
 }
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
-
-  ChartPageState(this.subjects);
+  ChartPageState(this._subjects);
   static const size = const Size(200, 20.0);
   final random = Random();
 
-  List<Subject> subjects;
-  AnimationController animation;
-  BarChartTween tween;
+  List<Subject> _subjects;
+  AnimationController _animation;
+  BarChartTween _tween;
 
   @override
   void initState() {
     super.initState();
-    animation = AnimationController(
+    _animation = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    tween = BarChartTween(
+    _tween = BarChartTween(
       BarChart.empty(size),
-      BarChart.create(size, subjects),
+      BarChart.create(size, _subjects),
     );
-    animation.forward();
+    _animation.forward();
   }
 
   @override
   void dispose() {
-    animation.dispose();
+    _animation.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return
-       CustomPaint(
-          size: size,
-          painter: BarChartPainter(tween.animate(animation)),
+    return CustomPaint(
+      size: size,
+      painter: BarChartPainter(_tween.animate(_animation)),
     );
   }
 }
@@ -157,8 +162,8 @@ class BarChart {
     final stackRanks = [0];
     final stackCount = stackRanks.length;
     final stackDistance = size.width;
-    final stackWidth = stackDistance *stackWidthFraction;
-    final startX =  (1-stackWidthFraction)*stackWidth/2;
+    final stackWidth = stackDistance * stackWidthFraction;
+    final startX = (1 - stackWidthFraction) * stackWidth / 2;
     final list = _selectSize(subjects);
     final stacks = List.generate(
       stackCount,
@@ -168,10 +173,9 @@ class BarChart {
           barRanks.length,
           (j) => Bar(
                 barRanks[j],
-                list[j]* stackWidth,
+                list[j] * stackWidth,
                 subjects[j].color,
               ),
-
         );
         return BarStack(
           stackRanks[i],
@@ -187,26 +191,26 @@ class BarChart {
   static List<int> _selectRanks(List<Subject> subjects) {
     final ranks = <int>[];
     var rank = 0;
-    for (int i =0; i<subjects.length ;i++){
+    for (int i = 0; i < subjects.length; i++) {
       ranks.add(rank);
       rank++;
     }
     return ranks;
   }
-  static List<double> _selectSize(List<Subject> subjects){
-    int total=0;
-    final size= <double>[];
-    for (int i =0; i<subjects.length ;i++){
-      total+= subjects[i].timeSpent;
+
+  static List<double> _selectSize(List<Subject> subjects) {
+    int total = 0;
+    final size = <double>[];
+    for (int i = 0; i < subjects.length; i++) {
+      total += subjects[i].timeSpent;
     }
 
-    for (int i =0; i<subjects.length ;i++){
-      size.add(subjects[i].timeSpent/total);
+    for (int i = 0; i < subjects.length; i++) {
+      size.add(subjects[i].timeSpent / total);
     }
 
     return size;
   }
-
 }
 
 class BarChartTween extends Tween<BarChart> {
@@ -307,34 +311,31 @@ class BarChartPainter extends CustomPainter {
       ..strokeWidth = 2.0;
     final linePath = Path();
     final chart = animation.value;
-      for (final stack in chart.stacks) {
-        var x = stack.x;
-        for (final bar in stack.bars) {
-          barPaint.color = bar.color;
-          if (!bar.height.isNaN) {
-            debugPrint(bar.height.toString());
-            canvas.drawRect(
-              Rect.fromLTWH(
-                x,
-                0,
-                bar.height,
-                stack.width,
-              ),
-              barPaint,
-            );
-            if (x < size.width) {
-              linePath.moveTo(x, 0);
-              linePath.lineTo(x, 10);
-            }
-            x += bar.height;
+    for (final stack in chart.stacks) {
+      var x = stack.x;
+      for (final bar in stack.bars) {
+        barPaint.color = bar.color;
+        if (!bar.height.isNaN) {
+          debugPrint(bar.height.toString());
+          canvas.drawRect(
+            Rect.fromLTWH(
+              x,
+              0,
+              bar.height,
+              stack.width,
+            ),
+            barPaint,
+          );
+          if (x < size.width) {
+            linePath.moveTo(x, 0);
+            linePath.lineTo(x, 10);
           }
+          x += bar.height;
         }
-        canvas.drawPath(linePath, linePaint);
-        linePath.reset();
       }
-
-
-
+      canvas.drawPath(linePath, linePaint);
+      linePath.reset();
+    }
   }
 
   @override
