@@ -1,6 +1,8 @@
 class Priority {
   final _value;
+
   const Priority._internal(this._value);
+
   toString() => '$_value';
 
   static const VALUES = [WANT_TO_PASS, MINIMALISM, NORMAL];
