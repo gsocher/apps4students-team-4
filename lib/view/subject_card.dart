@@ -1,10 +1,10 @@
-import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
 class SubjectCard extends StatelessWidget {
-
   // TODO: 03.05.2019 if we use mvvm this view shouldnt contain any field variable.
-  Subject _subject;
+  final Subject _subject;
+
   SubjectCard(this._subject);
 
   @override
@@ -16,7 +16,10 @@ class SubjectCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           verticalDirection: VerticalDirection.down,
           children: <Widget>[
-            Text(_subject.title,style: TextStyle(color: Colors.green, fontSize: 20),),
+            Text(
+              _subject.title,
+              style: TextStyle(color: Colors.green, fontSize: 20),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

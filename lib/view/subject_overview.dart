@@ -1,5 +1,5 @@
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/view/SubjectCard.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/view/subject_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

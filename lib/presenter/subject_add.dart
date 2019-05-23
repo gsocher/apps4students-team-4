@@ -1,7 +1,7 @@
-import 'package:easy_study/model/Priority.dart';
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/model/Type.dart';
-import 'package:easy_study/view/MainScreen.dart';
+import 'package:easy_study/model/priority.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/model/type.dart';
+import 'package:easy_study/view/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

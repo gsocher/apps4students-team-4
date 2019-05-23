@@ -1,6 +1,8 @@
 class Type {
   final _value;
+
   const Type._internal(this._value);
+
   toString() => '$_value';
 
   static const VALUES = [ORAL_EXAM_, PRESENTATION, WRITTEN_EXAM];
