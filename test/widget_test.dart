@@ -88,7 +88,7 @@ void main() {
     // TODO: 22.05.2019 how to test this?
   });
 
-  testWidgets('show subject overview', (tester) async{
+  testWidgets('show subject overview', (tester) async {
     var createApp = _createApp();
     createApp.store.dispatch(ChangeView(new SubjectOverview()));
     await tester.pumpWidget(createApp);
