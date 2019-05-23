@@ -1,6 +1,7 @@
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/main_screen.dart';
+import 'package:easy_study/view/progressSummary.dart';
 import 'package:easy_study/view/subject_progress_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +26,21 @@ class _HomeState extends State<Home> {
             builder: (context, snapshot) {
               if (snapshot.data != null) {
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return new SubjectProgressBar(
-                            subject: snapshot.data[index]);
-                      });
+                  return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      verticalDirection: VerticalDirection.down,
+                      children: <Widget>[
+                        ProgressSummary(snapshot.data),
+                        Expanded(
+                            child: ListView.builder(
+                                itemCount: snapshot.data.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return new SubjectProgressBar(
+                                      subject: snapshot.data[index]);
+                                }))
+                      ]);
                 }
               }
               return new Container(
