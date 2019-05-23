@@ -1,7 +1,8 @@
 import 'dart:core';
+
+import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
-import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
