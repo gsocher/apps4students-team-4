@@ -1,7 +1,8 @@
 import 'dart:core';
+
+import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
-import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,10 @@ class SubjectEditOrDelete extends StatefulWidget {
 class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void onChanged(HSVColor value) => _color = value.toColor();
 
-  final String TITLE = 'title';
-  final String ROOM = 'room';
-  final String DESCRIPTION = 'descprition';
-  final String HOURSPERWEEK = 'hours per week';
+  static const String TITLE = 'title';
+  static const String ROOM = 'room';
+  static const String DESCRIPTION = 'descprition';
+  static const String HOURSPERWEEK = 'hours per week';
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
