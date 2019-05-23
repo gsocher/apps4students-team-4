@@ -105,7 +105,7 @@ class ChartPage extends StatefulWidget {
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
 
   ChartPageState(this.subjects);
-  static const size = const Size(400, 20.0);
+  static const size = const Size(200, 20.0);
   final random = Random();
 
   List<Subject> subjects;
