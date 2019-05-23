@@ -5,16 +5,15 @@ class ExamType {
 
   toString() => '$_value';
 
-  static ExamType getType(String string){
-    Map<String,ExamType> stringToType = new Map();
+  static ExamType getType(String string) {
+    Map<String, ExamType> stringToType = new Map();
     stringToType["Presentation"] = ExamType.PRESENTATION;
     stringToType["Oral exam"] = ExamType.ORAL_EXAM;
     stringToType["Written exam"] = ExamType.WRITTEN_EXAM;
-    if(!stringToType.containsKey(string)){
+    if (!stringToType.containsKey(string)) {
       throw new Exception("This type is not a valid Type");
     }
     return stringToType[string];
-
   }
 
   static const VALUES = [ORAL_EXAM, PRESENTATION, WRITTEN_EXAM];

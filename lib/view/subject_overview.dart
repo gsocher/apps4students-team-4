@@ -6,14 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-
 class SubjectOverview extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SubjectOverviewState();
 }
 
 class _SubjectOverviewState extends State<SubjectOverview> {
-
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
@@ -39,7 +37,6 @@ class _SubjectOverviewState extends State<SubjectOverview> {
                 alignment: AlignmentDirectional.center,
                 child: new CircularProgressIndicator(),
               );
-
             },
           ),
         );

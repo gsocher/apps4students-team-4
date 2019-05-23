@@ -47,7 +47,6 @@ class Subject {
 
   //puts the ObjectVariables to a map so the database can read it easily
   Map<String, dynamic> toMap() {
-
     var map = Map<String, dynamic>();
     if (id != null) {
       map['id'] = _id;
@@ -75,6 +74,4 @@ class Subject {
         ' $_timeSpent, _hoursWeek: $_hoursWeek, _type: $_type, '
         '_priority: $_priority, _color: $_color, _dueDate: $_dueDate}';
   }
-
-
 }

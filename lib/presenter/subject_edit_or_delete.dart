@@ -10,7 +10,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectEditOrDelete extends StatefulWidget {
   final Subject subject;
-  const SubjectEditOrDelete({Key key, this.subject}): super(key: key);
+  const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SubjectEditOrDeleteState();
@@ -32,13 +32,12 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void initState() {
     super.initState();
     _title = widget.subject.title;
-    _room =  widget.subject.room;
-    _description =  widget.subject.description;
-    _hoursPerWeek =  widget.subject.hoursWeek.toString();
-    _priority =  widget.subject.priority;
+    _room = widget.subject.room;
+    _description = widget.subject.description;
+    _hoursPerWeek = widget.subject.hoursWeek.toString();
+    _priority = widget.subject.priority;
     _type = widget.subject.type;
     _color = widget.subject.color;
-
   }
 
   @override
@@ -72,7 +71,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           TextFormField(
             initialValue: _title,
             validator: (String input) =>
-            input.length <= 0 ? 'please enter a  $TITLE' : null,
+                input.length <= 0 ? 'please enter a  $TITLE' : null,
             onSaved: (String value) => _title = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -85,7 +84,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           TextFormField(
             initialValue: _room,
             validator: (String input) =>
-            input.length <= 0 ? 'please enter a $ROOM' : null,
+                input.length <= 0 ? 'please enter a $ROOM' : null,
             onSaved: (String value) => _room = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -98,7 +97,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           TextFormField(
             initialValue: _description,
             validator: (String input) =>
-            input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+                input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
             onSaved: (String value) => _description = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -112,28 +111,28 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
               value: _type,
               items: ExamType.VALUES
                   .map((value) => new DropdownMenuItem<ExamType>(
-                child: Text(value.toString()),
-                value: value,
-              ))
+                        child: Text(value.toString()),
+                        value: value,
+                      ))
                   .toList(),
               onChanged: (ExamType value) => setState(() {
-                _type = value;
-              })),
+                    _type = value;
+                  })),
           DropdownButton<Priority>(
               value: _priority,
               items: Priority.VALUES
                   .map((value) => new DropdownMenuItem<Priority>(
-                child: Text(value.toString()),
-                value: value,
-              ))
+                        child: Text(value.toString()),
+                        value: value,
+                      ))
                   .toList(),
               onChanged: (Priority value) => setState(() {
-                _priority = value;
-              })),
+                    _priority = value;
+                  })),
           TextFormField(
             initialValue: _hoursPerWeek,
             validator: (String input) =>
-            input.length <= 0 ? 'please enter the $HOURSPERWEEK' : null,
+                input.length <= 0 ? 'please enter the $HOURSPERWEEK' : null,
             onSaved: (String value) => _hoursPerWeek = value,
             style: TextStyle(fontSize: 20),
             decoration: InputDecoration(
@@ -164,39 +163,34 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
               )
             ]),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-               StoreConnector<AppState, VoidCallback>(
-              converter: (store) {
-                return () => store..dispatch(UpdateSubject(_submit()));
-              }, builder: (context, callback) {
-            return new IconButton(
-              icon: Icon(
-                Icons.save,
-                size: 30,
-              ),
-              onPressed: callback,
-            );
-          }),
-              Container(
-                width: 20.0,
-                height: 20.0,
-              ),
-             StoreConnector<AppState, VoidCallback>(
-                  converter: (store) {
-                return () => store..dispatch(DeleteSubject(widget.subject.id));
-              }, builder: (context, callback) {
-                return new IconButton(
-                  icon: Icon(
-                    Icons.delete,
-                    size: 30,
-                  ),
-                  onPressed: callback,
-                );
-              }),
-          ]
-          )
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            StoreConnector<AppState, VoidCallback>(converter: (store) {
+              return () => store..dispatch(UpdateSubject(_submit()));
+            }, builder: (context, callback) {
+              return new IconButton(
+                icon: Icon(
+                  Icons.save,
+                  size: 30,
+                ),
+                onPressed: callback,
+              );
+            }),
+            Container(
+              width: 20.0,
+              height: 20.0,
+            ),
+            StoreConnector<AppState, VoidCallback>(converter: (store) {
+              return () => store..dispatch(DeleteSubject(widget.subject.id));
+            }, builder: (context, callback) {
+              return new IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  size: 30,
+                ),
+                onPressed: callback,
+              );
+            }),
+          ])
         ]);
   }
 }

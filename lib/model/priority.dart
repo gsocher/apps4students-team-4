@@ -5,16 +5,15 @@ class Priority {
 
   toString() => '$_value';
 
-  static Priority getPriority(String string){
-    Map<String,Priority> stringToPrio = new Map();
+  static Priority getPriority(String string) {
+    Map<String, Priority> stringToPrio = new Map();
     stringToPrio["Want to pass!"] = Priority.WANT_TO_PASS;
     stringToPrio["Minimalism"] = Priority.MINIMALISM;
     stringToPrio["Normal"] = Priority.NORMAL;
-    if(!stringToPrio.containsKey(string)){
+    if (!stringToPrio.containsKey(string)) {
       throw new Exception("This priority is not a valid Priority");
     }
     return stringToPrio[string];
-
   }
 
   static const VALUES = [WANT_TO_PASS, MINIMALISM, NORMAL];

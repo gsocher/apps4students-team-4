@@ -41,7 +41,8 @@ class _MainScreenState extends State<MainScreen> {
                       onPressed: () => callback..dispatch(ChangeView(Home()))),
                   IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: () => callback..dispatch(ChangeView(SubjectOverview()))),
+                      onPressed: () =>
+                          callback..dispatch(ChangeView(SubjectOverview()))),
                   IconButton(
                     icon: Icon(Icons.settings),
                     onPressed: () => callback..dispatch(ChangeView(Settings())),
@@ -70,7 +71,6 @@ class AppStateViewModel {
   final AppState state;
 
   AppStateViewModel(this.state);
-
 }
 
 // TODO: 03.05.2019 rethink, if this callback is good. or if mvvm is able to reduce this callback.

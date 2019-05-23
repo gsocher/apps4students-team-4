@@ -17,7 +17,6 @@ class _SubjectAddState extends State<SubjectAdd> {
 
   void onChanged(HSVColor value) => this.color = value;
 
-
   final String TITLE = 'title';
   final String ROOM = 'room';
   final String DESCRIPTION = 'descprition';
@@ -151,7 +150,7 @@ class _SubjectAddState extends State<SubjectAdd> {
           ),
           //TODO: 19.05.2019 check if all inputs are correct before saving.
           new StoreConnector<AppState, VoidCallback>(converter: (store) {
-            return  () => store..dispatch(AddNewSubject(_submit()));
+            return () => store..dispatch(AddNewSubject(_submit()));
           }, builder: (context, callback) {
             return new IconButton(
               icon: Icon(
