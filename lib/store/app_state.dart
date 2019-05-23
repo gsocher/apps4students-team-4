@@ -49,7 +49,7 @@ AppState _addNewSubject(AppState state, AddNewSubject action) =>
       ..dbHelper.addNewSubject(action.subject);
 
 AppState _updateSubject(AppState state, UpdateSubject action) =>
-    new AppState(dbHelper: state.dbHelper, widget: new SubjectOverview())
+    new AppState(dbHelper: state.dbHelper, widget: state.widget)
       ..dbHelper.updateSubject(action.subject);
 
 AppState _deleteSubject(AppState state, DeleteSubject action) =>

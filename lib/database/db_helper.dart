@@ -45,7 +45,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_15.db';
+    String path = documentsDirectory.path + '/subject_22.db';
     var db = await openDatabase(path, version: 1, onCreate: _createDB);
     return db;
   }
@@ -61,7 +61,7 @@ class DBHelper {
         ' $COLOR_ALPHA INTEGER,'
         ' $COLOR_RED INTEGER,'
         ' $COLOR_GREEN INTEGER,'
-        ' $COLOR_BLUE INTEGER),'
+        ' $COLOR_BLUE INTEGER,'
         ' $STARTED_TIMETRACKING_AT TEXT,'
         ' $TIME_SPENT INTEGER);');
   }

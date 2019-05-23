@@ -1,4 +1,5 @@
 import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/presenter/time_tracking.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -15,6 +16,8 @@ class SubjectProgressBar extends StatelessWidget {
         converter: (store) => store,
         builder: (context, callback) {
           return GestureDetector(
+              onTap: () => callback
+                ..dispatch(ChangeView(TimeTracking(subject: subject))),
               child: Card(
                   elevation: 5,
                   child: Container(
