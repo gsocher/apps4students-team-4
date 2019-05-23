@@ -34,37 +34,31 @@ void main() {
   }
 
   test('reducer changes view to subject overview', () {
-    final widget = SubjectOverview();
+    final widget = new SubjectOverview();
     final state = searchReducer(new AppState.initial(), ChangeView(widget));
     expect(state.widget, widget);
   });
 
   test('reducer changes view to subject add', () {
-    final widget = SubjectAdd();
-    final state = searchReducer(new AppState.initial(), ChangeView(widget));
-    expect(state.widget, widget);
-  });
-
-  test('reducer changes view to subject overview', () {
-    final widget = SubjectOverview();
+    final widget = new SubjectAdd();
     final state = searchReducer(new AppState.initial(), ChangeView(widget));
     expect(state.widget, widget);
   });
 
   test('reducer changes view to subject edit or delete', () {
-    final widget = SubjectEditOrDelete(subject: _getDummySubject());
+    final widget = new SubjectEditOrDelete(subject: _getDummySubject());
     final state = searchReducer(new AppState.initial(), ChangeView(widget));
     expect(state.widget, widget);
   });
 
   test('reducer changes view to map', () {
-    final widget = HmMap();
+    final widget = new HmMap();
     final state = searchReducer(new AppState.initial(), ChangeView(widget));
     expect(state.widget, widget);
   });
 
   test('reducer changes view to settings', () {
-    final widget = Settings();
+    final widget = new Settings();
     final state = searchReducer(new AppState.initial(), ChangeView(widget));
     expect(state.widget, widget);
   });
@@ -92,5 +86,12 @@ void main() {
     createApp.store.dispatch(AddNewSubject(_getDummySubject()));
     createApp.store.dispatch(DeleteSubject(_getDummySubject().id));
     // TODO: 22.05.2019 how to test this?
+  });
+
+  testWidgets('show subject overview', (tester) async{
+    var createApp = _createApp();
+    createApp.store.dispatch(ChangeView(new SubjectOverview()));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
   });
 }
