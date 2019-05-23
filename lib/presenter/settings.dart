@@ -4,14 +4,12 @@ import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
-  Event event;
-
   @override
   Widget build(BuildContext context) {
     Future<List<Subject>> subjects = DBHelper().getSubjects();
     subjects.then((value) {
       for (var subject in value) {
-        event = Event(
+        final event = Event(
           title: 'Event title',
           description: 'Event description',
           location: 'Event location',
