@@ -9,6 +9,7 @@ class Subject {
   ExamType type;
   Priority priority;
   Color color = Color.fromARGB(255, 0, 0, 0);
+  String startedTimetrackingAt;
 
   // TODO: 02.05.2019 Change due date. For now its today or right now.
   DateTime dueDate = DateTime.now();
@@ -33,6 +34,8 @@ class Subject {
     map['color_red'] = color.red;
     map['color_green'] = color.green;
     map['color_blue'] = color.blue;
+    map['started_timetracking_at'] = startedTimetrackingAt;
+    map['time_spent'] = timeSpent;
 
     print("color alpha" + color.alpha.toString());
 
@@ -44,6 +47,7 @@ class Subject {
     return 'Subject{_title: $title, _room: $room,'
         ' _description: $description, _id: $id, _timeSpent:'
         ' $timeSpent, _hoursWeek: $hoursWeek, _type: $type, '
-        '_priority: $priority, _color: $color, _dueDate: $dueDate}';
+        '_priority: $priority, _color: $color, _dueDate: $dueDate,'
+        '_startedTimetrackingAt: $startedTimetrackingAt}';
   }
 }

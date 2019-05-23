@@ -20,6 +20,8 @@ class DBHelper {
   static const String COLOR_RED = 'color_red';
   static const String COLOR_GREEN = 'color_green';
   static const String COLOR_BLUE = 'color_blue';
+  static const String STARTED_TIMETRACKING_AT = 'started_timetracking_at';
+  static const String TIME_SPENT = 'time_spent';
 
   static DBHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database; //Singleton Database
@@ -59,7 +61,9 @@ class DBHelper {
         ' $COLOR_ALPHA INTEGER,'
         ' $COLOR_RED INTEGER,'
         ' $COLOR_GREEN INTEGER,'
-        ' $COLOR_BLUE INTEGER);');
+        ' $COLOR_BLUE INTEGER),'
+        ' $STARTED_TIMETRACKING_AT TEXT,'
+        ' $TIME_SPENT INTEGER);');
   }
 
   /*
@@ -85,6 +89,8 @@ class DBHelper {
           list[index][COLOR_RED],
           list[index][COLOR_GREEN],
           list[index][COLOR_BLUE]);
+      subject.startedTimetrackingAt = list[index][STARTED_TIMETRACKING_AT];
+      subject.timeSpent = list[index][TIME_SPENT];
 
       subjects.add(subject);
     }
@@ -92,12 +98,18 @@ class DBHelper {
   }
 
   Future<int> addNewSubject(Subject subject) async {
+    if (subject == null) {
+      return -1;
+    }
     var dbConnection = await this.database;
     var result = await dbConnection.insert(TABLE_NAME, subject.toMap());
     return result;
   }
 
   Future<int> updateSubject(Subject subject) async {
+    if (subject == null) {
+      return -1;
+    }
     var dbConnection = await this.database;
     var result = await dbConnection.update(TABLE_NAME, subject.toMap(),
         where: '$ID = ?', whereArgs: [subject.id]);
