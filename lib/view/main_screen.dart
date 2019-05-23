@@ -1,5 +1,5 @@
 import 'package:easy_study/model/subject.dart';
-import 'package:easy_study/presenter/home.dart';
+import 'package:easy_study/view/home.dart';
 import 'package:easy_study/presenter/hm_map.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
