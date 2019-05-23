@@ -1,11 +1,12 @@
-import 'package:easy_study/model/Subject.dart';
+import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui' show lerpDouble;
-
+import 'package:date_format/date_format.dart';
 import 'package:flutter/animation.dart';
 import 'tween.dart';
-import 'package:date_format/date_format.dart';
+
+
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
   ProgressSummary(this._subjects);
