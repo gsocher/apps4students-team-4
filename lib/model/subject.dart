@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 
@@ -24,18 +24,18 @@ class Subject {
     if (id != null) {
       map['id'] = id;
     }
-    map['title'] = title;
-    map['type'] = type.toString();
-    map['room'] = room;
-    map['priority'] = priority.toString();
-    map['description'] = description;
-    map['hoursWeek'] = hoursWeek;
-    map['color_alpha'] = color.alpha;
-    map['color_red'] = color.red;
-    map['color_green'] = color.green;
-    map['color_blue'] = color.blue;
-    map['started_timetracking_at'] = startedTimetrackingAt;
-    map['time_spent'] = timeSpent;
+    map[DBHelper.TITLE] = title;
+    map[DBHelper.TYPE] = type.toString();
+    map[DBHelper.ROOM] = room;
+    map[DBHelper.PRIORITY] = priority.toString();
+    map[DBHelper.DESCRIPTION] = description;
+    map[DBHelper.HOURS_WEEK] = hoursWeek;
+    map[DBHelper.COLOR_ALPHA] = color.alpha;
+    map[DBHelper.COLOR_RED] = color.red;
+    map[DBHelper.COLOR_GREEN] = color.green;
+    map[DBHelper.COLOR_BLUE] = color.blue;
+    map[DBHelper.STARTED_TIMETRACKING_AT] = startedTimetrackingAt;
+    map[DBHelper.TIME_SPENT] = timeSpent;
 
     print("color alpha" + color.alpha.toString());
 
