@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8d19d5c-9065-426f-92bc-326d0cd843c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy_study/lib/view/MainScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easy_study/lib/view/MainScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easy_study/lib/view/ProgressSummary.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easy_study/lib/view/ProgressSummary.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easy_study/lib/view/SubjectOverview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easy_study/lib/view/SubjectOverview.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easy_study/lib/view/tween.dart" beforeDir="false" afterPath="$PROJECT_DIR$/easy_study/lib/view/tween.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -31,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="650">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -70,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/easy_study/lib/view/tween.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="260">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -216,7 +213,31 @@
               <item name="apps4students-team-4" type="b2602c69:ProjectViewProjectNode" />
               <item name="apps4students-team-4" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="apps4students-team-4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="apps4students-team-4" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="apps4students-team-4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="apps4students-team-4" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="presenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="apps4students-team-4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="apps4students-team-4" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="apps4students-team-4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="apps4students-team-4" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -382,7 +403,7 @@
     <frame x="0" y="0" width="960" height="1032" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.35633484" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.35633484" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -401,7 +422,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5013423" side_tool="true" weight="0.32064423" />
       <window_info anchor="bottom" id="Flutter Performance" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49798658" weight="0.329429" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.37298638" />
+      <window_info anchor="bottom" id="Messages" order="11" visible="true" weight="0.37298638" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -486,8 +507,8 @@
     <entry file="file://$PROJECT_DIR$/easy_study/lib/view/color_palette.dart" />
     <entry file="file://$PROJECT_DIR$/easy_study/lib/view/tween.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="260">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>

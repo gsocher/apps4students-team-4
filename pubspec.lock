@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.0.8"
   boolean_selector:
     dependency: transitive
     description:
@@ -36,20 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  date_format:
-    dependency: "direct main"
-    description:
-      name: date_format
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.6"
-  decimal:
-    dependency: transitive
-    description:
-      name: decimal
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -144,13 +130,6 @@ packages:
       name: redux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.4"
-  redux:
-    dependency: transitive
-    description:
-      name: redux
-      url: "https://pub.dartlang.org"
-    source: hosted
     version: "3.0.0"
   sky_engine:
     dependency: transitive
@@ -163,7 +142,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.5"
+    version: "1.5.4"
   sqflite:
     dependency: "direct main"
     description:
@@ -228,5 +207,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.2.0 <3.0.0"
+  dart: ">=2.1.0 <3.0.0"
   flutter: ">=1.2.1 <2.0.0"
