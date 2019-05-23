@@ -1,8 +1,7 @@
-import 'package:easy_study/model/Priority.dart';
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/model/Type.dart';
-import 'package:easy_study/store/AppState.dart';
-import 'package:easy_study/view/MainScreen.dart';
+import 'package:easy_study/model/priority.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/model/exam_type.dart';
+import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
@@ -26,7 +25,7 @@ class _SubjectAddState extends State<SubjectAdd> {
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
-  Type _type;
+  ExamType _type;
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
   // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
@@ -94,15 +93,15 @@ class _SubjectAddState extends State<SubjectAdd> {
                 alignLabelWithHint: true,
                 labelText: DESCRIPTION),
           ),
-          DropdownButton<Type>(
+          DropdownButton<ExamType>(
               value: _type,
-              items: Type.VALUES
-                  .map((value) => new DropdownMenuItem<Type>(
+              items: ExamType.VALUES
+                  .map((value) => new DropdownMenuItem<ExamType>(
                         child: Text(value.toString()),
                         value: value,
                       ))
                   .toList(),
-              onChanged: (Type value) => setState(() {
+              onChanged: (ExamType value) => setState(() {
                     _type = value;
                   })),
           DropdownButton<Priority>(

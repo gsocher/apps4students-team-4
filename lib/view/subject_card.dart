@@ -1,6 +1,6 @@
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/presenter/SubjectEditOrDelete.dart';
-import 'package:easy_study/store/AppState.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/presenter/subject_edit_or_delete.dart';
+import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';

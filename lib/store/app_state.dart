@@ -1,6 +1,6 @@
-import 'package:easy_study/Database/DBHelper.dart';
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/view/SubjectOverview.dart';
+import 'package:easy_study/database/db_helper.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io' as io;
 import 'dart:ui';
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/model/Type.dart';
-import 'package:easy_study/model/Priority.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/model/exam_type.dart';
+import 'package:easy_study/model/priority.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -81,7 +81,7 @@ class DBHelper{
 
       Subject subject = new Subject.name(
         list[index][TITLE],
-        Type.getType(list[index][TYPE]),
+        ExamType.getType(list[index][TYPE]),
         list[index][ROOM],
         Priority.getPriority(list[index][PRIORITY]),
         list[index][DESCRIPTION],

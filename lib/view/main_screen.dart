@@ -1,10 +1,10 @@
-import 'package:easy_study/model/Subject.dart';
-import 'package:easy_study/presenter/Home.dart';
-import 'package:easy_study/presenter/Map.dart';
-import 'package:easy_study/presenter/Settings.dart';
-import 'package:easy_study/presenter/SubjectAdd.dart';
-import 'package:easy_study/store/AppState.dart';
-import 'package:easy_study/view/SubjectOverview.dart';
+import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/presenter/home.dart';
+import 'package:easy_study/presenter/hm_map.dart';
+import 'package:easy_study/presenter/settings.dart';
+import 'package:easy_study/presenter/subject_add.dart';
+import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   IconButton(
                     icon: Icon(Icons.map),
-                    onPressed: () => callback..dispatch(ChangeView(Map())),
+                    onPressed: () => callback..dispatch(ChangeView(HmMap())),
                   )
                 ],
               ),

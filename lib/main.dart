@@ -1,5 +1,5 @@
-import 'package:easy_study/store/AppState.dart';
-import 'package:easy_study/view/MainScreen.dart';
+import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -29,3 +29,4 @@ class EasyStudyApp extends StatelessWidget {
     );
   }
 }
+
