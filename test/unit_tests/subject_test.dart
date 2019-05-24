@@ -29,7 +29,9 @@ void main() {
       'color_alpha': 255,
       'color_red': 0,
       'color_green': 0,
-      'color_blue': 0
+      'color_blue': 0,
+      'started_timetracking_at': null,
+      'time_spent': 0
     };
     expect(map, compare);
   });
