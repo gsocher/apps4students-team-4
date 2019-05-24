@@ -13,7 +13,8 @@
 *.iml
 *.ipr
 *.iws
-.idea/
+.idea
+**.idea**
 
 # Visual Studio Code related
 .vscode/
@@ -73,3 +74,4 @@ gradle/
 gradlew
 gradlew.bat
 .gradle/
+pubspec.lock
