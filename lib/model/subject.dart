@@ -1,14 +1,25 @@
 import 'dart:ui';
-
+import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 
 class Subject {
+  static Subject copy(Subject org) {
+    Subject copy = Subject.name(org.title, org.type, org.room, org.priority,
+        org.description, org.hoursWeek);
+    copy.id = org.id;
+    copy.color = org.color;
+    copy.timeSpent = org.timeSpent;
+    copy.startedTimetrackingAt = org.startedTimetrackingAt;
+    return copy;
+  }
+
   String title, room, description;
   int id, timeSpent = 0, hoursWeek;
   ExamType type;
   Priority priority;
   Color color = Color.fromARGB(255, 0, 0, 0);
+  String startedTimetrackingAt;
 
   // TODO: 02.05.2019 Change due date. For now its today or right now.
   DateTime dueDate = DateTime.now();
@@ -23,27 +34,21 @@ class Subject {
     if (id != null) {
       map['id'] = id;
     }
-    map['title'] = title;
-    map['type'] = type.toString();
-    map['room'] = room;
-    map['priority'] = priority.toString();
-    map['description'] = description;
-    map['hoursWeek'] = hoursWeek;
-    map['color_alpha'] = color.alpha;
-    map['color_red'] = color.red;
-    map['color_green'] = color.green;
-    map['color_blue'] = color.blue;
+    map[DBHelper.TITLE] = title;
+    map[DBHelper.TYPE] = type.toString();
+    map[DBHelper.ROOM] = room;
+    map[DBHelper.PRIORITY] = priority.toString();
+    map[DBHelper.DESCRIPTION] = description;
+    map[DBHelper.HOURS_WEEK] = hoursWeek;
+    map[DBHelper.COLOR_ALPHA] = color.alpha;
+    map[DBHelper.COLOR_RED] = color.red;
+    map[DBHelper.COLOR_GREEN] = color.green;
+    map[DBHelper.COLOR_BLUE] = color.blue;
+    map[DBHelper.STARTED_TIMETRACKING_AT] = startedTimetrackingAt;
+    map[DBHelper.TIME_SPENT] = timeSpent;
 
     print("color alpha" + color.alpha.toString());
 
     return map;
-  }
-
-  @override
-  String toString() {
-    return 'Subject{_title: $title, _room: $room,'
-        ' _description: $description, _id: $id, _timeSpent:'
-        ' $timeSpent, _hoursWeek: $hoursWeek, _type: $type, '
-        '_priority: $priority, _color: $color, _dueDate: $dueDate}';
   }
 }

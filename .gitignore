@@ -74,3 +74,4 @@ gradle/
 gradlew
 gradlew.bat
 .gradle/
+pubspec.lock
