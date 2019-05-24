@@ -1,11 +1,4 @@
-import 'package:easy_study/database/db_helper.dart';
-import 'package:easy_study/model/exam_type.dart';
-import 'package:easy_study/model/priority.dart';
-import 'package:easy_study/model/subject.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 void main() {
-
 //  Subject _getDummySubject() {
 //    return Subject.name("Software Engineering II", ExamType.WRITTEN_EXAM,
 //        "T1.011", Priority.MINIMALISM, "A funny subject.", 5);
