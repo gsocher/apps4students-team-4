@@ -66,6 +66,7 @@ jobs:
         - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
         - git push -q https://$TAGPERM@github.com/mobileappdevhm19/apps4students-team-4 --tags
         - ls -R
+      language: generic
       deploy:
         overwrite: true
         provider: releases
