@@ -11,9 +11,9 @@ class Settings extends StatelessWidget {
     subjects.then((value) {
       for (var subject in value) {
         event = Event(
-          title: 'Event title',
-          description: 'Event description',
-          location: 'Event location',
+          title: subject.title,
+          description: event.description,
+          location: subject.room,
           startDate: DateTime(subject.dueDate.year, subject.dueDate.month,
               subject.dueDate.day, 1, 0, 0, 0, 0),
           endDate: DateTime(subject.dueDate.year, subject.dueDate.month,
@@ -29,6 +29,7 @@ class Settings extends StatelessWidget {
               child: Text('Export to Calendar'),
               onPressed: () {
                 Add2Calendar.addEvent2Cal(event);
+
               },
             )));
   }
