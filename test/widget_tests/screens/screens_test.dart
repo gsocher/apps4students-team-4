@@ -58,7 +58,7 @@ void main() {
     await tester.pump();
   });
 
-  testWidgets('show setings', (tester) async {
+  testWidgets('show settings', (tester) async {
     var createApp = _createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.pump();
