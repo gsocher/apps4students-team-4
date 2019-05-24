@@ -51,13 +51,4 @@ class Subject {
 
     return map;
   }
-
-  @override
-  String toString() {
-    return 'Subject{_title: $title, _room: $room,'
-        ' _description: $description, _id: $id, _timeSpent:'
-        ' $timeSpent, _hoursWeek: $hoursWeek, _type: $type, '
-        '_priority: $priority, _color: $color, _dueDate: $dueDate,'
-        '_startedTimetrackingAt: $startedTimetrackingAt}';
-  }
 }
