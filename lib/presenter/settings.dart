@@ -29,7 +29,6 @@ class Settings extends StatelessWidget {
               child: Text('Export to Calendar'),
               onPressed: () {
                 Add2Calendar.addEvent2Cal(event);
-
               },
             )));
   }
