@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 
 class HmMap extends StatelessWidget {
+  final controller = PageController(initialPage: 1);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
       alignment: Alignment.center,
-      child: Text("Map in construction!"),
-      // TODO: 03.05.2019 Import the map as a picture f.e.
+      child: PageView(
+        controller: controller,
+        children: <Widget>[
+          DecoratedBox(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('graphics/campus_lothstr.jpg'))),
+          )
+        ],
+      ),
     ));
   }
 }
