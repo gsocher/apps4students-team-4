@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 class HmMap extends StatelessWidget {
   final controller = PageController(initialPage: 1);
@@ -11,11 +12,7 @@ class HmMap extends StatelessWidget {
       child: PageView(
         controller: controller,
         children: <Widget>[
-          DecoratedBox(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('graphics/campus_lothstr.jpg'))),
-          )
+          PhotoView(imageProvider: AssetImage('graphics/campus_lothstr.jpg'))
         ],
       ),
     ));

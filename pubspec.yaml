@@ -30,6 +30,7 @@ dependencies:
   flutter_redux: ^0.5.3
   add_2_calendar: ^1.2.2
   date_format: ^1.0.6
+  photo_view:
 
 dev_dependencies:
   flutter_test:
