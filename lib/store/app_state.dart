@@ -25,7 +25,7 @@ class AddNewSubject {
   final Subject subject;
   AddNewSubject(this.subject);
 }
-
+//TODO: add final Widget widget to this class
 class UpdateSubject {
   final Subject subject;
   UpdateSubject(this.subject);
@@ -47,7 +47,7 @@ class ChangeView {
 AppState _addNewSubject(AppState state, AddNewSubject action) =>
     new AppState(dbHelper: state.dbHelper, widget: new SubjectOverview())
       ..dbHelper.addNewSubject(action.subject);
-
+//TODO: widget: will get action.widget -that it will reviece from method call.
 AppState _updateSubject(AppState state, UpdateSubject action) =>
     new AppState(dbHelper: state.dbHelper, widget: state.widget)
       ..dbHelper.updateSubject(action.subject);
