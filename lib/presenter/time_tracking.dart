@@ -102,13 +102,13 @@ class _TimeTracking extends State<TimeTracking> {
                           new FloatingActionButton(
                               backgroundColor: Colors.green,
                               onPressed: () => callback
-                                  .dispatch(UpdateSubject(_startWatch())),
+                                  .dispatch(UpdateSubject(_startWatch(),null)),
                               child: new Icon(Icons.play_arrow)),
                           SizedBox(width: 40.0),
                           new FloatingActionButton(
                               backgroundColor: Colors.red,
                               onPressed: () => callback
-                                ..dispatch(UpdateSubject(_stopWatch())),
+                                ..dispatch(UpdateSubject(_stopWatch(),null)),
                               child: new Icon(Icons.stop)),
                           SizedBox(width: 20.0),
                         ],
