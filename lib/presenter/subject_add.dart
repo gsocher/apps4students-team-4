@@ -172,6 +172,9 @@ class _SubjectAddState extends State<SubjectAdd> {
             ]),
           ),
           //TODO: 19.05.2019 check if all inputs are correct before saving.
+          //TODO: 10.06.2019 maybe a grey button on top of the original button
+          //TODO: or a check input button which shows the save button if all
+          // TODO:input is correct or prints a popup if some inputs are not correct
           new StoreConnector<AppState, VoidCallback>(converter: (store) {
             return () => store..dispatch(AddNewSubject(_submit()));
           }, builder: (context, callback) {
