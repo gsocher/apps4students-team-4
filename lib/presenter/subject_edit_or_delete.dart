@@ -6,6 +6,7 @@ import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -29,6 +30,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   Priority _priority;
   ExamType _type;
   Color _color;
+  DateTime _dateTime;
 
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     _priority = widget.subject.priority;
     _type = widget.subject.type;
     _color = widget.subject.color;
+    _dateTime = widget.subject.dueDate;
   }
 
   @override
@@ -59,7 +62,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       result = Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek));
+          int.parse(_hoursPerWeek),_dateTime);
       result.color = _color;
       result.id = widget.subject.id;
     }
@@ -145,6 +148,30 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                 labelText: HOURS_PER_WEEK),
             keyboardType: TextInputType.number,
           ),
+          FlatButton(
+              onPressed: () {
+                DatePicker.showDatePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime.now(),
+                    theme: DatePickerTheme(
+                        backgroundColor: Colors.blue,
+                        itemStyle: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        doneStyle:
+                        TextStyle(color: Colors.white, fontSize: 16)),
+                    onChanged: (date) {
+                      print('change $date in time zone ' +
+                          date.timeZoneOffset.inHours.toString());
+                    },
+                    onConfirm: (date) {
+                      print('confirm $date');
+                    },
+                    currentTime: DateTime.now(),
+                    locale: LocaleType.de);
+              },
+              child: Text('dueDate',
+                style: TextStyle(color: Colors.blue),
+              )),
           Container(
             decoration: BoxDecoration(
               border: Border.all(),

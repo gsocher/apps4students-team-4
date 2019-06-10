@@ -23,6 +23,7 @@ class DBHelper {
   static const String COLOR_BLUE = 'color_blue';
   static const String STARTED_TIMETRACKING_AT = 'started_timetracking_at';
   static const String TIME_SPENT = 'time_spent';
+  static const String DUE_DATE = 'due_date';
 
   static DBHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database; //Singleton Database
@@ -46,7 +47,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_22.db';
+    String path = documentsDirectory.path + '/subject_24.db';
     var db = await openDatabase(path, version: 1, onCreate: _createDB);
     return db;
   }
@@ -64,8 +65,10 @@ class DBHelper {
         ' $COLOR_GREEN INTEGER,'
         ' $COLOR_BLUE INTEGER,'
         ' $STARTED_TIMETRACKING_AT TEXT,'
+        ' $DUE_DATE TEXT,'
         ' $TIME_SPENT INTEGER);');
   }
+
 
   /*
   CRUD Function
@@ -76,6 +79,7 @@ class DBHelper {
     List<Map> list = await dbConnection.query(TABLE_NAME);
     List<Subject> subjects = new List();
     for (int index = 0; index < list.length; index++) {
+      print("dueDate: " + DateTime.parse(list[index][DUE_DATE]).toString() );
       Subject subject = new Subject.name(
         list[index][TITLE],
         ExamType.getType(list[index][TYPE]),
@@ -83,6 +87,7 @@ class DBHelper {
         Priority.getPriority(list[index][PRIORITY]),
         list[index][DESCRIPTION],
         list[index][HOURS_WEEK],
+        DateTime.parse(list[index][DUE_DATE])
       );
       subject.id = list[index]['id'];
       subject.color = Color.fromARGB(

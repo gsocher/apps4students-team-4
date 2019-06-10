@@ -6,11 +6,12 @@ import 'package:easy_study/model/priority.dart';
 class Subject {
   static Subject copy(Subject org) {
     Subject copy = Subject.name(org.title, org.type, org.room, org.priority,
-        org.description, org.hoursWeek);
+        org.description, org.hoursWeek,org.dueDate);
     copy.id = org.id;
     copy.color = org.color;
     copy.timeSpent = org.timeSpent;
     copy.startedTimetrackingAt = org.startedTimetrackingAt;
+    copy.dueDate = org.dueDate;
     return copy;
   }
 
@@ -20,13 +21,11 @@ class Subject {
   Priority priority;
   Color color = Color.fromARGB(255, 0, 0, 0);
   String startedTimetrackingAt;
-
-  // TODO: 02.05.2019 Change due date. For now its today or right now.
-  DateTime dueDate = DateTime.now();
+  DateTime dueDate;
 
   // TODO: 02.05.2019 refactor to initialization and naming
   Subject.name(this.title, this.type, this.room, this.priority,
-      this.description, this.hoursWeek);
+      this.description, this.hoursWeek,this.dueDate);
 
   //puts the ObjectVariables to a map so the database can read it easily
   Map<String, dynamic> toMap() {
@@ -45,7 +44,9 @@ class Subject {
     map[DBHelper.COLOR_GREEN] = color.green;
     map[DBHelper.COLOR_BLUE] = color.blue;
     map[DBHelper.STARTED_TIMETRACKING_AT] = startedTimetrackingAt;
+    map[DBHelper.DUE_DATE] = dueDate.toString();
     map[DBHelper.TIME_SPENT] = timeSpent;
+
 
     print("color alpha" + color.alpha.toString());
 
