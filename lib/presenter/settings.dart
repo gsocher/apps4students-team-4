@@ -3,23 +3,19 @@ import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
-
 class Settings extends StatefulWidget {
-
   Settings();
+
   @override
-  SettingsPageState  createState() {
+  SettingsPageState createState() {
     return new SettingsPageState();
   }
 }
 
 class SettingsPageState extends State<Settings> {
-
   DeviceCalendarPlugin _deviceCalendarPlugin;
 
-
   List<Calendar> _calendars;
-
 
   SettingsPageState() {
     _deviceCalendarPlugin = new DeviceCalendarPlugin();
@@ -33,7 +29,7 @@ class SettingsPageState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    List <Subject> events = new List<Subject>();
+    List<Subject> events = new List<Subject>();
     final Future<List<Subject>> subjects = DBHelper().getSubjects();
     subjects.then((value) {
       for (var subject in value) {
@@ -52,16 +48,16 @@ class SettingsPageState extends State<Settings> {
             )));
   }
 
-  Future _addEventsToCalendar(List <Subject> events) async {
+  Future _addEventsToCalendar(List<Subject> events) async {
     for (var subject in events) {
       final eventToCreate = new Event("nils.wimmer2@gmail.com");
       eventToCreate.title = subject.title;
       eventToCreate.start = subject.dueDate;
-      eventToCreate.end = DateTime(subject.dueDate.year,subject.dueDate.month,subject.dueDate.day,subject.dueDate.hour + subject.hoursWeek);
+      eventToCreate.end = DateTime(subject.dueDate.year, subject.dueDate.month,
+          subject.dueDate.day, subject.dueDate.hour + subject.hoursWeek);
       eventToCreate.description = subject.description;
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
     }
-
   }
 
   void _retrieveCalendars() async {
