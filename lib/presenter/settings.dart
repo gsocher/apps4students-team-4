@@ -15,6 +15,8 @@ class Settings extends StatefulWidget {
 class SettingsPageState extends State<Settings> {
   DeviceCalendarPlugin _deviceCalendarPlugin;
 
+  List<Calendar> calendars;
+
   SettingsPageState() {
     _deviceCalendarPlugin = new DeviceCalendarPlugin();
   }
@@ -48,7 +50,7 @@ class SettingsPageState extends State<Settings> {
 
   Future _addEventsToCalendar(List<Subject> events) async {
     for (var subject in events) {
-      final eventToCreate = new Event("nils.wimmer2@gmail.com");
+      final eventToCreate = new Event(calendars.elementAt(0).id);
       eventToCreate.title = subject.title;
       eventToCreate.start = subject.dueDate;
       eventToCreate.end = DateTime(subject.dueDate.year, subject.dueDate.month,
@@ -59,13 +61,11 @@ class SettingsPageState extends State<Settings> {
   }
 
   void _retrieveCalendars() async {
-    List<Calendar> calendars;
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
         if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
-          print(!permissionsGranted.data);
           return;
         }
       }
@@ -73,7 +73,6 @@ class SettingsPageState extends State<Settings> {
       setState(() {
         calendars = calendarsResult?.data;
       });
-      print(calendars);
     } on Exception catch (e) {
       print(e);
     }
