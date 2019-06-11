@@ -15,7 +15,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  AppBar _appBar;
   List<Widget> _widgets = <Widget>[
     Home(),
     SubjectOverview(),
@@ -24,18 +23,12 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _appBar = AppBar(title: Text("Exam Planer"));
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, Store>(
       converter: (store) => store,
       builder: (context, callback) {
         return new Scaffold(
-            appBar: _appBar,
+            appBar: AppBar(title: Text("Exam Planer")),
             bottomNavigationBar: new BottomNavigationBar(
                 onTap: (index) => _changeView(index, callback),
                 type: BottomNavigationBarType.fixed,
