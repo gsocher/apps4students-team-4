@@ -23,22 +23,27 @@ final searchReducer = combineReducers<AppState>([
 
 class AddNewSubject {
   final Subject subject;
+
   AddNewSubject(this.subject);
 }
 
 class UpdateSubject {
   final Subject subject;
+
   UpdateSubject(this.subject);
 }
 
 class DeleteSubject {
   final int id;
+
   DeleteSubject(this.id);
 }
 
 class ChangeView {
   final Widget widget;
+
   ChangeView(this.widget);
+
   bool showFAB() {
     return widget.toString() == "SubjectOverview";
   }

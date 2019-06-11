@@ -55,8 +55,8 @@ class _SubjectAddState extends State<SubjectAdd> {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      result = Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek), _dateTime);
+      result = new Subject.name(_title, _type, _room, _priority, _description,
+          int.parse(_hoursPerWeek), _dateTime, DateTime.now());
       result.color = color.toColor();
     }
     return result;

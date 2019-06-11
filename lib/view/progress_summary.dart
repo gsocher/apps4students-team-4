@@ -8,12 +8,15 @@ import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
+
   ProgressSummary(this._subjects);
+
   State<StatefulWidget> createState() => ProgressSummaryState(_subjects);
 }
 
 class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
+
   ProgressSummaryState(this._subjects);
 
   Widget build(BuildContext context) {
@@ -84,6 +87,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
 // ignore: must_be_immutable
 class SubjectCardProgressBar extends StatelessWidget {
   Subject _subject;
+
   SubjectCardProgressBar(this._subject);
 
   Widget build(BuildContext context) {
@@ -112,12 +116,15 @@ class SubjectCardProgressBar extends StatelessWidget {
 
 class ChartPage extends StatefulWidget {
   final List<Subject> _subjects;
+
   ChartPage(this._subjects);
+
   ChartPageState createState() => ChartPageState(_subjects);
 }
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
+
   static const size = const Size(390, 50.0);
   final random = Random();
 

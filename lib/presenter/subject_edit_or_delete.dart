@@ -36,6 +36,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   ExamType _type;
   Color _color;
   DateTime _dateTime;
+  DateTime _dateOfCreation;
 
   void initState() {
     super.initState();
@@ -47,6 +48,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     _type = widget.subject.type;
     _color = widget.subject.color;
     _dateTime = widget.subject.dueDate;
+    _dateOfCreation = widget.subject.dateOfCreation;
   }
 
   @override
@@ -67,7 +69,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       result = Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek), _dateTime);
+          int.parse(_hoursPerWeek), _dateTime, _dateOfCreation);
       result.color = _color;
       result.id = widget.subject.id;
     }
