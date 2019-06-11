@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>NSCalendarsUsageDescription</key>
-    <string>INSERT_REASON_HERE</string>
+    <string>REASON_TO_USE_CALENDAR</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
