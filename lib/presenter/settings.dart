@@ -15,8 +15,6 @@ class Settings extends StatefulWidget {
 class SettingsPageState extends State<Settings> {
   DeviceCalendarPlugin _deviceCalendarPlugin;
 
-  List<Calendar> _calendars;
-
   SettingsPageState() {
     _deviceCalendarPlugin = new DeviceCalendarPlugin();
   }
@@ -61,6 +59,7 @@ class SettingsPageState extends State<Settings> {
   }
 
   void _retrieveCalendars() async {
+    List<Calendar> calendars;
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
@@ -72,8 +71,9 @@ class SettingsPageState extends State<Settings> {
       }
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
       setState(() {
-        _calendars = calendarsResult?.data;
+        calendars = calendarsResult?.data;
       });
+      print(calendars);
     } on Exception catch (e) {
       print(e);
     }
