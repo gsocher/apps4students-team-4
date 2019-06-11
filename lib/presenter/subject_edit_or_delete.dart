@@ -12,6 +12,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectEditOrDelete extends StatefulWidget {
   final Subject subject;
+
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
@@ -168,7 +169,8 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(UpdateSubject(_submit(),new SubjectOverview()));
+              return () => store
+                ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
             }, builder: (context, callback) {
               return new IconButton(
                 icon: Icon(
