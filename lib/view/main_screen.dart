@@ -29,25 +29,22 @@ class _MainScreenState extends State<MainScreen> {
       builder: (context, callback) {
         return new Scaffold(
             appBar: AppBar(title: Text("Exam Planer")),
-            bottomNavigationBar: new BottomNavigationBar(
+            bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) => _changeView(index, callback),
                 type: BottomNavigationBarType.fixed,
-                selectedItemColor: Colors.red,
+                selectedItemColor: Colors.blue,
+                unselectedItemColor: Colors.black,
                 currentIndex: _selectedIndex,
                 elevation: 20,
                 items: [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.storage, color: Colors.black),
-                      title: Text('Overview')),
+                      icon: Icon(Icons.storage), title: Text('Overview')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.add, color: Colors.black),
-                      title: Text('Add')),
+                      icon: Icon(Icons.add), title: Text('Add')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.settings, color: Colors.black),
-                      title: Text('Settings')),
+                      icon: Icon(Icons.settings), title: Text('Settings')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.map, color: Colors.black),
-                      title: Text('Map'))
+                      icon: Icon(Icons.map), title: Text('Map'))
                 ]),
             body: callback.state.widget,
             floatingActionButton: Visibility(
