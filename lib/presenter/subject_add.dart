@@ -33,6 +33,12 @@ class _SubjectAddState extends State<SubjectAdd> {
   Priority _priority;
   ExamType _type;
   DateTime _dateTime;
+  bool isValidated;
+
+  void initState() {
+    super.initState();
+    isValidated = false;
+  }
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
   // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
@@ -58,134 +64,171 @@ class _SubjectAddState extends State<SubjectAdd> {
       result = new Subject.name(_title, _type, _room, _priority, _description,
           int.parse(_hoursPerWeek), _dateTime, DateTime.now());
       result.color = color.toColor();
+      setState(() {
+        isValidated = false;
+      });
     }
     return result;
   }
 
+  Widget _checkIfInputIsValid() {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      setState(() {
+        isValidated = true;
+      });
+      return null;
+    } else {
+      return new AlertDialog(
+        title: Text("Check your Input again"),
+        content: Text("Please check the input again"),
+      );
+    }
+  }
+
   Widget _buildColumnItems(BuildContext context, int index) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          TextFormField(
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a  $TITLE' : null,
-            onSaved: (String value) => _title = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: TITLE),
-          ),
-          TextFormField(
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a $ROOM' : null,
-            onSaved: (String value) => _room = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: ROOM),
-          ),
-          TextFormField(
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
-            onSaved: (String value) => _description = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: DESCRIPTION),
-          ),
-          DropdownButton<ExamType>(
-              value: _type,
-              items: ExamType.VALUES
-                  .map((value) => new DropdownMenuItem<ExamType>(
-                        child: Text(value.toString()),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (ExamType value) => setState(() {
-                    _type = value;
-                  })),
-          DropdownButton<Priority>(
-              value: _priority,
-              items: Priority.VALUES
-                  .map((value) => new DropdownMenuItem<Priority>(
-                        child: Text(value.toString()),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (Priority value) => setState(() {
-                    _priority = value;
-                  })),
-          TextFormField(
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
-            onSaved: (String value) => _hoursPerWeek = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: HOURS_PER_WEEK),
-            keyboardType: TextInputType.number,
-          ),
-          Container(
-              child: DateTimePickerFormField(
-            format: this.dateFormat,
-            dateOnly: false,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: DUE_DATE),
-            onChanged: (dueDate) => setState(() => _dateTime = dueDate),
-          )),
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        TextFormField(
+          validator: (String input) =>
+              input.length <= 0 ? 'please enter a  $TITLE' : null,
+          onSaved: (String value) => (value) {
+                _title = value;
+                setState(() {
+                  isValidated = false;
+                });
+                print(isValidated);
+              },
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: TITLE),
+        ),
+        TextFormField(
+          validator: (String input) =>
+              input.length <= 0 ? 'please enter a $ROOM' : null,
+          onSaved: (String value) => _room = value,
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: ROOM),
+        ),
+        TextFormField(
+          validator: (String input) =>
+              input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+          onSaved: (String value) => _description = value,
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: DESCRIPTION),
+        ),
+        DropdownButton<ExamType>(
+            value: _type,
+            items: ExamType.VALUES
+                .map((value) => new DropdownMenuItem<ExamType>(
+                      child: Text(value.toString()),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (ExamType value) => setState(() {
+                  _type = value;
+                })),
+        DropdownButton<Priority>(
+            value: _priority,
+            items: Priority.VALUES
+                .map((value) => new DropdownMenuItem<Priority>(
+                      child: Text(value.toString()),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (Priority value) => setState(() {
+                  _priority = value;
+                })),
+        TextFormField(
+          validator: (String input) =>
+              input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+          onSaved: (String value) => _hoursPerWeek = value,
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: HOURS_PER_WEEK),
+          keyboardType: TextInputType.number,
+        ),
+        Container(
+            child: DateTimePickerFormField(
+          format: this.dateFormat,
+          dateOnly: false,
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: DUE_DATE),
+          onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+        )),
 
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(top: 20),
-            width: 500,
-            height: 400,
-            child: Column(children: <Widget>[
-              Text(
-                'choose the subjects color:',
-                style: TextStyle(fontSize: 25.0),
-              ),
-              new PaletteValuePicker(
-                color: this.color,
-                onChanged: (value) =>
-                    super.setState(() => this.onChanged(value)),
-              )
-            ]),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(),
           ),
-          //TODO: 19.05.2019 check if all inputs are correct before saving.
-          //TODO: 10.06.2019 maybe a grey button on top of the original button
-          //TODO: or a check input button which shows the save button if all
-          // TODO:input is correct or prints a popup if some inputs are not correct
-          new StoreConnector<AppState, VoidCallback>(converter: (store) {
-            return () => store..dispatch(AddNewSubject(_submit()));
-          }, builder: (context, callback) {
-            return new IconButton(
+          margin: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 20),
+          width: 500,
+          height: 400,
+          child: Column(children: <Widget>[
+            Text(
+              'choose the subjects color:',
+              style: TextStyle(fontSize: 25.0),
+            ),
+            new PaletteValuePicker(
+              color: this.color,
+              onChanged: (value) => super.setState(() => this.onChanged(value)),
+            )
+          ]),
+        ),
+        //TODO: 19.05.2019 check if all inputs are correct before saving.
+        //TODO: 10.06.2019 maybe a grey button on top of the original button
+        //TODO: or a check input button which shows the save button if all
+        // TODO:input is correct or prints a popup if some inputs are not correct
+
+        Visibility(
+            visible: !isValidated,
+            child: new IconButton(
               icon: Icon(
-                Icons.save,
+                Icons.check_circle_outline,
                 size: 30,
               ),
-              onPressed: callback,
-            );
-          })
-        ]);
+              onPressed: () => _checkIfInputIsValid(),
+            )),
+        Visibility(
+            visible: isValidated,
+            child:
+                new StoreConnector<AppState, VoidCallback>(converter: (store) {
+              return () => store..dispatch(AddNewSubject(_submit()));
+            }, builder: (context, callback) {
+              return new IconButton(
+                icon: Icon(
+                  Icons.save,
+                  size: 30,
+                ),
+                onPressed: callback,
+              );
+            }))
+      ],
+    );
   }
 }
