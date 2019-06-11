@@ -4,9 +4,13 @@ import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
+import 'package:intl/intl.dart';
 
 class SubjectAdd extends StatefulWidget {
   @override
@@ -22,12 +26,13 @@ class _SubjectAddState extends State<SubjectAdd> {
   static const String ROOM = 'room';
   static const String DESCRIPTION = 'descprition';
   static const String HOURS_PER_WEEK = 'hours per week';
+  static const String DUE_DATE = 'Due Date';
+  final dateFormat = DateFormat("EE, dd.MM.yy 'at' h:mm a");
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
   ExamType _type;
-  // TODO: CHANGE THE DATETIME!
-  DateTime _dateTime = DateTime.now();
+  DateTime _dateTime;
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
   // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
@@ -51,7 +56,7 @@ class _SubjectAddState extends State<SubjectAdd> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       result = Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek),_dateTime);
+          int.parse(_hoursPerWeek), _dateTime);
       result.color = color.toColor();
     }
     return result;
@@ -131,25 +136,20 @@ class _SubjectAddState extends State<SubjectAdd> {
                 alignLabelWithHint: true,
                 labelText: HOURS_PER_WEEK),
             keyboardType: TextInputType.number,
-            autovalidate: true,
           ),
           Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(top: 20),
-            width: 500,
-            height: 200,
-            child: Column(
-              children: <Widget>[
-                Text("Due Date"),
-              //TODO : 2 buttons with time and date
-              //TODO : 2 edit delete view is not changed yet.
-              // TODO : think about how to validate the date and the time. its not allowed to be pre now.
-              ],
-            ),
-          ),
+              child: DateTimePickerFormField(
+            format: this.dateFormat,
+            dateOnly: false,
+            style: TextStyle(fontSize: 20),
+            decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.black),
+                border: UnderlineInputBorder(),
+                filled: true,
+                alignLabelWithHint: true,
+                labelText: DUE_DATE),
+            onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+          )),
 
           Container(
             decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
@@ -9,9 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:intl/intl.dart';
 
 class SubjectEditOrDelete extends StatefulWidget {
   final Subject subject;
+
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
@@ -25,6 +28,8 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   static const String ROOM = 'room';
   static const String DESCRIPTION = 'descprition';
   static const String HOURS_PER_WEEK = 'hours per week';
+  static const String DUE_DATE = 'Due Date';
+  final dateFormat = DateFormat("EE, dd.MM.yy 'at' h:mm a");
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
@@ -62,7 +67,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       result = Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek),_dateTime);
+          int.parse(_hoursPerWeek), _dateTime);
       result.color = _color;
       result.id = widget.subject.id;
     }
@@ -148,30 +153,20 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                 labelText: HOURS_PER_WEEK),
             keyboardType: TextInputType.number,
           ),
-          FlatButton(
-              onPressed: () {
-                DatePicker.showDatePicker(context,
-                    showTitleActions: true,
-                    minTime: DateTime.now(),
-                    theme: DatePickerTheme(
-                        backgroundColor: Colors.blue,
-                        itemStyle: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                        doneStyle:
-                        TextStyle(color: Colors.white, fontSize: 16)),
-                    onChanged: (date) {
-                      print('change $date in time zone ' +
-                          date.timeZoneOffset.inHours.toString());
-                    },
-                    onConfirm: (date) {
-                      print('confirm $date');
-                    },
-                    currentTime: DateTime.now(),
-                    locale: LocaleType.de);
-              },
-              child: Text('dueDate',
-                style: TextStyle(color: Colors.blue),
-              )),
+          Container(
+              child: DateTimePickerFormField(
+            initialValue: _dateTime,
+            format: this.dateFormat,
+            dateOnly: false,
+            style: TextStyle(fontSize: 20),
+            decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.black),
+                border: UnderlineInputBorder(),
+                filled: true,
+                alignLabelWithHint: true,
+                labelText: DUE_DATE),
+            onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+          )),
           Container(
             decoration: BoxDecoration(
               border: Border.all(),
