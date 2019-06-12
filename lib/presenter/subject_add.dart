@@ -27,7 +27,7 @@ class _SubjectAddState extends State<SubjectAdd> {
   static const String DESCRIPTION = 'descprition';
   static const String HOURS_PER_WEEK = 'hours per week';
   static const String DUE_DATE = 'Due Date';
-  final dateFormat = DateFormat("EE, dd.MM.yy 'at' h:mm a");
+  final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
   Priority _priority;
@@ -61,8 +61,15 @@ class _SubjectAddState extends State<SubjectAdd> {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      result = new Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek), _dateTime, DateTime.now());
+      result = new Subject.name(
+          _title,
+          _type,
+          _room,
+          _priority,
+          _description,
+          int.parse(_hoursPerWeek),
+          _dateTime,
+          DateTime.now());
       result.color = color.toColor();
       setState(() {
         isValidated = false;
@@ -71,20 +78,41 @@ class _SubjectAddState extends State<SubjectAdd> {
     return result;
   }
 
-  Widget _checkIfInputIsValid() {
+  void _checkIfInputIsValid() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       setState(() {
         isValidated = true;
       });
-      return null;
     } else {
-      return new AlertDialog(
-        title: Text("Check your Input again"),
-        content: Text("Please check the input again"),
+      showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: const Text('Please check your input again'),
+              actions: <Widget>[
+                FlatButton(
+                  child: const Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                )
+              ]);
+        },
       );
     }
   }
+
+  String _validateDueDate(DateTime duedate) {
+    if (duedate == null) {
+      return '$DUE_DATE must not be empty.';
+    }
+    if (duedate.isBefore(DateTime.now())) {
+      return 'the date must be ahead of now';
+    }
+    return null;
+  }
+
 
   Widget _buildColumnItems(BuildContext context, int index) {
     return Column(
@@ -92,14 +120,13 @@ class _SubjectAddState extends State<SubjectAdd> {
       children: <Widget>[
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a  $TITLE' : null,
-          onSaved: (String value) => (value) {
-                _title = value;
-                setState(() {
-                  isValidated = false;
-                });
-                print(isValidated);
-              },
+          input.length <= 0 ? 'please enter a  $TITLE' : null,
+          onFieldSubmitted: (String value) {
+            setState(() {
+              isValidated = false;
+            });
+          },
+          onSaved: (String value) => _title = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -110,7 +137,12 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a $ROOM' : null,
+          input.length <= 0 ? 'please enter a $ROOM' : null,
+          onFieldSubmitted: (String value) {
+            setState(() {
+              isValidated = false;
+            });
+          },
           onSaved: (String value) => _room = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
@@ -122,7 +154,12 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+          input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+          onFieldSubmitted: (String value) {
+            setState(() {
+              isValidated = false;
+            });
+          },
           onSaved: (String value) => _description = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
@@ -135,28 +172,37 @@ class _SubjectAddState extends State<SubjectAdd> {
         DropdownButton<ExamType>(
             value: _type,
             items: ExamType.VALUES
-                .map((value) => new DropdownMenuItem<ExamType>(
-                      child: Text(value.toString()),
-                      value: value,
-                    ))
+                .map((value) =>
+            new DropdownMenuItem<ExamType>(
+              child: Text(value.toString()),
+              value: value,
+            ))
                 .toList(),
-            onChanged: (ExamType value) => setState(() {
+            onChanged: (ExamType value) =>
+                setState(() {
                   _type = value;
                 })),
         DropdownButton<Priority>(
             value: _priority,
             items: Priority.VALUES
-                .map((value) => new DropdownMenuItem<Priority>(
-                      child: Text(value.toString()),
-                      value: value,
-                    ))
+                .map((value) =>
+            new DropdownMenuItem<Priority>(
+              child: Text(value.toString()),
+              value: value,
+            ))
                 .toList(),
-            onChanged: (Priority value) => setState(() {
+            onChanged: (Priority value) =>
+                setState(() {
                   _priority = value;
                 })),
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+          input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+          onFieldSubmitted: (String value) {
+            setState(() {
+              isValidated = false;
+            });
+          },
           onSaved: (String value) => _hoursPerWeek = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
@@ -169,17 +215,23 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         Container(
             child: DateTimePickerFormField(
-          format: this.dateFormat,
-          dateOnly: false,
-          style: TextStyle(fontSize: 20),
-          decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.black),
-              border: UnderlineInputBorder(),
-              filled: true,
-              alignLabelWithHint: true,
-              labelText: DUE_DATE),
-          onChanged: (dueDate) => setState(() => _dateTime = dueDate),
-        )),
+              format: this.dateFormat,
+              dateOnly: false,
+              style: TextStyle(fontSize: 20),
+              decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  alignLabelWithHint: true,
+                  labelText: DUE_DATE),
+              validator:  _validateDueDate,
+              onFieldSubmitted: (DateTime value) {
+                setState(() {
+                  isValidated = false;
+                });
+              },
+              onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+            )),
 
         Container(
           decoration: BoxDecoration(
@@ -200,16 +252,12 @@ class _SubjectAddState extends State<SubjectAdd> {
             )
           ]),
         ),
-        //TODO: 19.05.2019 check if all inputs are correct before saving.
-        //TODO: 10.06.2019 maybe a grey button on top of the original button
-        //TODO: or a check input button which shows the save button if all
-        // TODO:input is correct or prints a popup if some inputs are not correct
-
         Visibility(
             visible: !isValidated,
             child: new IconButton(
               icon: Icon(
-                Icons.check_circle_outline,
+                Icons.save,
+                color: Colors.grey,
                 size: 30,
               ),
               onPressed: () => _checkIfInputIsValid(),
@@ -217,7 +265,7 @@ class _SubjectAddState extends State<SubjectAdd> {
         Visibility(
             visible: isValidated,
             child:
-                new StoreConnector<AppState, VoidCallback>(converter: (store) {
+            new StoreConnector<AppState, VoidCallback>(converter: (store) {
               return () => store..dispatch(AddNewSubject(_submit()));
             }, builder: (context, callback) {
               return new IconButton(
