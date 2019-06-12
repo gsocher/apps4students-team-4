@@ -5,6 +5,7 @@ import 'dart:ui' show lerpDouble;
 import 'package:date_format/date_format.dart';
 import 'package:flutter/animation.dart';
 import 'tween.dart';
+import 'package:intl/intl.dart';
 
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
@@ -19,6 +20,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
+      margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       decoration: new BoxDecoration(color: Colors.white),
       child: new Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,7 +33,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
               Text(
                 _total(_subjects),
                 style: new TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 40.0,
                   color: Colors.black,
                 ),
               ),
@@ -49,8 +51,9 @@ class ProgressSummaryState extends State<ProgressSummary> {
               ChartPage(_subjects),
             ],
           ),
+
           Container(
-            height: 75.0,
+            height: 100,
             child: ListView(
               children: _subjects
                   .map((subject) => new SubjectCardProgressBar(subject))
@@ -88,20 +91,21 @@ class SubjectCardProgressBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
+      width:100,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
               _subject.title,
-              style: TextStyle(color: _subject.color, fontSize: 20),
+              style: TextStyle(color: _subject.color, fontSize: 15),
             ),
             Text(
               ((_subject.timeSpent / 3600).truncate()).toString() +
                   "h" +
                   (_subject.timeSpent / 60).truncate().toString() +
                   "mn",
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 15),
             ),
           ],
         ),
@@ -118,7 +122,7 @@ class ChartPage extends StatefulWidget {
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
-  static const size = const Size(390, 50.0);
+  static const size = const Size(380, 30.0);
   final random = Random();
 
   final List<Subject> _subjects;
@@ -325,15 +329,15 @@ class BarChartPainter extends CustomPainter {
           canvas.drawRect(
             Rect.fromLTWH(
               x,
-              20,
+              10,
               bar.height,
               stack.width,
             ),
             barPaint,
           );
           if (x < size.width) {
-            linePath.moveTo(x, 20);
-            linePath.lineTo(x, 30);
+            linePath.moveTo(x, 10);
+            linePath.lineTo(x, 20);
           }
           x += bar.height;
         }

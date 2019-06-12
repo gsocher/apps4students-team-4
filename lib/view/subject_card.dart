@@ -4,6 +4,7 @@ import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:date_format/date_format.dart';
 
 class SubjectCard extends StatefulWidget {
   final Subject subject;
@@ -27,21 +28,22 @@ class _SubjectCardState extends State<SubjectCard> {
               child: Card(
                   elevation: 5,
                   child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.subject.title,
+                                widget.subject.title.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.green, fontSize: 20),
+                                    color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                               Container(
-                                width: 20.0,
+                                width: 10.0,
                                 height: 20.0,
                               ),
                               Container(
@@ -53,22 +55,37 @@ class _SubjectCardState extends State<SubjectCard> {
                                   ))
                             ]),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
+
                             Column(
                               mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.type.toString()),
-                                Text(widget.subject.dueDate.toIso8601String()),
-                                Text(widget.subject.room.toString()),
-                                Text(widget.subject.description)
+                                Text(widget.subject.type.toString(),
+                                  style: TextStyle(
+                                    color: Colors.black87, fontSize: 17,),),
+                                Text(formatDate(widget.subject.dueDate, [dd, '/', mm, '/', yyyy]).toString(),
+                                  style: TextStyle(
+                                  color: Colors.black87, fontSize: 17,),),
+                                Text(widget.subject.room.toString(),
+                                  style: TextStyle(
+                                    color: Colors.black87, fontSize: 17,),),
+                                Text(widget.subject.description,
+                                  style: TextStyle(
+                                    color: Colors.black87, fontSize: 17,),)
                               ],
                             ),
+                            Spacer(),
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.hoursWeek.toString()),
-                                Text(widget.subject.priority.toString())
+                                Text(widget.subject.hoursWeek.toString()+" Hours/week",
+                                  style: TextStyle(
+                                    color: Colors.black87, fontSize: 17,),),
+                                Text(widget.subject.priority.toString(),
+                                  style: TextStyle(
+                                    color: Colors.black87, fontSize: 19,fontWeight: FontWeight.w500,),)
                               ],
                             )
                           ],

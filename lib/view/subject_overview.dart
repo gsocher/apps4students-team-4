@@ -25,12 +25,14 @@ class _SubjectOverviewState extends State<SubjectOverview> {
             builder: (context, snapshot) {
               if (snapshot.data != null) {
                 if (snapshot.hasData) {
-                  return ListView.builder(
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: ListView.builder(
                       itemCount: snapshot.data.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return new SubjectCard(subject: snapshot.data[index]);
-                      });
+                      }),);
                 }
               }
               return new Container(

@@ -19,52 +19,74 @@ class SubjectProgressBar extends StatelessWidget {
               onTap: () => callback
                 ..dispatch(ChangeView(TimeTracking(subject: subject))),
               child: Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0,vertical: 2.0),
                   elevation: 5,
                   child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                subject.title,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                              ),
-                              Container(
-                                  width: 20.0,
-                                  height: 20.0,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: subject.color,
-                                  ))
-                            ]),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Time spent: ${subject.timeSpent} (seconds)",
+                                subject.title.toUpperCase(),
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
+                                      color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+                              ),
+
+                            ]),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                Text(((subject.timeSpent / 3600).truncate()).toString() +
+                                    "h " +
+                                    (subject.timeSpent / 60).truncate().toString() +
+                                    "mn",
+                                  style: TextStyle(color: Colors.black87, fontSize: 17),
                                 ),
-                              ],
-                            ),
+                                Text(
+                                  _getTimeUntilDueDate(subject),
+                                  style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w500),
+                                ),
+                                  ],
+
+
+                        ),
+
+                    LinearProgressIndicator(
+                  value: subject.timeSpent/subject.hoursWeek,
+                      valueColor:AlwaysStoppedAnimation<Color>(subject.color),
+                      backgroundColor: Colors.black12,
+                                       ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            new Text(
+                              (subject.timeSpent/subject.hoursWeek).toString(),
+                              style: TextStyle(color: Colors.black87,fontSize: 15),
+                            )
                           ],
-                        )
+                        ),
                       ],
                     ),
                   )));
         });
+  }
+
+  static String _getTimeUntilDueDate(Subject subject){
+    int days;
+    String timeUntilDD;
+    days = subject.dueDate.difference(DateTime.now()).inDays;
+    if(days>0){
+      timeUntilDD= days.toString()+" days until due date";
+    }
+    else{timeUntilDD= "Due date has passed";}
+
+    return timeUntilDD;
+
   }
 }
