@@ -27,6 +27,8 @@ class _SubjectAddState extends State<SubjectAdd> {
   static const String DESCRIPTION = 'descprition';
   static const String HOURS_PER_WEEK = 'hours per week';
   static const String DUE_DATE = 'Due Date';
+  static const String PRIORITY = 'Priority';
+  static const String TYPE = 'Type';
   final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
   final formKey = GlobalKey<FormState>();
   String _title, _room, _description, _hoursPerWeek;
@@ -38,6 +40,8 @@ class _SubjectAddState extends State<SubjectAdd> {
   void initState() {
     super.initState();
     isValidated = false;
+    _priority = Priority.NORMAL;
+    _type = ExamType.WRITTEN_EXAM;
   }
 
   // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
@@ -56,20 +60,12 @@ class _SubjectAddState extends State<SubjectAdd> {
                     scrollDirection: Axis.vertical))));
   }
 
-  // TODO: 22.05.2019 This method does not return a subject, if the statement is false
   Subject _submit() {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      result = new Subject.name(
-          _title,
-          _type,
-          _room,
-          _priority,
-          _description,
-          int.parse(_hoursPerWeek),
-          _dateTime,
-          DateTime.now());
+      result = new Subject.name(_title, _type, _room, _priority, _description,
+          int.parse(_hoursPerWeek), _dateTime, DateTime.now());
       result.color = color.toColor();
       setState(() {
         isValidated = false;
@@ -113,14 +109,13 @@ class _SubjectAddState extends State<SubjectAdd> {
     return null;
   }
 
-
   Widget _buildColumnItems(BuildContext context, int index) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         TextFormField(
           validator: (String input) =>
-          input.length <= 0 ? 'please enter a  $TITLE' : null,
+              input.length <= 0 ? 'please enter a  $TITLE' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
@@ -137,7 +132,7 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         TextFormField(
           validator: (String input) =>
-          input.length <= 0 ? 'please enter a $ROOM' : null,
+              input.length <= 0 ? 'please enter a $ROOM' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
@@ -154,7 +149,7 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         TextFormField(
           validator: (String input) =>
-          input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+              input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
@@ -172,32 +167,29 @@ class _SubjectAddState extends State<SubjectAdd> {
         DropdownButton<ExamType>(
             value: _type,
             items: ExamType.VALUES
-                .map((value) =>
-            new DropdownMenuItem<ExamType>(
-              child: Text(value.toString()),
-              value: value,
-            ))
+                .map((value) => new DropdownMenuItem<ExamType>(
+                      child: Text(value.toString()),
+                      value: value,
+                    ))
                 .toList(),
-            onChanged: (ExamType value) =>
-                setState(() {
+            onChanged: (ExamType value) => setState(() {
                   _type = value;
                 })),
         DropdownButton<Priority>(
             value: _priority,
             items: Priority.VALUES
-                .map((value) =>
-            new DropdownMenuItem<Priority>(
-              child: Text(value.toString()),
-              value: value,
-            ))
+                .map((value) => new DropdownMenuItem<Priority>(
+                      child: Text(value.toString()),
+                      value: value,
+                    ))
                 .toList(),
-            onChanged: (Priority value) =>
-                setState(() {
+            onChanged: (Priority value) => setState(() {
                   _priority = value;
                 })),
+        SizedBox(height: 15.0),
         TextFormField(
           validator: (String input) =>
-          input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+              input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
@@ -215,24 +207,23 @@ class _SubjectAddState extends State<SubjectAdd> {
         ),
         Container(
             child: DateTimePickerFormField(
-              format: this.dateFormat,
-              dateOnly: false,
-              style: TextStyle(fontSize: 20),
-              decoration: InputDecoration(
-                  labelStyle: TextStyle(color: Colors.black),
-                  border: UnderlineInputBorder(),
-                  filled: true,
-                  alignLabelWithHint: true,
-                  labelText: DUE_DATE),
-              validator:  _validateDueDate,
-              onFieldSubmitted: (DateTime value) {
-                setState(() {
-                  isValidated = false;
-                });
-              },
-              onChanged: (dueDate) => setState(() => _dateTime = dueDate),
-            )),
-
+          format: this.dateFormat,
+          dateOnly: false,
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+              labelStyle: TextStyle(color: Colors.black),
+              border: UnderlineInputBorder(),
+              filled: true,
+              alignLabelWithHint: true,
+              labelText: DUE_DATE),
+          validator: _validateDueDate,
+          onFieldSubmitted: (DateTime value) {
+            setState(() {
+              isValidated = false;
+            });
+          },
+          onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+        )),
         Container(
           decoration: BoxDecoration(
             border: Border.all(),
@@ -265,7 +256,7 @@ class _SubjectAddState extends State<SubjectAdd> {
         Visibility(
             visible: isValidated,
             child:
-            new StoreConnector<AppState, VoidCallback>(converter: (store) {
+                new StoreConnector<AppState, VoidCallback>(converter: (store) {
               return () => store..dispatch(AddNewSubject(_submit()));
             }, builder: (context, callback) {
               return new IconButton(
