@@ -4,6 +4,7 @@ import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectEditOrDelete extends StatefulWidget {
   final Subject subject;
+
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
@@ -167,7 +169,8 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(UpdateSubject(_submit()));
+              return () => store
+                ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
             }, builder: (context, callback) {
               return new IconButton(
                 icon: Icon(
