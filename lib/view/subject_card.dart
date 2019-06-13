@@ -85,6 +85,7 @@ class _SubjectCardState extends State<SubjectCard> {
                                     hh,
                                     ':',
                                     mm,
+                                    am,
                                   ]).toString(),
                                   style: TextStyle(
                                     color: textColor,

@@ -98,7 +98,7 @@ class SubjectCardProgressBar extends StatelessWidget {
       width: 100,
       child: Card(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               _subject.title,

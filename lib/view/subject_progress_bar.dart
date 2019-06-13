@@ -66,11 +66,7 @@ class SubjectProgressBar extends StatelessWidget {
                           ],
                         ),
                         LinearProgressIndicator(
-                          value: subject.timeSpent /
-                              subject.hoursWeek *
-                              (subject.dueDate
-                                  .difference(DateTime.now())
-                                  .inSeconds),
+                          value: _getProgressRatio(subject),
                           valueColor:
                               AlwaysStoppedAnimation<Color>(subject.color),
                           backgroundColor: Colors.black12,
@@ -79,7 +75,10 @@ class SubjectProgressBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             new Text(
-                              _getProgressRatio(subject) + " %",
+                              (_getProgressRatio(subject) * 100)
+                                      .truncate()
+                                      .toString() +
+                                  " %",
                               style: TextStyle(
                                   color: textColor, fontSize: fontSizeNormal),
                             )
@@ -104,14 +103,13 @@ class SubjectProgressBar extends StatelessWidget {
     return timeUntilDD;
   }
 
-  static String _getProgressRatio(Subject subject) {
-    int ratio = 0;
-    if (subject.dueDate.difference(DateTime.now()).inSeconds > 0) {
-      ratio = (subject.timeSpent * 100) ~/
+  static double _getProgressRatio(Subject subject) {
+    double ratio = 0;
+    if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0) {
+      ratio = (((subject.timeSpent * 7) / 3600) /
           (subject.hoursWeek *
-              3600 *
-              (subject.dueDate.difference(DateTime.now()).inDays * 7));
+              (subject.dueDate.difference(subject.dateOfCreation).inDays)));
     }
-    return ratio.toString();
+    return ratio;
   }
 }
