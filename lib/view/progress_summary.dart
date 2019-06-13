@@ -8,12 +8,15 @@ import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
+
   ProgressSummary(this._subjects);
+
   State<StatefulWidget> createState() => ProgressSummaryState(_subjects);
 }
 
 class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
+
   ProgressSummaryState(this._subjects);
   final double fontSizeNormal = 20.0;
 
@@ -86,7 +89,9 @@ class ProgressSummaryState extends State<ProgressSummary> {
 // ignore: must_be_immutable
 class SubjectCardProgressBar extends StatelessWidget {
   Subject _subject;
+
   final double fontSizeNormal = 20.0;
+
   SubjectCardProgressBar(this._subject);
 
   Widget build(BuildContext context) {
@@ -116,13 +121,16 @@ class SubjectCardProgressBar extends StatelessWidget {
 
 class ChartPage extends StatefulWidget {
   final List<Subject> _subjects;
+
   ChartPage(this._subjects);
+
   ChartPageState createState() => ChartPageState(_subjects);
 }
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
   static const size = const Size(380, 30.0);
+
 
   final List<Subject> _subjects;
   AnimationController _animation;
