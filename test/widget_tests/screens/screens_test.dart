@@ -8,6 +8,7 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
+import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-  Subject _getDummySubject() {
+  Subject _getDummySubjectOne() {
     return Subject.name(
         "Software Engineering II",
         ExamType.WRITTEN_EXAM,
@@ -26,6 +27,21 @@ void main() {
         DateTime.parse('2019-06-10 16:27:46.371368'),
         DateTime.now());
   }
+  Subject _getDummySubjectTwo() {
+    return Subject.name(
+        "Meditation",
+        ExamType.ORAL_EXAM,
+        "R1.012",
+        Priority.NORMAL,
+        "A helping subject.",
+        6,
+        DateTime.parse('2019-10-10 16:27:46.371368'),
+        DateTime.now());
+  }
+  List<Subject> _subjects = new  List<Subject>();
+  _subjects.add(_getDummySubjectOne());
+//  _subjects.add(_getDummySubjectTwo());
+  print(_subjects.toString());
 
   EasyStudyApp _createApp(Widget widget) {
     final store =
@@ -46,7 +62,7 @@ void main() {
 
   testWidgets('show subject card', (tester) async {
     var createApp = _createApp(SubjectCard(
-      subject: _getDummySubject(),
+      subject: _getDummySubjectOne(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
@@ -79,8 +95,16 @@ void main() {
 
   testWidgets('show subject edit or delete', (tester) async {
     var createApp = _createApp(SubjectEditOrDelete(
-      subject: _getDummySubject(),
+      subject: _getDummySubjectOne(),
     ));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
+
+  testWidgets('show progress_summary', (tester) async {
+    var createApp = _createApp(
+      ProgressSummary(_subjects),
+    );
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
