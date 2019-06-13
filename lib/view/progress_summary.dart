@@ -131,7 +131,6 @@ class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
   static const size = const Size(380, 30.0);
 
-
   final List<Subject> _subjects;
   AnimationController _animation;
   BarChartTween _tween;
