@@ -19,10 +19,12 @@ class SubjectProgressBar extends StatelessWidget {
               onTap: () => callback
                 ..dispatch(ChangeView(TimeTracking(subject: subject))),
               child: Card(
-                  margin: new EdgeInsets.symmetric(horizontal: 5.0,vertical: 2.0),
+                  margin:
+                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
                   elevation: 5,
                   child: Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                    margin: new EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,41 +35,52 @@ class SubjectProgressBar extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 subject.title.toUpperCase(),
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold),
                               ),
-
                             ]),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                Text(((subject.timeSpent / 3600).truncate()).toString() +
-                                    "h " +
-                                    (subject.timeSpent / 60).truncate().toString() +
-                                    "mn",
-                                  style: TextStyle(color: Colors.black87, fontSize: 17),
-                                ),
-                                Text(
-                                  _getTimeUntilDueDate(subject),
-                                  style: TextStyle(color: Colors.black87, fontSize: 15, fontWeight: FontWeight.w500),
-                                ),
-                                  ],
-
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              ((subject.timeSpent / 3600).truncate())
+                                      .toString() +
+                                  "h " +
+                                  (subject.timeSpent / 60)
+                                      .truncate()
+                                      .toString() +
+                                  "mn",
+                              style: TextStyle(
+                                  color: Colors.black87, fontSize: 17),
+                            ),
+                            Text(
+                              _getTimeUntilDueDate(subject),
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
                         ),
-
-                    LinearProgressIndicator(
-                  value: subject.timeSpent/subject.hoursWeek,
-                      valueColor:AlwaysStoppedAnimation<Color>(subject.color),
-                      backgroundColor: Colors.black12,
-                                       ),
+                        LinearProgressIndicator(
+                          value: subject.timeSpent /
+                              subject.hoursWeek *
+                              (subject.dueDate
+                                  .difference(DateTime.now())
+                                  .inSeconds),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(subject.color),
+                          backgroundColor: Colors.black12,
+                        ),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             new Text(
-                              (subject.timeSpent/subject.hoursWeek).toString(),
-                              style: TextStyle(color: Colors.black87,fontSize: 15),
+                              _getProgressRatio(subject) + " %",
+                              style: TextStyle(
+                                  color: Colors.black87, fontSize: 15),
                             )
                           ],
                         ),
@@ -77,16 +90,27 @@ class SubjectProgressBar extends StatelessWidget {
         });
   }
 
-  static String _getTimeUntilDueDate(Subject subject){
+  static String _getTimeUntilDueDate(Subject subject) {
     int days;
     String timeUntilDD;
     days = subject.dueDate.difference(DateTime.now()).inDays;
-    if(days>0){
-      timeUntilDD= days.toString()+" days until due date";
+    if (days > 0) {
+      timeUntilDD = days.toString() + " days until due date";
+    } else {
+      timeUntilDD = "Due date has passed";
     }
-    else{timeUntilDD= "Due date has passed";}
 
     return timeUntilDD;
+  }
 
+  static String _getProgressRatio(Subject subject) {
+    double ratio = 0;
+    if (subject.dueDate.difference(DateTime.now()).inSeconds != 0) {
+      ratio = subject.timeSpent *
+          100 /
+          (subject.hoursWeek *
+              (subject.dueDate.difference(DateTime.now()).inSeconds));
+    }
+    return ratio.truncate().toString();
   }
 }

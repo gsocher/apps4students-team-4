@@ -51,7 +51,6 @@ class ProgressSummaryState extends State<ProgressSummary> {
               ChartPage(_subjects),
             ],
           ),
-
           Container(
             height: 100,
             child: ListView(
@@ -91,7 +90,7 @@ class SubjectCardProgressBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width:100,
+      width: 100,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -105,7 +104,7 @@ class SubjectCardProgressBar extends StatelessWidget {
                   "h" +
                   (_subject.timeSpent / 60).truncate().toString() +
                   "mn",
-              style: TextStyle(color: Colors.black, fontSize: 15),
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
           ],
         ),

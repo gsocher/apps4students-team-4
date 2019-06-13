@@ -40,7 +40,9 @@ class _SubjectCardState extends State<SubjectCard> {
                               Text(
                                 widget.subject.title.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Container(
                                 width: 10.0,
@@ -56,23 +58,39 @@ class _SubjectCardState extends State<SubjectCard> {
                             ]),
                         Row(
                           children: <Widget>[
-
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.type.toString(),
+                                Text(
+                                  widget.subject.type.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87, fontSize: 17,),),
-                                Text(formatDate(widget.subject.dueDate, [dd, '/', mm, '/', yyyy]).toString(),
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Text(
+                                  formatDate(widget.subject.dueDate,
+                                      [dd, '/', mm, '/', yyyy]).toString(),
                                   style: TextStyle(
-                                  color: Colors.black87, fontSize: 17,),),
-                                Text(widget.subject.room.toString(),
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.room.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87, fontSize: 17,),),
-                                Text(widget.subject.description,
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.description,
                                   style: TextStyle(
-                                    color: Colors.black87, fontSize: 17,),)
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                  ),
+                                )
                               ],
                             ),
                             Spacer(),
@@ -80,12 +98,22 @@ class _SubjectCardState extends State<SubjectCard> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.hoursWeek.toString()+" Hours/week",
+                                Text(
+                                  widget.subject.hoursWeek.toString() +
+                                      " Hours/week",
                                   style: TextStyle(
-                                    color: Colors.black87, fontSize: 17,),),
-                                Text(widget.subject.priority.toString(),
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.priority.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87, fontSize: 19,fontWeight: FontWeight.w500,),)
+                                    color: Colors.black87,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
                               ],
                             )
                           ],
