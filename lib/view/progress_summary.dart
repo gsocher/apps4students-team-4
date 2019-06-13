@@ -15,6 +15,7 @@ class ProgressSummary extends StatefulWidget {
 class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
   ProgressSummaryState(this._subjects);
+  final double fontSizeNormal = 20.0;
 
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +40,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
               Text(
                 formatDate(DateTime.now(), [dd, '/', mm, '/', yyyy]).toString(),
                 style: new TextStyle(
-                  fontSize: 20.0,
+                  fontSize: fontSizeNormal,
                   color: Colors.black,
                 ),
               ),
@@ -85,6 +86,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
 // ignore: must_be_immutable
 class SubjectCardProgressBar extends StatelessWidget {
   Subject _subject;
+  final double fontSizeNormal = 20.0;
   SubjectCardProgressBar(this._subject);
 
   Widget build(BuildContext context) {
@@ -103,7 +105,7 @@ class SubjectCardProgressBar extends StatelessWidget {
                   "h" +
                   (_subject.timeSpent / 60).truncate().toString() +
                   "mn",
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: fontSizeNormal),
             ),
           ],
         ),

@@ -16,6 +16,8 @@ class SubjectCard extends StatefulWidget {
 }
 
 class _SubjectCardState extends State<SubjectCard> {
+  final double fontText = 17.0;
+  final Color textColor = Colors.black87;
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, Store>(
@@ -28,7 +30,8 @@ class _SubjectCardState extends State<SubjectCard> {
               child: Card(
                   elevation: 5,
                   child: Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 5.0),
+                    margin:
+                        new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +44,7 @@ class _SubjectCardState extends State<SubjectCard> {
                                 widget.subject.title.toUpperCase(),
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 17,
+                                    fontSize: fontText,
                                     fontWeight: FontWeight.bold),
                               ),
                               Container(
@@ -49,10 +52,12 @@ class _SubjectCardState extends State<SubjectCard> {
                                 height: 20.0,
                               ),
                               Container(
-                                  width: 20.0,
-                                  height: 20.0,
+                                  width: 40.0,
+                                  height: 25.0,
                                   decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    shape: BoxShape.rectangle,
                                     color: widget.subject.color,
                                   ))
                             ]),
@@ -65,30 +70,39 @@ class _SubjectCardState extends State<SubjectCard> {
                                 Text(
                                   widget.subject.type.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontText,
                                   ),
                                 ),
                                 Text(
-                                  formatDate(widget.subject.dueDate,
-                                      [dd, '/', mm, '/', yyyy]).toString(),
+                                  formatDate(widget.subject.dueDate, [
+                                    dd,
+                                    '/',
+                                    mm,
+                                    '/',
+                                    yyyy,
+                                    ' ',
+                                    hh,
+                                    ':',
+                                    mm,
+                                  ]).toString(),
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontText,
                                   ),
                                 ),
                                 Text(
                                   widget.subject.room.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontText,
                                   ),
                                 ),
                                 Text(
                                   widget.subject.description,
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontText,
                                   ),
                                 )
                               ],
@@ -102,15 +116,15 @@ class _SubjectCardState extends State<SubjectCard> {
                                   widget.subject.hoursWeek.toString() +
                                       " Hours/week",
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontText,
                                   ),
                                 ),
                                 Text(
                                   widget.subject.priority.toString(),
                                   style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 19,
+                                    color: textColor,
+                                    fontSize: fontText + 2,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 )

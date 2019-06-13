@@ -7,7 +7,8 @@ import 'package:redux/redux.dart';
 
 class SubjectProgressBar extends StatelessWidget {
   final Subject subject;
-
+  final double fontSizeNormal = 17.0;
+  final Color textColor = Colors.black87;
   const SubjectProgressBar({Key key, this.subject}) : super(key: key);
 
   @override
@@ -36,8 +37,8 @@ class SubjectProgressBar extends StatelessWidget {
                               Text(
                                 subject.title.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
+                                    color: textColor,
+                                    fontSize: fontSizeNormal,
                                     fontWeight: FontWeight.bold),
                               ),
                             ]),
@@ -53,13 +54,13 @@ class SubjectProgressBar extends StatelessWidget {
                                       .toString() +
                                   "mn",
                               style: TextStyle(
-                                  color: Colors.black87, fontSize: 17),
+                                  color: textColor, fontSize: fontSizeNormal),
                             ),
                             Text(
                               _getTimeUntilDueDate(subject),
                               style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 15,
+                                  color: textColor,
+                                  fontSize: fontSizeNormal,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -80,7 +81,7 @@ class SubjectProgressBar extends StatelessWidget {
                             new Text(
                               _getProgressRatio(subject) + " %",
                               style: TextStyle(
-                                  color: Colors.black87, fontSize: 15),
+                                  color: textColor, fontSize: fontSizeNormal),
                             )
                           ],
                         ),
@@ -104,14 +105,15 @@ class SubjectProgressBar extends StatelessWidget {
   }
 
   static String _getProgressRatio(Subject subject) {
-    double ratio = 0;
-    if (subject.dueDate.difference(DateTime.now()).inSeconds != 0) {
-      ratio = subject.timeSpent *
-          100 /
-          (subject.hoursWeek *
-              3600 *
-              (subject.dueDate.difference(DateTime.now()).inDays * 7));
+    int ratio = 0;
+    if (subject.dueDate.difference(DateTime.now()).inSeconds > 0) {
+      ratio = (subject.timeSpent *
+              100 /
+              (subject.hoursWeek *
+                  3600 *
+                  (subject.dueDate.difference(DateTime.now()).inDays * 7)))
+          .toInt();
     }
-    return ratio.truncate().toString();
+    return ratio.toString();
   }
 }

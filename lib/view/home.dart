@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
             future: vm.state.dbHelper.getSubjects(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
-                if (snapshot.hasData) {
+                if (snapshot.data.isNotEmpty) {
                   return Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,6 +41,28 @@ class _HomeState extends State<Home> {
                                       subject: snapshot.data[index]);
                                 }))
                       ]);
+                } else {
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    verticalDirection: VerticalDirection.down,
+                    children: <Widget>[
+                      Center(
+                        child: Text(
+                          "Welcome !",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "Add a subject to begin",
+                        style: TextStyle(fontSize: 25),
+                      )
+                    ],
+                  );
                 }
               }
               return new Container(
