@@ -109,7 +109,8 @@ class SubjectProgressBar extends StatelessWidget {
       ratio = subject.timeSpent *
           100 /
           (subject.hoursWeek *
-              (subject.dueDate.difference(DateTime.now()).inSeconds));
+              3600 *
+              (subject.dueDate.difference(DateTime.now()).inDays * 7));
     }
     return ratio.truncate().toString();
   }

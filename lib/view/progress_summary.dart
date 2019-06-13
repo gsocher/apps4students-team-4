@@ -5,7 +5,6 @@ import 'dart:ui' show lerpDouble;
 import 'package:date_format/date_format.dart';
 import 'package:flutter/animation.dart';
 import 'tween.dart';
-import 'package:intl/intl.dart';
 
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
