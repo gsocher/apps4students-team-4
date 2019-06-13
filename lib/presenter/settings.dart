@@ -1,24 +1,39 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:device_calendar/device_calendar.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  Settings();
+
+  @override
+  SettingsPageState createState() {
+    return new SettingsPageState();
+  }
+}
+
+class SettingsPageState extends State<Settings> {
+  DeviceCalendarPlugin _deviceCalendarPlugin;
+
+  List<Calendar> calendars;
+
+  SettingsPageState() {
+    _deviceCalendarPlugin = new DeviceCalendarPlugin();
+  }
+
+  @override
+  initState() {
+    super.initState();
+    _retrieveCalendars();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Subject> events = new List<Subject>();
     final Future<List<Subject>> subjects = DBHelper().getSubjects();
-    Event event;
     subjects.then((value) {
       for (var subject in value) {
-        event = Event(
-          title: subject.title,
-          description: event.description,
-          location: subject.room,
-          startDate: DateTime(subject.dueDate.year, subject.dueDate.month,
-              subject.dueDate.day, 1, 0, 0, 0, 0),
-          endDate: DateTime(subject.dueDate.year, subject.dueDate.month,
-              subject.dueDate.day, 1 + subject.hoursWeek, 0, 0, 0, 0),
-        );
+        events.add(subject);
       }
     });
     return Scaffold(
@@ -28,8 +43,38 @@ class Settings extends StatelessWidget {
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {
-                Add2Calendar.addEvent2Cal(event);
+                _addEventsToCalendar(events);
               },
             )));
+  }
+
+  Future _addEventsToCalendar(List<Subject> events) async {
+    for (var subject in events) {
+      final eventToCreate = new Event(calendars.elementAt(0).id);
+      eventToCreate.title = subject.title;
+      eventToCreate.start = subject.dueDate;
+      eventToCreate.end = DateTime(subject.dueDate.year, subject.dueDate.month,
+          subject.dueDate.day, subject.dueDate.hour + subject.hoursWeek);
+      eventToCreate.description = subject.description;
+      await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+    }
+  }
+
+  void _retrieveCalendars() async {
+    try {
+      var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
+      if (permissionsGranted.isSuccess && !permissionsGranted.data) {
+        permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
+        if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+          return;
+        }
+      }
+      final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
+      setState(() {
+        calendars = calendarsResult?.data;
+      });
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 }

@@ -28,8 +28,9 @@ dependencies:
   fluttertoast: any
   flutter_hsvcolor_picker: ^0.0.1
   flutter_redux: ^0.5.3
-  add_2_calendar: ^1.2.2
+  device_calendar: ^0.1.1
   date_format: ^1.0.6
+  permission_handler: ^3.1.0
   photo_view:
   page_view_indicators:
   flutter_datetime_picker: ^1.2.1
