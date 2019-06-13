@@ -44,7 +44,7 @@ void main() {
 
   testWidgets('reducer updates subject', (tester) async {
     var createApp = _createApp();
-    createApp.store.dispatch(UpdateSubject(_getDummySubject()));
+    createApp.store.dispatch(UpdateSubject(_getDummySubject(),new SubjectOverview()));
     await tester.pumpWidget(createApp);
     await tester.pump();
     // TODO: 23.05.2019 How to test, if this worked?

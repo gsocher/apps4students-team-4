@@ -5,6 +5,7 @@ import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
@@ -116,195 +117,194 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   }
 
   Widget _buildColumnItems(BuildContext context, int index) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          TextFormField(
-            initialValue: _title,
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a  $TITLE' : null,
-            onFieldSubmitted: (String value) {
-              setState(() {
-                isValidated = false;
-              });
-            },
-            onSaved: (String value) => _title = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: TITLE),
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
+        Widget>[
+      TextFormField(
+        initialValue: _title,
+        validator: (String input) =>
+            input.length <= 0 ? 'please enter a  $TITLE' : null,
+        onFieldSubmitted: (String value) {
+          setState(() {
+            isValidated = false;
+          });
+        },
+        onSaved: (String value) => _title = value,
+        style: TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+            labelStyle: TextStyle(color: Colors.black),
+            border: UnderlineInputBorder(),
+            filled: true,
+            alignLabelWithHint: true,
+            labelText: TITLE),
+      ),
+      SizedBox(height: 15.0),
+      TextFormField(
+        initialValue: _room,
+        validator: (String input) =>
+            input.length <= 0 ? 'please enter a $ROOM' : null,
+        onFieldSubmitted: (String value) {
+          setState(() {
+            isValidated = false;
+          });
+        },
+        onSaved: (String value) => _room = value,
+        style: TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+            labelStyle: TextStyle(color: Colors.black),
+            border: UnderlineInputBorder(),
+            filled: true,
+            alignLabelWithHint: true,
+            labelText: ROOM),
+      ),
+      SizedBox(height: 15.0),
+      TextFormField(
+        initialValue: _description,
+        validator: (String input) =>
+            input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+        onFieldSubmitted: (String value) {
+          setState(() {
+            isValidated = false;
+          });
+        },
+        onSaved: (String value) => _description = value,
+        style: TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+            labelStyle: TextStyle(color: Colors.black),
+            border: UnderlineInputBorder(),
+            filled: true,
+            alignLabelWithHint: true,
+            labelText: DESCRIPTION),
+      ),
+      SizedBox(height: 15.0),
+      DropdownButton<ExamType>(
+          value: _type,
+          items: ExamType.VALUES
+              .map((value) => new DropdownMenuItem<ExamType>(
+                    child: Text(value.toString()),
+                    value: value,
+                  ))
+              .toList(),
+          onChanged: (ExamType value) => setState(() {
+                _type = value;
+              })),
+      SizedBox(height: 15.0),
+      DropdownButton<Priority>(
+          value: _priority,
+          items: Priority.VALUES
+              .map((value) => new DropdownMenuItem<Priority>(
+                    child: Text(value.toString()),
+                    value: value,
+                  ))
+              .toList(),
+          onChanged: (Priority value) => setState(() {
+                _priority = value;
+              })),
+      SizedBox(height: 15.0),
+      TextFormField(
+        initialValue: _hoursPerWeek,
+        validator: (String input) =>
+            input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+        onFieldSubmitted: (String value) {
+          setState(() {
+            isValidated = false;
+          });
+        },
+        onSaved: (String value) => _hoursPerWeek = value,
+        style: TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+            labelStyle: TextStyle(color: Colors.black),
+            border: UnderlineInputBorder(),
+            filled: true,
+            alignLabelWithHint: true,
+            labelText: HOURS_PER_WEEK),
+        keyboardType: TextInputType.number,
+      ),
+      SizedBox(height: 15.0),
+      Container(
+          child: DateTimePickerFormField(
+        initialValue: _dateTime,
+        format: this.dateFormat,
+        dateOnly: false,
+        style: TextStyle(fontSize: 20),
+        decoration: InputDecoration(
+            labelStyle: TextStyle(color: Colors.black),
+            border: UnderlineInputBorder(),
+            filled: true,
+            alignLabelWithHint: true,
+            labelText: DUE_DATE),
+        validator: _validateDueDate,
+        onFieldSubmitted: (DateTime value) {
+          setState(() {
+            isValidated = false;
+          });
+        },
+        onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+      )),
+      SizedBox(height: 15.0),
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(),
+        ),
+        margin: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.only(top: 20),
+        width: 500,
+        height: 400,
+        child: Column(children: <Widget>[
+          Text(
+            'choose the subjects color:',
+            style: TextStyle(fontSize: 25.0),
           ),
-          SizedBox(height: 15.0),
-          TextFormField(
-            initialValue: _room,
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a $ROOM' : null,
-            onFieldSubmitted: (String value) {
-              setState(() {
-                isValidated = false;
-              });
-            },
-            onSaved: (String value) => _room = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: ROOM),
-          ),
-          SizedBox(height: 15.0),
-          TextFormField(
-            initialValue: _description,
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
-            onFieldSubmitted: (String value) {
-              setState(() {
-                isValidated = false;
-              });
-            },
-            onSaved: (String value) => _description = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: DESCRIPTION),
-          ),
-          SizedBox(height: 15.0),
-          DropdownButton<ExamType>(
-              value: _type,
-              items: ExamType.VALUES
-                  .map((value) => new DropdownMenuItem<ExamType>(
-                        child: Text(value.toString()),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (ExamType value) => setState(() {
-                    _type = value;
-                  })),
-          SizedBox(height: 15.0),
-          DropdownButton<Priority>(
-              value: _priority,
-              items: Priority.VALUES
-                  .map((value) => new DropdownMenuItem<Priority>(
-                        child: Text(value.toString()),
-                        value: value,
-                      ))
-                  .toList(),
-              onChanged: (Priority value) => setState(() {
-                    _priority = value;
-                  })),
-          SizedBox(height: 15.0),
-          TextFormField(
-            initialValue: _hoursPerWeek,
-            validator: (String input) =>
-                input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
-            onFieldSubmitted: (String value) {
-              setState(() {
-                isValidated = false;
-              });
-            },
-            onSaved: (String value) => _hoursPerWeek = value,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: HOURS_PER_WEEK),
-            keyboardType: TextInputType.number,
-          ),
-          SizedBox(height: 15.0),
-          Container(
-              child: DateTimePickerFormField(
-            initialValue: _dateTime,
-            format: this.dateFormat,
-            dateOnly: false,
-            style: TextStyle(fontSize: 20),
-            decoration: InputDecoration(
-                labelStyle: TextStyle(color: Colors.black),
-                border: UnderlineInputBorder(),
-                filled: true,
-                alignLabelWithHint: true,
-                labelText: DUE_DATE),
-            validator: _validateDueDate,
-            onFieldSubmitted: (DateTime value) {
-              setState(() {
-                isValidated = false;
-              });
-            },
-            onChanged: (dueDate) => setState(() => _dateTime = dueDate),
-          )),
-          SizedBox(height: 15.0),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(top: 20),
-            width: 500,
-            height: 400,
-            child: Column(children: <Widget>[
-              Text(
-                'choose the subjects color:',
-                style: TextStyle(fontSize: 25.0),
-              ),
-              new PaletteValuePicker(
-                color: new HSVColor.fromColor(_color),
-                onChanged: (value) =>
-                    super.setState(() => this.onChanged(value)),
-              )
-            ]),
-          ),
-          SizedBox(height: 15.0),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Stack(children: <Widget>[
-              Visibility(
-                  visible: !isValidated,
-                  child: new IconButton(
-                    icon: Icon(
-                      Icons.save,
-                      color: Colors.grey,
-                      size: 30,
-                    ),
-                    onPressed: () => _checkIfInputIsValid(),
-                  )),
-              Visibility(
-                  visible: isValidated,
-                  child: new StoreConnector<AppState, VoidCallback>(
-                      converter: (store) {
-                    return () => store..dispatch(UpdateSubject(_submit()));
-                  }, builder: (context, callback) {
-                    return new IconButton(
-                      icon: Icon(
-                        Icons.save,
-                        size: 30,
-                      ),
-                      onPressed: callback,
-                    );
-                  }))
-            ]),
-            Container(
-              width: 20.0,
-              height: 20.0,
-            ),
-            StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(DeleteSubject(widget.subject.id));
-            }, builder: (context, callback) {
-              return new IconButton(
+          new PaletteValuePicker(
+            color: new HSVColor.fromColor(_color),
+            onChanged: (value) => super.setState(() => this.onChanged(value)),
+          )
+        ]),
+      ),
+      SizedBox(height: 15.0),
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Stack(children: <Widget>[
+          Visibility(
+              visible: !isValidated,
+              child: new IconButton(
                 icon: Icon(
-                  Icons.delete,
+                  Icons.save,
+                  color: Colors.grey,
                   size: 30,
                 ),
-                onPressed: callback,
-              );
-            }),
-          ])
-        ]);
+                onPressed: () => _checkIfInputIsValid(),
+              )),
+          Visibility(
+              visible: isValidated,
+              child: new StoreConnector<AppState, VoidCallback>(
+                  converter: (store) {
+                return () => store
+                  ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
+              }, builder: (context, callback) {
+                return new IconButton(
+                  icon: Icon(
+                    Icons.save,
+                    size: 30,
+                  ),
+                  onPressed: callback,
+                );
+              }))
+        ]),
+        Container(
+          width: 20.0,
+          height: 20.0,
+        ),
+        StoreConnector<AppState, VoidCallback>(converter: (store) {
+          return () => store..dispatch(DeleteSubject(widget.subject.id));
+        }, builder: (context, callback) {
+          return new IconButton(
+            icon: Icon(
+              Icons.delete,
+              size: 30,
+            ),
+            onPressed: callback,
+          );
+        }),
+      ])
+    ]);
   }
 }
