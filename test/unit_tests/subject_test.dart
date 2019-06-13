@@ -20,7 +20,7 @@ void main() {
         "A funny subject.",
         5,
         DateTime.parse('2019-06-10 16:27:46.371368'),
-        DateTime.now());
+        DateTime.parse('2019-06-13 09:06:27.669877'));
   }
 
   test('subject to map', () {
