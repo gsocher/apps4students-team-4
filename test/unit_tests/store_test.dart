@@ -25,8 +25,15 @@ void main() {
   }
 
   Subject _getDummySubject() {
-    return Subject.name("Software Engineering II", ExamType.WRITTEN_EXAM,
-        "T1.011", Priority.MINIMALISM, "A funny subject.", 5);
+    return Subject.name(
+        "Software Engineering II",
+        ExamType.WRITTEN_EXAM,
+        "T1.011",
+        Priority.MINIMALISM,
+        "A funny subject.",
+        5,
+        DateTime.parse('2019-06-10 16:27:46.371368'),
+        DateTime.now());
   }
 
   test('reducer changes view to subject overview', () {
