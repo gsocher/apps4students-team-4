@@ -14,13 +14,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  AppBar _appBar;
-
-  @override
-  void initState() {
-    super.initState();
-    _appBar = AppBar(title: Text("Exam Planer"));
-  }
+  int _selectedIndex = 0;
+  List<Widget> _widgets = <Widget>[
+    Home(),
+    SubjectOverview(),
+    Settings(),
+    HmMap(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +28,24 @@ class _MainScreenState extends State<MainScreen> {
       converter: (store) => store,
       builder: (context, callback) {
         return new Scaffold(
-            appBar: _appBar,
-            bottomNavigationBar: BottomAppBar(
-              child: new Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                // TODO: 03.05.2019 The buttons should be separated by a line and be wider. So you can click next to the icon and also hit it.
-                children: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.storage),
-                      onPressed: () => callback..dispatch(ChangeView(Home()))),
-                  IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () =>
-                          callback..dispatch(ChangeView(SubjectOverview()))),
-                  IconButton(
-                    icon: Icon(Icons.settings),
-                    onPressed: () => callback..dispatch(ChangeView(Settings())),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.map),
-                    onPressed: () => callback..dispatch(ChangeView(HmMap())),
-                  )
-                ],
-              ),
-            ),
+            appBar: AppBar(title: Text("Exam Planer")),
+            bottomNavigationBar: BottomNavigationBar(
+                onTap: (index) => _changeView(index, callback),
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: Colors.blue,
+                unselectedItemColor: Colors.black,
+                currentIndex: _selectedIndex,
+                elevation: 20,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.storage), title: Text('Overview')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.add), title: Text('Add')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.settings), title: Text('Settings')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.map), title: Text('Map'))
+                ]),
             body: callback.state.widget,
             floatingActionButton: Visibility(
               visible: ChangeView(callback.state.widget).showFAB(),
@@ -63,6 +56,13 @@ class _MainScreenState extends State<MainScreen> {
             ));
       },
     );
+  }
+
+  void _changeView(int index, Store callback) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    callback.dispatch(ChangeView(_widgets.elementAt(index)));
   }
 }
 

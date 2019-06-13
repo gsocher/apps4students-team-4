@@ -23,6 +23,8 @@ class DBHelper {
   static const String COLOR_BLUE = 'color_blue';
   static const String STARTED_TIMETRACKING_AT = 'started_timetracking_at';
   static const String TIME_SPENT = 'time_spent';
+  static const String DUE_DATE = 'due_date';
+  static const String DATE_OF_CREATION = 'date_of_creation';
 
   static DBHelper _databaseHelper; // Singleton DatabaseHelper
   static Database _database; //Singleton Database
@@ -46,7 +48,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_22.db';
+    String path = documentsDirectory.path + '/subject_33.db';
     var db = await openDatabase(path, version: 1, onCreate: _createDB);
     return db;
   }
@@ -64,7 +66,9 @@ class DBHelper {
         ' $COLOR_GREEN INTEGER,'
         ' $COLOR_BLUE INTEGER,'
         ' $STARTED_TIMETRACKING_AT TEXT,'
-        ' $TIME_SPENT INTEGER);');
+        ' $DUE_DATE TEXT,'
+        ' $TIME_SPENT INTEGER,'
+        ' $DATE_OF_CREATION TEXT);');
   }
 
   /*
@@ -77,13 +81,14 @@ class DBHelper {
     List<Subject> subjects = new List();
     for (int index = 0; index < list.length; index++) {
       Subject subject = new Subject.name(
-        list[index][TITLE],
-        ExamType.getType(list[index][TYPE]),
-        list[index][ROOM],
-        Priority.getPriority(list[index][PRIORITY]),
-        list[index][DESCRIPTION],
-        list[index][HOURS_WEEK],
-      );
+          list[index][TITLE],
+          ExamType.getType(list[index][TYPE]),
+          list[index][ROOM],
+          Priority.getPriority(list[index][PRIORITY]),
+          list[index][DESCRIPTION],
+          list[index][HOURS_WEEK],
+          DateTime.parse(list[index][DUE_DATE]),
+          DateTime.parse(list[index][DATE_OF_CREATION]));
       subject.id = list[index]['id'];
       subject.color = Color.fromARGB(
           list[index][COLOR_ALPHA],
@@ -102,6 +107,7 @@ class DBHelper {
     if (subject == null) {
       return -1;
     }
+    print('creationDate add: ' + subject.dateOfCreation.toString());
     var dbConnection = await this.database;
     var result = await dbConnection.insert(TABLE_NAME, subject.toMap());
     return result;
@@ -111,6 +117,7 @@ class DBHelper {
     if (subject == null) {
       return -1;
     }
+    print('creationDate add: ' + subject.dateOfCreation.toString());
     var dbConnection = await this.database;
     var result = await dbConnection.update(TABLE_NAME, subject.toMap(),
         where: '$ID = ?', whereArgs: [subject.id]);
