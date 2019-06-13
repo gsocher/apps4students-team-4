@@ -130,6 +130,7 @@ class _SubjectAddState extends State<SubjectAdd> {
               alignLabelWithHint: true,
               labelText: TITLE),
         ),
+        SizedBox(height: 15.0),
         TextFormField(
           validator: (String input) =>
               input.length <= 0 ? 'please enter a $ROOM' : null,
@@ -147,6 +148,7 @@ class _SubjectAddState extends State<SubjectAdd> {
               alignLabelWithHint: true,
               labelText: ROOM),
         ),
+        SizedBox(height: 15.0),
         TextFormField(
           validator: (String input) =>
               input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
@@ -164,6 +166,7 @@ class _SubjectAddState extends State<SubjectAdd> {
               alignLabelWithHint: true,
               labelText: DESCRIPTION),
         ),
+        SizedBox(height: 15.0),
         DropdownButton<ExamType>(
             value: _type,
             items: ExamType.VALUES
@@ -175,6 +178,7 @@ class _SubjectAddState extends State<SubjectAdd> {
             onChanged: (ExamType value) => setState(() {
                   _type = value;
                 })),
+        SizedBox(height: 15.0),
         DropdownButton<Priority>(
             value: _priority,
             items: Priority.VALUES
@@ -205,6 +209,7 @@ class _SubjectAddState extends State<SubjectAdd> {
               labelText: HOURS_PER_WEEK),
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 15.0),
         Container(
             child: DateTimePickerFormField(
           format: this.dateFormat,
@@ -224,6 +229,7 @@ class _SubjectAddState extends State<SubjectAdd> {
           },
           onChanged: (dueDate) => setState(() => _dateTime = dueDate),
         )),
+        SizedBox(height: 15.0),
         Container(
           decoration: BoxDecoration(
             border: Border.all(),
@@ -243,6 +249,7 @@ class _SubjectAddState extends State<SubjectAdd> {
             )
           ]),
         ),
+        SizedBox(height: 15.0),
         Visibility(
             visible: !isValidated,
             child: new IconButton(
