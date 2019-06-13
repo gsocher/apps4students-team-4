@@ -4,7 +4,7 @@
 //import 'package:easy_study/model/subject.dart';
 //import 'package:flutter_test/flutter_test.dart';
 //
-//void main() {
+void main() {
 //  Subject _getDummySubject() {
 //    return Subject.name("Software Engineering II", ExamType.WRITTEN_EXAM,
 //        "T1.011", Priority.MINIMALISM, "A funny subject.", 5,
@@ -38,4 +38,4 @@
 //    var dbHelper = DBHelper();
 //    var i = await dbHelper.deleteSubject(1);
 //  });
-//}
+}
