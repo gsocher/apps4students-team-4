@@ -8,7 +8,6 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
-import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,6 @@ void main() {
         DateTime.parse('2019-06-10 16:27:46.371368'),
         DateTime.now());
   }
-  
 
   EasyStudyApp _createApp(Widget widget) {
     final store =
@@ -42,17 +40,6 @@ void main() {
 
   testWidgets('show subject overview', (tester) async {
     var createApp = _createApp(SubjectOverview());
-    await tester.pumpWidget(createApp);
-    await tester.pump();
-  });
-  
-  testWidgets('show subject overview', (tester) async {
-    var createApp = _createApp(SubjectCardProgressBar(_getDummySubject()));
-    await tester.pumpWidget(createApp);
-    await tester.pump();
-  });
-  testWidgets('show subject overview', (tester) async {
-    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
