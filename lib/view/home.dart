@@ -26,21 +26,45 @@ class _HomeState extends State<Home> {
             builder: (context, snapshot) {
               if (snapshot.data != null) {
                 if (snapshot.hasData) {
-                  return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  if (snapshot.data.isNotEmpty) {
+                    return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        verticalDirection: VerticalDirection.down,
+                        children: <Widget>[
+                          ProgressSummary(snapshot.data),
+                          Expanded(
+                              child: ListView.builder(
+                                  itemCount: snapshot.data.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    return new SubjectProgressBar(
+                                        subject: snapshot.data[index]);
+                                  }))
+                        ]);
+                  } else {
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
-                        ProgressSummary(snapshot.data),
-                        Expanded(
-                            child: ListView.builder(
-                                itemCount: snapshot.data.length,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  return new SubjectProgressBar(
-                                      subject: snapshot.data[index]);
-                                }))
-                      ]);
+                        Center(
+                          child: Text(
+                            "Welcome !",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Add a subject to begin",
+                          style: TextStyle(fontSize: 25),
+                        )
+                      ],
+                    );
+                  }
                 }
               }
               return new Container(
