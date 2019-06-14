@@ -8,6 +8,7 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
+import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,17 @@ void main() {
     await tester.pump();
   });
 
+  testWidgets('show subject progress bar', (tester) async {
+    var createApp = _createApp(SubjectCardProgressBar(_getDummySubject()));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
+
+  testWidgets('show progress summary', (tester) async {
+    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
   testWidgets('show subject card', (tester) async {
     var createApp = _createApp(SubjectCard(
       subject: _getDummySubject(),
