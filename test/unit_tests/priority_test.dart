@@ -26,4 +26,15 @@ void main() {
     var compare = Priority.NORMAL;
     expect(result, compare);
   });
+
+  test('priority getPriority not inside the enum', () {
+    var ex = Exception("Default");
+    try {
+      Priority.getPriority("Not inside");
+    } catch (e) {
+      ex = e;
+    }
+    var compare = Exception("This priority is not a valid Priority");
+    expect(ex.toString(), compare.toString());
+  });
 }
