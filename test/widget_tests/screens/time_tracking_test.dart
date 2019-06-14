@@ -23,10 +23,11 @@ void main() {
     await tester.tap(find.byIcon(Icons.play_arrow));
     await tester.pump();
     createApp.store.dispatch(ChangeView(SubjectOverview()));
-    await tester.pump();
+    await tester.pumpWidget(createApp);
     createApp.store.dispatch(ChangeView(TimeTracking(
       subject: TestHelper.getDummySubject(),
     )));
+    await tester.pumpWidget(createApp);
     await tester.pump();
   });
 }
