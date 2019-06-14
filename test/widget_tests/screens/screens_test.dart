@@ -1,64 +1,47 @@
-import 'package:easy_study/main.dart';
-import 'package:easy_study/model/exam_type.dart';
-import 'package:easy_study/model/priority.dart';
-import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/presenter/hm_map.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
-import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
-import 'package:flutter/material.dart';
+import 'package:easy_study/view/subject_progress_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:redux/redux.dart';
+
+import '../screen_helper.dart';
 
 void main() {
-  Subject _getDummySubject() {
-    return Subject.name(
-        "Software Engineering II",
-        ExamType.WRITTEN_EXAM,
-        "T1.011",
-        Priority.MINIMALISM,
-        "A funny subject.",
-        5,
-        DateTime.parse('2019-06-10 16:27:46.371368'),
-        DateTime.now());
-  }
-
-  EasyStudyApp _createApp(Widget widget) {
-    final store =
-        new Store<AppState>(searchReducer, initialState: AppState.initial());
-    var app = new EasyStudyApp(
-      title: 'Easy Study',
-      store: store,
-    );
-    app.store.dispatch(ChangeView(widget));
-    return app;
-  }
-
   testWidgets('show subject overview', (tester) async {
-    var createApp = _createApp(SubjectOverview());
+    var createApp = ScreenHelper.createApp(SubjectOverview());
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
+
+  testWidgets('show subject card progress bar', (tester) async {
+    var createApp = ScreenHelper.createApp(
+        SubjectCardProgressBar(ScreenHelper.getDummySubject()));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject progress bar', (tester) async {
-    var createApp = _createApp(SubjectCardProgressBar(_getDummySubject()));
+    var createApp = ScreenHelper.createApp(SubjectProgressBar(
+      subject: ScreenHelper.getDummySubject(),
+    ));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show progress summary', (tester) async {
-    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
+    var createApp = ScreenHelper.createApp(ProgressSummary(
+        [ScreenHelper.getDummySubject(), ScreenHelper.getDummySubject()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
   testWidgets('show subject card', (tester) async {
-    var createApp = _createApp(SubjectCard(
-      subject: _getDummySubject(),
+    var createApp = ScreenHelper.createApp(SubjectCard(
+      subject: ScreenHelper.getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
@@ -66,32 +49,32 @@ void main() {
   });
 
   testWidgets('show hm map', (tester) async {
-    var createApp = _createApp(HmMap());
+    var createApp = ScreenHelper.createApp(HmMap());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show home', (tester) async {
-    var createApp = _createApp(Home());
+    var createApp = ScreenHelper.createApp(Home());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show settings', (tester) async {
-    var createApp = _createApp(Settings());
+    var createApp = ScreenHelper.createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject add', (tester) async {
-    var createApp = _createApp(SubjectAdd());
+    var createApp = ScreenHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject edit or delete', (tester) async {
-    var createApp = _createApp(SubjectEditOrDelete(
-      subject: _getDummySubject(),
+    var createApp = ScreenHelper.createApp(SubjectEditOrDelete(
+      subject: ScreenHelper.getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
