@@ -18,6 +18,7 @@ class SubjectCard extends StatefulWidget {
 class _SubjectCardState extends State<SubjectCard> {
   final double fontText = 17.0;
   final Color textColor = Colors.black87;
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, Store>(

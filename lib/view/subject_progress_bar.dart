@@ -9,6 +9,7 @@ class SubjectProgressBar extends StatelessWidget {
   final Subject subject;
   final double fontSizeNormal = 17.0;
   final Color textColor = Colors.black87;
+
   const SubjectProgressBar({Key key, this.subject}) : super(key: key);
 
   @override
