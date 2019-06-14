@@ -5,7 +5,7 @@
 //import 'package:flutter_test/flutter_test.dart';
 //
 ////
-//void main() {
+void main() {
 //  Subject _getDummySubject() {
 //    return Subject.name(
 //        "Software Engineering II",
@@ -42,4 +42,4 @@
 //    var dbHelper = DBHelper();
 //    var i = await dbHelper.deleteSubject(1);
 //  });
-//}
+}
