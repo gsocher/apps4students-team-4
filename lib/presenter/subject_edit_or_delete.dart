@@ -74,6 +74,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
           int.parse(_hoursPerWeek), _dateTime, _dateOfCreation);
       result.color = _color;
       result.id = widget.subject.id;
+      result.timeSpent = widget.subject.timeSpent;
       setState(() {
         isValidated = false;
       });

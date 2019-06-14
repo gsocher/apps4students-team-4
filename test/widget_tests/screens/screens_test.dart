@@ -16,7 +16,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-  Subject _getDummySubjectOne() {
+  Subject _getDummySubject() {
     return Subject.name(
         "Software Engineering II",
         ExamType.WRITTEN_EXAM,
@@ -27,21 +27,11 @@ void main() {
         DateTime.parse('2019-06-10 16:27:46.371368'),
         DateTime.now());
   }
-  Subject _getDummySubjectTwo() {
-    return Subject.name(
-        "Meditation",
-        ExamType.ORAL_EXAM,
-        "R1.012",
-        Priority.NORMAL,
-        "A helping subject.",
-        6,
-        DateTime.parse('2019-10-10 16:27:46.371368'),
-        DateTime.now());
-  }
-  List<Subject> _subjects = new  List<Subject>();
-  _subjects.add(_getDummySubjectOne());
+
+  List<Subject> _subjects = new List<Subject>();
+  _subjects.add(_getDummySubject());
 //  _subjects.add(_getDummySubjectTwo());
-  print(_subjects.toString());
+//  print(_subjects.toString());
 
   EasyStudyApp _createApp(Widget widget) {
     final store =
@@ -62,7 +52,7 @@ void main() {
 
   testWidgets('show subject card', (tester) async {
     var createApp = _createApp(SubjectCard(
-      subject: _getDummySubjectOne(),
+      subject: _getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
@@ -95,16 +85,8 @@ void main() {
 
   testWidgets('show subject edit or delete', (tester) async {
     var createApp = _createApp(SubjectEditOrDelete(
-      subject: _getDummySubjectOne(),
+      subject: _getDummySubject(),
     ));
-    await tester.pumpWidget(createApp);
-    await tester.pump();
-  });
-
-  testWidgets('show progress_summary', (tester) async {
-    var createApp = _createApp(
-      ProgressSummary(_subjects),
-    );
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
