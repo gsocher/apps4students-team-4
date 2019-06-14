@@ -1,3 +1,4 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
@@ -6,17 +7,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-
 import 'package:intl/intl.dart';
 
 class SubjectAdd extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SubjectAddState();
+  State<StatefulWidget> createState() => SubjectAddState();
 }
 
-class _SubjectAddState extends State<SubjectAdd> {
+class SubjectAddState extends State<SubjectAdd> {
   HSVColor color = new HSVColor.fromColor(Colors.blue);
 
   void onChanged(HSVColor value) => this.color = value;

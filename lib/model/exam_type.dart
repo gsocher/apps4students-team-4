@@ -11,7 +11,7 @@ class ExamType {
     stringToType["Oral exam"] = ExamType.ORAL_EXAM;
     stringToType["Written exam"] = ExamType.WRITTEN_EXAM;
     if (!stringToType.containsKey(string)) {
-      throw new Exception("This type is not a valid Type");
+      throw Exception("This type is not a valid Type");
     }
     return stringToType[string];
   }
