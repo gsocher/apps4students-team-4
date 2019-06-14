@@ -26,4 +26,15 @@ void main() {
     var compare = ExamType.WRITTEN_EXAM;
     expect(result, compare);
   });
+
+  test('exam type getType not inside the enum', () {
+    var ex = Exception("Default");
+    try {
+      ExamType.getType("Not inside");
+    } catch (e) {
+      ex = e;
+    }
+    var compare = Exception("This type is not a valid Type");
+    expect(ex.toString(), compare.toString());
+  });
 }
