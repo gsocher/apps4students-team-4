@@ -9,39 +9,39 @@ import 'package:easy_study/view/subject_overview.dart';
 import 'package:easy_study/view/subject_progress_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../screen_helper.dart';
+import '../../test_helper.dart';
 
 void main() {
   testWidgets('show subject overview', (tester) async {
-    var createApp = ScreenHelper.createApp(SubjectOverview());
+    var createApp = TestHelper.createApp(SubjectOverview());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject card progress bar', (tester) async {
-    var createApp = ScreenHelper.createApp(
-        SubjectCardProgressBar(ScreenHelper.getDummySubject()));
+    var createApp = TestHelper.createApp(
+        SubjectCardProgressBar(TestHelper.getDummySubject()));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject progress bar', (tester) async {
-    var createApp = ScreenHelper.createApp(SubjectProgressBar(
-      subject: ScreenHelper.getDummySubject(),
+    var createApp = TestHelper.createApp(SubjectProgressBar(
+      subject: TestHelper.getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show progress summary', (tester) async {
-    var createApp = ScreenHelper.createApp(ProgressSummary(
-        [ScreenHelper.getDummySubject(), ScreenHelper.getDummySubject()]));
+    var createApp = TestHelper.createApp(ProgressSummary(
+        [TestHelper.getDummySubject(), TestHelper.getDummySubject()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
   testWidgets('show subject card', (tester) async {
-    var createApp = ScreenHelper.createApp(SubjectCard(
-      subject: ScreenHelper.getDummySubject(),
+    var createApp = TestHelper.createApp(SubjectCard(
+      subject: TestHelper.getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
@@ -49,32 +49,32 @@ void main() {
   });
 
   testWidgets('show hm map', (tester) async {
-    var createApp = ScreenHelper.createApp(HmMap());
+    var createApp = TestHelper.createApp(HmMap());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show home', (tester) async {
-    var createApp = ScreenHelper.createApp(Home());
+    var createApp = TestHelper.createApp(Home());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show settings', (tester) async {
-    var createApp = ScreenHelper.createApp(Settings());
+    var createApp = TestHelper.createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject add', (tester) async {
-    var createApp = ScreenHelper.createApp(SubjectAdd());
+    var createApp = TestHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
 
   testWidgets('show subject edit or delete', (tester) async {
-    var createApp = ScreenHelper.createApp(SubjectEditOrDelete(
-      subject: ScreenHelper.getDummySubject(),
+    var createApp = TestHelper.createApp(SubjectEditOrDelete(
+      subject: TestHelper.getDummySubject(),
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();

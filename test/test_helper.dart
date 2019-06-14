@@ -6,7 +6,7 @@ import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
-class ScreenHelper {
+class TestHelper {
   static EasyStudyApp createApp(Widget widget) {
     final store =
         new Store<AppState>(searchReducer, initialState: AppState.initial());
