@@ -1,24 +1,30 @@
-import 'package:easy_study/model/subject.dart';
-import 'package:flutter/material.dart';
-import 'dart:math';
 import 'dart:ui' show lerpDouble;
+
 import 'package:date_format/date_format.dart';
+import 'package:easy_study/model/subject.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
+
 import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
   final List<Subject> _subjects;
+
   ProgressSummary(this._subjects);
+
   State<StatefulWidget> createState() => ProgressSummaryState(_subjects);
 }
 
 class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
+
   ProgressSummaryState(this._subjects);
+
+  final double fontSizeNormal = 20.0;
 
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       decoration: new BoxDecoration(color: Colors.white),
       child: new Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,14 +37,14 @@ class ProgressSummaryState extends State<ProgressSummary> {
               Text(
                 _total(_subjects),
                 style: new TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 40.0,
                   color: Colors.black,
                 ),
               ),
               Text(
                 formatDate(DateTime.now(), [dd, '/', mm, '/', yyyy]).toString(),
                 style: new TextStyle(
-                  fontSize: 20.0,
+                  fontSize: fontSizeNormal,
                   color: Colors.black,
                 ),
               ),
@@ -50,7 +56,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
             ],
           ),
           Container(
-            height: 75.0,
+            height: 100,
             child: ListView(
               children: _subjects
                   .map((subject) => new SubjectCardProgressBar(subject))
@@ -84,24 +90,30 @@ class ProgressSummaryState extends State<ProgressSummary> {
 // ignore: must_be_immutable
 class SubjectCardProgressBar extends StatelessWidget {
   Subject _subject;
+
+  final double fontSizeNormal = 20.0;
+
   SubjectCardProgressBar(this._subject);
 
   Widget build(BuildContext context) {
     return Container(
+      width: 100,
       child: Card(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               _subject.title,
-              style: TextStyle(color: _subject.color, fontSize: 20),
+              style: TextStyle(color: _subject.color, fontSize: 15),
+              overflow: TextOverflow.ellipsis,
             ),
             Text(
               ((_subject.timeSpent / 3600).truncate()).toString() +
                   "h" +
                   (_subject.timeSpent / 60).truncate().toString() +
                   "mn",
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: fontSizeNormal),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -112,14 +124,16 @@ class SubjectCardProgressBar extends StatelessWidget {
 
 class ChartPage extends StatefulWidget {
   final List<Subject> _subjects;
+
   ChartPage(this._subjects);
+
   ChartPageState createState() => ChartPageState(_subjects);
 }
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
-  static const size = const Size(390, 50.0);
-  final random = Random();
+
+  static const size = const Size(380, 30.0);
 
   final List<Subject> _subjects;
   AnimationController _animation;
@@ -325,15 +339,15 @@ class BarChartPainter extends CustomPainter {
           canvas.drawRect(
             Rect.fromLTWH(
               x,
-              20,
+              10,
               bar.height,
               stack.width,
             ),
             barPaint,
           );
           if (x < size.width) {
-            linePath.moveTo(x, 20);
-            linePath.lineTo(x, 30);
+            linePath.moveTo(x, 10);
+            linePath.lineTo(x, 20);
           }
           x += bar.height;
         }

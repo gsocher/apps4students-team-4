@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
@@ -15,6 +16,9 @@ class SubjectCard extends StatefulWidget {
 }
 
 class _SubjectCardState extends State<SubjectCard> {
+  final double fontText = 17.0;
+  final Color textColor = Colors.black87;
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, Store>(
@@ -27,48 +31,105 @@ class _SubjectCardState extends State<SubjectCard> {
               child: Card(
                   elevation: 5,
                   child: Container(
+                    margin:
+                        new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.subject.title,
+                                widget.subject.title.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.green, fontSize: 20),
+                                    color: Colors.black,
+                                    fontSize: fontText,
+                                    fontWeight: FontWeight.bold),
                               ),
                               Container(
-                                width: 20.0,
+                                width: 10.0,
                                 height: 20.0,
                               ),
                               Container(
-                                  width: 20.0,
-                                  height: 20.0,
+                                  width: 40.0,
+                                  height: 25.0,
                                   decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    shape: BoxShape.rectangle,
                                     color: widget.subject.color,
                                   ))
                             ]),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Column(
                               mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.type.toString()),
-                                Text(widget.subject.dueDate.toIso8601String()),
-                                Text(widget.subject.room.toString()),
-                                Text(widget.subject.description)
+                                Text(
+                                  widget.subject.type.toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText,
+                                  ),
+                                ),
+                                Text(
+                                  formatDate(widget.subject.dueDate, [
+                                    dd,
+                                    '/',
+                                    mm,
+                                    '/',
+                                    yyyy,
+                                    ' ',
+                                    hh,
+                                    ':',
+                                    mm,
+                                    am,
+                                  ]).toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.room.toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.description,
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText,
+                                  ),
+                                )
                               ],
                             ),
+                            Spacer(),
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.subject.hoursWeek.toString()),
-                                Text(widget.subject.priority.toString())
+                                Text(
+                                  widget.subject.hoursWeek.toString() +
+                                      " Hours/week",
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText,
+                                  ),
+                                ),
+                                Text(
+                                  widget.subject.priority.toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: fontText + 2,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
                               ],
                             )
                           ],

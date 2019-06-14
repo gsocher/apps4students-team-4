@@ -25,8 +25,15 @@ void main() {
   }
 
   Subject _getDummySubject() {
-    return Subject.name("Software Engineering II", ExamType.WRITTEN_EXAM,
-        "T1.011", Priority.MINIMALISM, "A funny subject.", 5);
+    return Subject.name(
+        "Software Engineering II",
+        ExamType.WRITTEN_EXAM,
+        "T1.011",
+        Priority.MINIMALISM,
+        "A funny subject.",
+        5,
+        DateTime.parse('2019-06-10 16:27:46.371368'),
+        DateTime.now());
   }
 
   test('reducer changes view to subject overview', () {
@@ -37,7 +44,8 @@ void main() {
 
   testWidgets('reducer updates subject', (tester) async {
     var createApp = _createApp();
-    createApp.store.dispatch(UpdateSubject(_getDummySubject()));
+    createApp.store
+        .dispatch(UpdateSubject(_getDummySubject(), new SubjectOverview()));
     await tester.pumpWidget(createApp);
     await tester.pump();
     // TODO: 23.05.2019 How to test, if this worked?

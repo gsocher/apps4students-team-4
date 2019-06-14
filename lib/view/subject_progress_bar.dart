@@ -7,6 +7,8 @@ import 'package:redux/redux.dart';
 
 class SubjectProgressBar extends StatelessWidget {
   final Subject subject;
+  final double fontSizeNormal = 17.0;
+  final Color textColor = Colors.black87;
 
   const SubjectProgressBar({Key key, this.subject}) : super(key: key);
 
@@ -19,52 +21,96 @@ class SubjectProgressBar extends StatelessWidget {
               onTap: () => callback
                 ..dispatch(ChangeView(TimeTracking(subject: subject))),
               child: Card(
+                  margin:
+                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
                   elevation: 5,
                   child: Container(
+                    margin: new EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 5.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       verticalDirection: VerticalDirection.down,
                       children: <Widget>[
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                subject.title,
+                                subject.title.toUpperCase(),
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
+                                    color: textColor,
+                                    fontSize: fontSizeNormal,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              Container(
-                                width: 20.0,
-                                height: 20.0,
-                              ),
-                              Container(
-                                  width: 20.0,
-                                  height: 20.0,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: subject.color,
-                                  ))
                             ]),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Time spent: ${subject.timeSpent} (seconds)",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                ),
-                              ],
+                            Text(
+                              ((subject.timeSpent / 3600).truncate())
+                                      .toString() +
+                                  "h " +
+                                  (subject.timeSpent / 60)
+                                      .truncate()
+                                      .toString() +
+                                  "mn",
+                              style: TextStyle(
+                                  color: textColor, fontSize: fontSizeNormal),
+                            ),
+                            Text(
+                              _getTimeUntilDueDate(subject),
+                              style: TextStyle(
+                                  color: textColor,
+                                  fontSize: fontSizeNormal,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
-                        )
+                        ),
+                        LinearProgressIndicator(
+                          value: _getProgressRatio(subject),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(subject.color),
+                          backgroundColor: Colors.black12,
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            new Text(
+                              (_getProgressRatio(subject) * 100)
+                                      .truncate()
+                                      .toString() +
+                                  " %",
+                              style: TextStyle(
+                                  color: textColor, fontSize: fontSizeNormal),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   )));
         });
+  }
+
+  static String _getTimeUntilDueDate(Subject subject) {
+    int days;
+    String timeUntilDD;
+    days = subject.dueDate.difference(DateTime.now()).inDays;
+    if (days > 0) {
+      timeUntilDD = days.toString() + " days until due date";
+    } else {
+      timeUntilDD = "Due date has passed";
+    }
+
+    return timeUntilDD;
+  }
+
+  static double _getProgressRatio(Subject subject) {
+    double ratio = 0;
+    if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0) {
+      ratio = (((subject.timeSpent * 7) / 3600) /
+          (subject.hoursWeek *
+              (subject.dueDate.difference(subject.dateOfCreation).inDays)));
+    }
+    return ratio;
   }
 }
