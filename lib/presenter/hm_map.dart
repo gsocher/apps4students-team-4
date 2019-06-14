@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
+import 'package:photo_view/photo_view.dart';
 
 class HmMap extends StatelessWidget {
   final _controller = PageController(initialPage: 0);

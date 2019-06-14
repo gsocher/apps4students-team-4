@@ -1,10 +1,10 @@
+import 'package:date_format/date_format.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:date_format/date_format.dart';
 
 class SubjectCard extends StatefulWidget {
   final Subject subject;
