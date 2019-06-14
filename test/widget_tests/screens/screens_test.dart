@@ -50,6 +50,17 @@ void main() {
     await tester.pump();
   });
 
+  testWidgets('show subject progress bar', (tester) async {
+    var createApp = _createApp(SubjectCardProgressBar(_getDummySubject()));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
+
+  testWidgets('show progress summary', (tester) async {
+    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
   testWidgets('show subject card', (tester) async {
     var createApp = _createApp(SubjectCard(
       subject: _getDummySubject(),
