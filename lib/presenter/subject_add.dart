@@ -11,10 +11,10 @@ import 'package:intl/intl.dart';
 
 class SubjectAdd extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SubjectAddState();
+  State<StatefulWidget> createState() => SubjectAddState();
 }
 
-class _SubjectAddState extends State<SubjectAdd> {
+class SubjectAddState extends State<SubjectAdd> {
   HSVColor color = new HSVColor.fromColor(Colors.blue);
 
   void onChanged(HSVColor value) => this.color = value;
@@ -52,12 +52,12 @@ class _SubjectAddState extends State<SubjectAdd> {
             child: Form(
                 key: formKey,
                 child: ListView.builder(
-                    itemBuilder: _buildColumnItems,
+                    itemBuilder: buildColumnItems,
                     itemCount: 1,
                     scrollDirection: Axis.vertical))));
   }
 
-  Subject _submit() {
+  Subject submit() {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
@@ -71,7 +71,7 @@ class _SubjectAddState extends State<SubjectAdd> {
     return result;
   }
 
-  void _checkIfInputIsValid() {
+  void checkIfInputIsValid() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       setState(() {
@@ -96,7 +96,7 @@ class _SubjectAddState extends State<SubjectAdd> {
     }
   }
 
-  String _validateDueDate(DateTime duedate) {
+  String validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
@@ -106,7 +106,7 @@ class _SubjectAddState extends State<SubjectAdd> {
     return null;
   }
 
-  Widget _buildColumnItems(BuildContext context, int index) {
+  Widget buildColumnItems(BuildContext context, int index) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -218,7 +218,7 @@ class _SubjectAddState extends State<SubjectAdd> {
               filled: true,
               alignLabelWithHint: true,
               labelText: DUE_DATE),
-          validator: _validateDueDate,
+          validator: validateDueDate,
           onFieldSubmitted: (DateTime value) {
             setState(() {
               isValidated = false;
@@ -255,13 +255,13 @@ class _SubjectAddState extends State<SubjectAdd> {
                 color: Colors.grey,
                 size: 30,
               ),
-              onPressed: () => _checkIfInputIsValid(),
+              onPressed: () => checkIfInputIsValid(),
             )),
         Visibility(
             visible: isValidated,
             child:
                 new StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(AddNewSubject(_submit()));
+              return () => store..dispatch(AddNewSubject(submit()));
             }, builder: (context, callback) {
               return new IconButton(
                 icon: Icon(

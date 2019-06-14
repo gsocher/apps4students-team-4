@@ -43,12 +43,12 @@ class SettingsPageState extends State<Settings> {
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {
-                _addEventsToCalendar(events);
+                addEventsToCalendar(events);
               },
             )));
   }
 
-  Future _addEventsToCalendar(List<Subject> events) async {
+  Future addEventsToCalendar(List<Subject> events) async {
     for (var subject in events) {
       final eventToCreate = new Event(calendars.elementAt(0).id);
       eventToCreate.title = subject.title;

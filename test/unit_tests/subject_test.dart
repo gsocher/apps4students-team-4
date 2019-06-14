@@ -44,4 +44,10 @@ void main() {
     };
     expect(map, compare);
   });
+
+  test('subject copy', () {
+    Subject subject = _getDummySubject();
+    Subject subject2 = Subject.copy(subject);
+    expect(subject.toMap(), subject2.toMap());
+  });
 }
