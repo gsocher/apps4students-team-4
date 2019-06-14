@@ -28,11 +28,6 @@ void main() {
         DateTime.now());
   }
 
-  List<Subject> _subjects = new List<Subject>();
-  _subjects.add(_getDummySubject());
-//  _subjects.add(_getDummySubjectTwo());
-//  print(_subjects.toString());
-
   EasyStudyApp _createApp(Widget widget) {
     final store =
         new Store<AppState>(searchReducer, initialState: AppState.initial());
@@ -57,7 +52,8 @@ void main() {
   });
 
   testWidgets('show progress summary', (tester) async {
-    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
+    var createApp =
+        _createApp(ProgressSummary([_getDummySubject(), _getDummySubject()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
