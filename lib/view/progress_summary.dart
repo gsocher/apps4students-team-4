@@ -21,7 +21,6 @@ class ProgressSummaryState extends State<ProgressSummary> {
 
   Widget build(BuildContext context) {
     return Container(
-
       margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       decoration: new BoxDecoration(color: Colors.white),
       child: new Column(
@@ -103,15 +102,16 @@ class SubjectCardProgressBar extends StatelessWidget {
             Text(
               _subject.title,
               style: TextStyle(color: _subject.color, fontSize: 15),
-              overflow: TextOverflow.ellipsis,),
-
+              overflow: TextOverflow.ellipsis,
+            ),
             Text(
               ((_subject.timeSpent / 3600).truncate()).toString() +
                   "h" +
                   (_subject.timeSpent / 60).truncate().toString() +
                   "mn",
               style: TextStyle(color: Colors.black, fontSize: fontSizeNormal),
-              overflow: TextOverflow.ellipsis,),
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),
