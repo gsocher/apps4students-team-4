@@ -48,7 +48,7 @@ class DBHelper {
 
   Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_33.db';
+    String path = documentsDirectory.path + '/subject_34.db';
     var db = await openDatabase(path, version: 1, onCreate: _createDB);
     return db;
   }

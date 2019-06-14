@@ -19,6 +19,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
   final List<Subject> _subjects;
 
   ProgressSummaryState(this._subjects);
+
   final double fontSizeNormal = 20.0;
 
   Widget build(BuildContext context) {
@@ -131,6 +132,7 @@ class ChartPage extends StatefulWidget {
 
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
+
   static const size = const Size(380, 30.0);
 
   final List<Subject> _subjects;
