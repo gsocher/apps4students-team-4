@@ -35,10 +35,18 @@ void main() {
 
   testWidgets('show progress summary', (tester) async {
     var createApp = TestHelper.createApp(ProgressSummary(
-        [TestHelper.getDummySubject(), TestHelper.getDummySubject()]));
+        [TestHelper.getDummySubject2(), TestHelper.getDummySubject2()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
+  testWidgets('show progress bar', (tester) async {
+    var createApp = TestHelper.createApp(SubjectProgressBar(
+        subject: TestHelper.getDummySubject2()));
+    await tester.pumpWidget(createApp);
+    await tester.pump();
+  });
+
+
   testWidgets('show subject card', (tester) async {
     var createApp = TestHelper.createApp(SubjectCard(
       subject: TestHelper.getDummySubject(),
