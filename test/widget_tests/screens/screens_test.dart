@@ -25,7 +25,21 @@ void main() {
         "A funny subject.",
         5,
         DateTime.parse('2019-06-10 16:27:46.371368'),
-        DateTime.now());
+        DateTime.parse('2019-05-10 16:27:46.371368'));
+  }
+
+  Subject _getDummySubject2() {
+    Subject subject1 = Subject.name(
+        "Math",
+        ExamType.ORAL_EXAM,
+        "T1.011",
+        Priority.NORMAL,
+        "A funny subject.",
+        5,
+        DateTime.parse('2019-06-10 16:27:46.371368'),
+        DateTime.parse('2019-05-10 16:27:46.371368'));
+          subject1.timeSpent=1000;
+    return subject1;
   }
 
   EasyStudyApp _createApp(Widget widget) {
@@ -52,7 +66,7 @@ void main() {
   });
 
   testWidgets('show progress summary', (tester) async {
-    var createApp = _createApp(ProgressSummary([_getDummySubject(),_getDummySubject()]));
+    var createApp = _createApp(ProgressSummary([_getDummySubject2(),_getDummySubject2()]));
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
