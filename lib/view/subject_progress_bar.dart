@@ -76,8 +76,7 @@ class SubjectProgressBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             new Text(
-                              (_getProgressRatio(subject) * 100)
-                                      .truncate()
+                              (_getProgressRatio(subject) * 100).toInt()
                                       .toString() +
                                   " %",
                               style: TextStyle(
@@ -109,7 +108,7 @@ class SubjectProgressBar extends StatelessWidget {
     if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0) {
       ratio = (((subject.timeSpent * 7) / 3600) /
           (subject.hoursWeek *
-              (subject.dueDate.difference(subject.dateOfCreation).inDays)));
+              (subject.dueDate.difference(subject.dateOfCreation).inDays))).truncateToDouble();
     }
     return ratio;
   }
