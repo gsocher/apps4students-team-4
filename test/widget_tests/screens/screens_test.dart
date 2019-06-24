@@ -8,6 +8,7 @@ import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -55,6 +56,9 @@ void main() {
     var createApp = TestHelper.createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final buttonFinder = find.byType(RaisedButton);
+    await tester.tap(buttonFinder);
+    expect(buttonFinder, isNotNull);
   });
 
   testWidgets('show subject add', (tester) async {
