@@ -6,11 +6,16 @@ import 'package:easy_study/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 class TimeTracking extends StatefulWidget {
   final Subject subject;
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
 
-  const TimeTracking({Key key, this.subject}) : super(key: key);
+  const TimeTracking({Key key, this.subject, this.analytics, this.observer})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _TimeTracking();
@@ -135,6 +140,13 @@ class _TimeTracking extends State<TimeTracking> {
       duration: Duration(seconds: 6),
     );
     Scaffold.of(context).showSnackBar(snackBar);
+    _logTrackedTIme(widget.subject.id, time);
+  }
+
+  Future<void> _logTrackedTIme(int subject, int seconds) async {
+    await widget.analytics.logEvent(
+        name: "timetracked",
+        parameters: <String, dynamic>{'id': subject, 'time': seconds});
   }
 
   @override
