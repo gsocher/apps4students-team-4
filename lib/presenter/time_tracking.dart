@@ -108,7 +108,7 @@ class _TimeTracking extends State<TimeTracking> {
                           SizedBox(width: 40.0),
                           new FloatingActionButton(
                               backgroundColor: Colors.red,
-                              onPressed: () => asdf(callback),
+                              onPressed: () => stopTimer(callback),
                               child: new Icon(Icons.stop)),
                           SizedBox(width: 20.0),
                         ],
@@ -118,7 +118,7 @@ class _TimeTracking extends State<TimeTracking> {
             )));
   }
 
-  void asdf(Store callback) {
+  void stopTimer(Store callback) {
     int time = DateTime.now().difference(elapsedTime).inSeconds;
     var savedSubject = _stopWatch();
     var subjectBeforeTimeTracking = savedSubject;
