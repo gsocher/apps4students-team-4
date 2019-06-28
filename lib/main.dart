@@ -31,7 +31,10 @@ class EasyStudyApp extends StatelessWidget {
       child: new MaterialApp(
           title: title,
           navigatorObservers: <NavigatorObserver>[observer],
-          home: new MainScreen(analytics: analytics, observer: observer,)),
+          home: new MainScreen(
+            analytics: analytics,
+            observer: observer,
+          )),
     );
   }
 }
