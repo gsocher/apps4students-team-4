@@ -14,16 +14,16 @@ void main() {
 //    await createState.addEventsToCalendar(list);
 //  });
   MethodChannel channel =
-      const MethodChannel('plugins.builttoroam.com/device_calendar');
-  DeviceCalendarPlugin deviceCalendarPlugin = new DeviceCalendarPlugin();
+/*      const MethodChannel('plugins.builttoroam.com/device_calendar');
+  DeviceCalendarPlugin deviceCalendarPlugin = new DeviceCalendarPlugin();*/
 
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      print("Calling channel method ${methodCall.method}");
-
-      return null;
-    });
-  });
+//  setUp(() {
+//    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+//      print("Calling channel method ${methodCall.method}");
+//
+//      return null;
+//    });
+//  });
 
 /*  test('HasPermissions_Returns_Successfully', () async {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
@@ -40,4 +40,9 @@ void main() {
     final result = await Settings().createState();
     expect(result.calendars, isNotEmpty);
   });*/
+
+//      test('addEventsToCalendar', () async {
+//    final result = await Settings().createState();
+//    expect(result, isNotNull);
+//  });
 }

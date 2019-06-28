@@ -43,8 +43,9 @@ class SettingsPageState extends State<Settings> {
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {
-                addEventsToCalendar(events);
-                return 0;
+                if (addEventsToCalendar(events) == true) {
+                  return 0;
+                }
               },
             )));
   }
@@ -59,6 +60,7 @@ class SettingsPageState extends State<Settings> {
       eventToCreate.description = subject.description;
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
     }
+    return true;
   }
 
   void _retrieveCalendars() async {
