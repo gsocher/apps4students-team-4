@@ -57,6 +57,9 @@ class SettingsPageState extends State<Settings> {
           subject.dueDate.day, subject.dueDate.hour + subject.hoursWeek);
       eventToCreate.description = subject.description;
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+      SnackBar snackBar =
+          SnackBar(content: Text('Successfully added to calendar'));
+      Scaffold.of(context).showSnackBar(snackBar);
     }
   }
 
@@ -66,6 +69,19 @@ class SettingsPageState extends State<Settings> {
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
         if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+          SnackBar snackBar = SnackBar(
+            content: Text(
+              "Something went wrong. Please accept the permissions.",
+              style: TextStyle(color: Colors.white),
+            ),
+            duration: Duration(hours: 1),
+            action: SnackBarAction(
+                label: 'Ok',
+                onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
+                    reason: SnackBarClosedReason.action)),
+            backgroundColor: Colors.red,
+          );
+          Scaffold.of(context).showSnackBar(snackBar);
           return;
         }
       }
