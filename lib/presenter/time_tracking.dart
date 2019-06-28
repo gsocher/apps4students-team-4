@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -107,8 +108,7 @@ class _TimeTracking extends State<TimeTracking> {
                           SizedBox(width: 40.0),
                           new FloatingActionButton(
                               backgroundColor: Colors.red,
-                              onPressed: () => callback
-                                ..dispatch(UpdateSubject(_stopWatch(), null)),
+                              onPressed: () => stopTimer(callback),
                               child: new Icon(Icons.stop)),
                           SizedBox(width: 20.0),
                         ],
@@ -116,6 +116,25 @@ class _TimeTracking extends State<TimeTracking> {
                     })
               ],
             )));
+  }
+
+  void stopTimer(Store callback) {
+    int time = DateTime.now().difference(elapsedTime).inSeconds;
+    var savedSubject = _stopWatch();
+    var subjectBeforeTimeTracking = savedSubject;
+    subjectBeforeTimeTracking.timeSpent -= time;
+    callback.dispatch(UpdateSubject(savedSubject, Home()));
+    String timeString =
+        'You saved $time seconds which equals ${(time / 3600).floor()} hours, ${(time / 60).floor() % 60} minutes and ${time % 60} seconds';
+    SnackBar snackBar = SnackBar(
+      content: Text(timeString),
+      action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () => callback
+              .dispatch(UpdateSubject(subjectBeforeTimeTracking, null))),
+      duration: Duration(seconds: 6),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   @override
