@@ -106,7 +106,7 @@ class SubjectProgressBar extends StatelessWidget {
   static double _getProgressRatio(Subject subject) {
     double ratio = 0;
     // ignore: unrelated_type_equality_checks
-    if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0 & subject.hoursWeek!=0) {
+    if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0 && subject.hoursWeek!=0) {
       ratio = (((subject.timeSpent * 7) / 3600) /
           (subject.hoursWeek *
               (subject.dueDate.difference(subject.dateOfCreation).inDays))).truncateToDouble();
