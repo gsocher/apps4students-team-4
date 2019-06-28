@@ -7,13 +7,24 @@ import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 class MainScreen extends StatefulWidget {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  MainScreen({this.analytics, this.observer});
+
   @override
-  State<StatefulWidget> createState() => _MainScreenState();
+  State<StatefulWidget> createState() => _MainScreenState(analytics: analytics, observer: observer);
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  _MainScreenState({this.analytics, this.observer});
   int _selectedIndex = 0;
   List<Widget> _widgets = <Widget>[
     Home(),
@@ -62,7 +73,12 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
+    _logScreenChange(_widgets.elementAt(index).toStringShort());
     callback.dispatch(ChangeView(_widgets.elementAt(index)));
+  }
+
+  Future<void> _logScreenChange(String screen) async {
+    await analytics.setCurrentScreen(screenName: screen);
   }
 }
 
@@ -71,3 +87,5 @@ class AppStateViewModel {
 
   AppStateViewModel(this.state);
 }
+
+
