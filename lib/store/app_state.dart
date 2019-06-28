@@ -1,5 +1,6 @@
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
+import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
@@ -11,7 +12,7 @@ class AppState {
   AppState({this.widget, this.dbHelper});
 
   factory AppState.initial() =>
-      new AppState(dbHelper: DBHelper(), widget: new SubjectOverview());
+      new AppState(dbHelper: DBHelper(), widget: new Home());
 }
 
 final searchReducer = combineReducers<AppState>([

@@ -25,9 +25,8 @@ class _SubjectCardState extends State<SubjectCard> {
         converter: (store) => store,
         builder: (context, callback) {
           return GestureDetector(
-              onLongPress: () => callback
-                ..dispatch(
-                    ChangeView(SubjectEditOrDelete(subject: widget.subject))),
+              onLongPress: () => callback.dispatch(
+                  ChangeView(SubjectEditOrDelete(subject: widget.subject))),
               child: Card(
                   elevation: 5,
                   child: Container(

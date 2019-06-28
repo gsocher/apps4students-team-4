@@ -6,13 +6,26 @@ import 'package:easy_study/view/subject_progress_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 class Home extends StatefulWidget {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  Home({this.analytics, this.observer});
+
   @override
-  State<StatefulWidget> createState() => _HomeState();
+  State<StatefulWidget> createState() =>
+      _HomeState(analytics: analytics, observer: observer);
 }
 
 class _HomeState extends State<Home> {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  _HomeState({this.analytics, this.observer});
+
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
@@ -39,7 +52,10 @@ class _HomeState extends State<Home> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
                                     return new SubjectProgressBar(
-                                        subject: snapshot.data[index]);
+                                      subject: snapshot.data[index],
+                                      analytics: analytics,
+                                      observer: observer,
+                                    );
                                   }))
                         ]);
                   } else {
