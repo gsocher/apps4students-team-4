@@ -28,13 +28,14 @@ dependencies:
   fluttertoast: any
   flutter_hsvcolor_picker: ^0.0.1
   flutter_redux: ^0.5.3
-  device_calendar: ^0.1.1
+  device_calendar: ^0.1.2+2
   date_format: ^1.0.6
   permission_handler: ^3.1.0
   photo_view:
   page_view_indicators:
   flutter_datetime_picker: ^1.2.1
   datetime_picker_formfield: ^0.1.1
+  mockito: ^4.1.0
 
 dev_dependencies:
   flutter_test:
