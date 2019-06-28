@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -108,7 +109,8 @@ class _TimeTracking extends State<TimeTracking> {
                           new FloatingActionButton(
                               backgroundColor: Colors.red,
                               onPressed: () => callback
-                                ..dispatch(UpdateSubject(_stopWatch(), null)),
+                                ..dispatch(UpdateSubject(
+                                    _stopWatch(), SubjectOverview())),
                               child: new Icon(Icons.stop)),
                           SizedBox(width: 20.0),
                         ],
