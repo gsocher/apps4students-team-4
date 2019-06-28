@@ -4,13 +4,18 @@ import 'package:easy_study/store/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 
 class SubjectProgressBar extends StatelessWidget {
   final Subject subject;
   final double fontSizeNormal = 17.0;
   final Color textColor = Colors.black87;
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
 
-  const SubjectProgressBar({Key key, this.subject}) : super(key: key);
+  const SubjectProgressBar(
+      {Key key, this.subject, this.analytics, this.observer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +23,10 @@ class SubjectProgressBar extends StatelessWidget {
         converter: (store) => store,
         builder: (context, callback) {
           return GestureDetector(
-              onTap: () => callback
-                ..dispatch(ChangeView(TimeTracking(subject: subject))),
+              onTap: () => switchToTimetracking(callback),
               child: Card(
                   margin:
-                      new EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
+                  new EdgeInsets.symmetric(horizontal: 5.0, vertical: 2.0),
                   elevation: 5,
                   child: Container(
                     margin: new EdgeInsets.symmetric(
@@ -48,7 +52,7 @@ class SubjectProgressBar extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               ((subject.timeSpent / 3600).truncate())
-                                      .toString() +
+                                  .toString() +
                                   "h " +
                                   (subject.timeSpent / 60)
                                       .truncate()
@@ -69,7 +73,7 @@ class SubjectProgressBar extends StatelessWidget {
                         LinearProgressIndicator(
                           value: _getProgressRatio(subject),
                           valueColor:
-                              AlwaysStoppedAnimation<Color>(subject.color),
+                          AlwaysStoppedAnimation<Color>(subject.color),
                           backgroundColor: Colors.black12,
                         ),
                         new Row(
@@ -77,8 +81,8 @@ class SubjectProgressBar extends StatelessWidget {
                           children: <Widget>[
                             new Text(
                               (_getProgressRatio(subject) * 100)
-                                      .truncate()
-                                      .toString() +
+                                  .truncate()
+                                  .toString() +
                                   " %",
                               style: TextStyle(
                                   color: textColor, fontSize: fontSizeNormal),
@@ -91,10 +95,21 @@ class SubjectProgressBar extends StatelessWidget {
         });
   }
 
+  void switchToTimetracking(Store callback) {
+    callback..dispatch(ChangeView(TimeTracking(subject: subject)));
+    _logScreenChange("TimeTracking");
+  }
+
+  Future<void> _logScreenChange(String screen) async {
+    await analytics.setCurrentScreen(screenName: screen);
+  }
+
   static String _getTimeUntilDueDate(Subject subject) {
     int days;
     String timeUntilDD;
-    days = subject.dueDate.difference(DateTime.now()).inDays;
+    days = subject.dueDate
+        .difference(DateTime.now())
+        .inDays;
     if (days > 0) {
       timeUntilDD = days.toString() + " days until due date";
     } else {
@@ -106,10 +121,14 @@ class SubjectProgressBar extends StatelessWidget {
 
   static double _getProgressRatio(Subject subject) {
     double ratio = 0;
-    if (subject.dueDate.difference(subject.dateOfCreation).inSeconds > 0) {
+    if (subject.dueDate
+        .difference(subject.dateOfCreation)
+        .inSeconds > 0) {
       ratio = (((subject.timeSpent * 7) / 3600) /
           (subject.hoursWeek *
-              (subject.dueDate.difference(subject.dateOfCreation).inDays)));
+              (subject.dueDate
+                  .difference(subject.dateOfCreation)
+                  .inDays)));
     }
     return ratio;
   }

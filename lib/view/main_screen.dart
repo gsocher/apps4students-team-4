@@ -17,7 +17,8 @@ class MainScreen extends StatefulWidget {
   MainScreen({this.analytics, this.observer});
 
   @override
-  State<StatefulWidget> createState() => _MainScreenState(analytics: analytics, observer: observer);
+  State<StatefulWidget> createState() =>
+      _MainScreenState(analytics: analytics, observer: observer);
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -25,16 +26,20 @@ class _MainScreenState extends State<MainScreen> {
   final FirebaseAnalyticsObserver observer;
 
   _MainScreenState({this.analytics, this.observer});
+
   int _selectedIndex = 0;
-  List<Widget> _widgets = <Widget>[
-    Home(),
-    SubjectOverview(),
-    Settings(),
-    HmMap(),
-  ];
+  List<Widget> _widgets;
 
   @override
   Widget build(BuildContext context) {
+    if (_widgets == null) {
+      _widgets = <Widget>[
+        Home(analytics: analytics, observer: observer),
+        SubjectOverview(),
+        Settings(),
+        HmMap(),
+      ];
+    }
     return new StoreConnector<AppState, Store>(
       converter: (store) => store,
       builder: (context, callback) {
@@ -87,5 +92,3 @@ class AppStateViewModel {
 
   AppStateViewModel(this.state);
 }
-
-
