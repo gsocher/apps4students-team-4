@@ -261,7 +261,7 @@ class SubjectAddState extends State<SubjectAdd> {
             visible: isValidated,
             child:
                 new StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(AddNewSubject(submit()));
+              return () => store.dispatch(AddNewSubject(submit()));
             }, builder: (context, callback) {
               return new IconButton(
                 icon: Icon(
