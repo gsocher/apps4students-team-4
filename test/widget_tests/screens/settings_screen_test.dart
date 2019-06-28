@@ -1,4 +1,5 @@
 import 'package:device_calendar/device_calendar.dart';
+import 'package:easy_study/presenter/settings.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -24,21 +25,19 @@ void main() {
     });
   });
 
-  test('HasPermissions_Returns_Successfully', () async {
+/*  test('HasPermissions_Returns_Successfully', () async {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall == 'hasPermissions') {
         print("Has Permissions wurde aufgerufen");
         return true;
-      } else if (methodCall == '') {
+      } else if (methodCall == 'requestPermissions') {
         return true;
       } else {
         return "[{\"id\":\"1\",\"isReadOnly\":false,\"name\":\"fakeCalendarName\"}]";
       }
     });
 
-    final result = await Settings().retrieveCalendar();
-    expect(result.isSuccess, true);
-    expect(result.errorMessages, isEmpty);
-    expect(result.data, true);
-  });
+    final result = await Settings().createState();
+    expect(result.calendars, isNotEmpty);
+  });*/
 }

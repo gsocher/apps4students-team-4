@@ -11,6 +11,8 @@ import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:photo_view/photo_view.dart';
+
 void main() {
   testWidgets('show subject overview', (tester) async {
     var createApp = TestHelper.createApp(SubjectOverview());
@@ -44,6 +46,11 @@ void main() {
     var createApp = TestHelper.createApp(HmMap());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final imageFinder = find.byType(PhotoView);
+    expect(imageFinder, 3);
+    expect(HmMap().controller.initialPage, 0);
+    expect(HmMap().currentPageNotifier, 0);
+    await tester.drag(find.byType(Scaffold), Offset(500, 0));
   });
 
   testWidgets('show home', (tester) async {

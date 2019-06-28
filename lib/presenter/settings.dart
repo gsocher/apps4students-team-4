@@ -44,6 +44,7 @@ class SettingsPageState extends State<Settings> {
               child: Text('Export to Calendar'),
               onPressed: () {
                 addEventsToCalendar(events);
+                return 0;
               },
             )));
   }
@@ -73,6 +74,8 @@ class SettingsPageState extends State<Settings> {
       setState(() {
         calendars = calendarsResult?.data;
       });
+
+      print(calendars);
     } on Exception catch (e) {
       print(e);
     }
