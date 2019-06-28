@@ -96,7 +96,7 @@ class SubjectProgressBar extends StatelessWidget {
   }
 
   void switchToTimetracking(Store callback) {
-    callback..dispatch(ChangeView(TimeTracking(subject: subject)));
+    callback..dispatch(ChangeView(TimeTracking(subject: subject, analytics: analytics, observer: observer)));
     _logScreenChange("TimeTracking");
   }
 
