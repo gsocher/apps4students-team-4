@@ -132,7 +132,7 @@ class ChartPage extends StatefulWidget {
 class ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   ChartPageState(this._subjects);
 
-  static const size = const Size(370, 30.0);
+  static const size = const Size(380, 30.0);
 
   final List<Subject> _subjects;
   AnimationController _animation;

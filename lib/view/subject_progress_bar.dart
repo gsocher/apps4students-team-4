@@ -76,7 +76,7 @@ class SubjectProgressBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             new Text(
-                              (_getProgressRatio(subject) * 100).toInt()
+                              (_getProgressRatio(subject) * 100).truncate()
                                       .toString() +
                                   " %",
                               style: TextStyle(
