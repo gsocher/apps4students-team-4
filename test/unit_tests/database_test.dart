@@ -4,10 +4,11 @@ import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sqflite/sqlite_api.dart';
 
-class MockClass extends Mock implements DBHelper {}
+class MockDatabase extends Mock implements Database {}
 
-DBHelper mockDBHelper = MockClass();
+Database mockDatabase = MockDatabase();
 
 void main() {
   Subject _getDummySubject() {
@@ -22,12 +23,20 @@ void main() {
         DateTime.parse('2019-06-13 09:06:27.669877'));
   }
 
-  test('database: getSubjects', () async {
-    var dbHelper = mockDBHelper;
-    Future<List<Subject>> resultList = Future.value([_getDummySubject()]);
-    when(dbHelper.getSubjects()).thenAnswer((_)=> resultList);
-    var list = await dbHelper.getSubjects();
-    expect(list, await resultList);
+  test('database: initDB', () async {
+    var databaseMocked = mockDatabase;
+    DBHelper sut = DBHelper();
+    sut.createDB(databaseMocked,1);
+    //when(sut.createDB(mockDatabase, 1)).thenAnswer((_)=> Future.value(databaseMocked));
+
+    String sql = "CREATE TABLE Subject(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "  title TEXT, type TEXT, room TEXT, priority TEXT, description TEXT,"
+        " hoursWeek INTEGER, color_alpha INTEGER, color_red INTEGER,"
+        " color_green INTEGER, color_blue INTEGER, started_timetracking_at"
+        " TEXT, due_date TEXT, time_spent INTEGER, date_of_creation TEXT);";
+
+    verify(databaseMocked.execute(sql,null)).called(1);
+
   });
 
 //  test('database: addNewSubject', () async {

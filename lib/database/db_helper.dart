@@ -49,11 +49,11 @@ class DBHelper {
   Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = documentsDirectory.path + '/subject_34.db';
-    var db = await openDatabase(path, version: 1, onCreate: _createDB);
+    var db = await openDatabase(path, version: 1, onCreate: createDB);
     return db;
   }
 
-  void _createDB(Database db, int version) async {
+  void createDB(Database db, int version) async {
     // Create Table
     await db.execute(
         'CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT, '
