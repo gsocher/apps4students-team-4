@@ -43,9 +43,7 @@ class SettingsPageState extends State<Settings> {
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {
-                if (addEventsToCalendar(events) == true) {
-                  return 0;
-                }
+                addEventsToCalendar(events);
               },
             )));
   }

@@ -48,6 +48,7 @@ void main() {
     final imageFinder = find.byType(PhotoView);
     expect(imageFinder, findsOneWidget);
     final scaffoldfinder = find.byType(Scaffold);
+    expect(scaffoldfinder, isNotNull);
   });
 
   testWidgets('show home', (tester) async {
