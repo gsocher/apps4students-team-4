@@ -1,4 +1,3 @@
-import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/testhelper/test_helper.dart';
 import 'package:easy_study/view/progress_summary.dart';
