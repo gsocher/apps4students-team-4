@@ -85,14 +85,13 @@ void main() {
     expect(buttonFinder.at(1), isNotNull);
     final dateFinder = find.byType(DateTimePickerFormField);
     expect(dateFinder, isNotNull);
-    tester.tap(dateFinder);
+    await tester.tap(dateFinder);
     var submit = find.byType(IconButton);
     expect(submit, findsOneWidget);
-    tester.tap(submit);
+    await tester.tap(submit);
     submit = find.byType(IconButton);
-
     expect(submit, findsOneWidget);
-    tester.tap(submit);
+    await tester.tap(submit);
   });
 
   testWidgets('show subject edit or delete', (tester) async {
