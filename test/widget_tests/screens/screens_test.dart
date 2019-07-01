@@ -10,7 +10,6 @@ import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:photo_view/photo_view.dart';
 
 void main() {
@@ -47,10 +46,8 @@ void main() {
     await tester.pumpWidget(createApp);
     await tester.pump();
     final imageFinder = find.byType(PhotoView);
-    expect(imageFinder, 3);
-    expect(HmMap().controller.initialPage, 0);
-    expect(HmMap().currentPageNotifier, 0);
-    await tester.drag(find.byType(Scaffold), Offset(500, 0));
+    expect(imageFinder, findsOneWidget);
+    final scaffoldfinder = find.byType(Scaffold);
   });
 
   testWidgets('show home', (tester) async {
@@ -72,6 +69,19 @@ void main() {
     var createApp = TestHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final textfieldFinder = find.byType(TextFormField);
+    print(textfieldFinder);
+    await tester.enterText(textfieldFinder.at(0), "Test1");
+    await tester.enterText(textfieldFinder.at(1), "Test2");
+    await tester.enterText(textfieldFinder.at(2), "Test3");
+    await tester.enterText(textfieldFinder.at(3), "5");
+    final buttonFinder = find.byType(DropdownButton);
+    expect(find.text("Test1"), findsOneWidget);
+    expect(find.text("Test2"), findsOneWidget);
+    expect(find.text("Test3"), findsOneWidget);
+    expect(find.text("5"), findsOneWidget);
+    expect(buttonFinder.at(0), isNotNull);
+    expect(buttonFinder.at(1), isNotNull);
   });
 
   testWidgets('show subject edit or delete', (tester) async {
