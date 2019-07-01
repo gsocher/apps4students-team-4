@@ -9,6 +9,7 @@ import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   testWidgets('show subject overview', (tester) async {
@@ -83,6 +84,13 @@ void main() {
     var createApp = TestHelper.createApp(Home());
     await tester.pumpWidget(createApp);
     await tester.tap(find.text("Privacy"));
+    await tester.pump();
+  });
+
+  testWidgets('changeview mainscreen', (tester) async {
+    var createApp = TestHelper.createApp(Home());
+    await tester.pumpWidget(createApp);
+    await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
   });
 }
