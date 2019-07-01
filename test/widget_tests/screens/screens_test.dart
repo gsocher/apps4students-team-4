@@ -90,7 +90,7 @@ void main() {
     expect(submit, findsOneWidget);
     tester.tap(submit);
     submit = find.byType(IconButton);
-    checkIfInputisValid
+
     expect(submit, findsOneWidget);
     tester.tap(submit);
   });
