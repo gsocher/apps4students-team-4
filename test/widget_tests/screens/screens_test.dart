@@ -1,3 +1,4 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/presenter/hm_map.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
@@ -71,7 +72,6 @@ void main() {
     await tester.pumpWidget(createApp);
     await tester.pump();
     final textfieldFinder = find.byType(TextFormField);
-    print(textfieldFinder);
     await tester.enterText(textfieldFinder.at(0), "Test1");
     await tester.enterText(textfieldFinder.at(1), "Test2");
     await tester.enterText(textfieldFinder.at(2), "Test3");
@@ -83,6 +83,9 @@ void main() {
     expect(find.text("5"), findsOneWidget);
     expect(buttonFinder.at(0), isNotNull);
     expect(buttonFinder.at(1), isNotNull);
+    final dateFinder = find.byType(DateTimePickerFormField);
+    expect(dateFinder, isNotNull);
+    tester.tap(dateFinder);
   });
 
   testWidgets('show subject edit or delete', (tester) async {
