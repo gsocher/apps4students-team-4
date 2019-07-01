@@ -22,7 +22,7 @@ void main() {
 
     subjects.add(TestHelper.getDummySubject());
 
-    MergeTween mt = MergeTween<BarStack>(BarChart.create(size, subjects2).stacks, BarChart.empty(size).stacks);
+    MergeTween<BarStack>(BarChart.create(size, subjects2).stacks, BarChart.empty(size).stacks);
   });
 
   test('merge tween case 2 and 3', () {
@@ -31,7 +31,7 @@ void main() {
     subjects.add(TestHelper.getDummySubject());
     subjects.add(TestHelper.getDummySubject2());
 
-    MergeTween mt = MergeTween<BarStack>(BarChart.create(size, subjects2).stacks, BarChart.create(size, subjects).stacks);
+    MergeTween<BarStack>(BarChart.create(size, subjects2).stacks, BarChart.create(size, subjects).stacks);
   });
 
   test('tween lerp', () {
