@@ -9,7 +9,6 @@ void main() {
     await tester.pumpWidget(createApp);
     await tester.pump();
     await tester.tap(find.byIcon(Icons.add));
-    await tester.tap(find.byIcon((Icons.save)));
-    await tester.tap(find.byIcon((Icons.save)));
+    await tester.press(find.byIcon((Icons.save)));
   });
 }
