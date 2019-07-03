@@ -109,4 +109,18 @@ void main() {
     await tester.pumpWidget(createApp);
     await tester.pump();
   });
+
+  testWidgets('show privacy policy', (tester) async {
+    var createApp = TestHelper.createApp(Home());
+    await tester.pumpWidget(createApp);
+    await tester.tap(find.text("Privacy"));
+    await tester.pump();
+  });
+
+  testWidgets('changeview mainscreen', (tester) async {
+    var createApp = TestHelper.createApp(Home());
+    await tester.pumpWidget(createApp);
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+  });
 }

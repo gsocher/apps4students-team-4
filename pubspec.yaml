@@ -35,6 +35,9 @@ dependencies:
   page_view_indicators:
   flutter_datetime_picker: ^1.2.1
   datetime_picker_formfield: ^0.1.1
+  firebase_core: ^0.4.0+6
+  firebase_analytics: ^3.0.3
+  flutter_html: ^0.8.2
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +61,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - graphics/
+    - privacy/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

@@ -1,3 +1,4 @@
+
 os:
   - linux
 sudo: false
@@ -17,7 +18,7 @@ jobs:
       before_script:
         #- chmod 777 ./.no_camel.sh
         #- ./.no_camel.sh # file names are not allowed to include capital letters
-        - git clone https://github.com/flutter/flutter.git ../flutter -b beta stable --depth 1
+        - git clone https://github.com/flutter/flutter.git ../flutter -b stable --depth 1
         - ../flutter/bin/flutter doctor
         - $(../flutter/bin/cache/dart-sdk/bin/dartfmt -n lib) # check if files are formatted according to dartfmt
         - ../flutter/bin/flutter analyze

@@ -31,7 +31,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
@@ -97,7 +97,6 @@ class SubjectCardProgressBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

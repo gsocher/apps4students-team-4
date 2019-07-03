@@ -4,31 +4,57 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/subject_overview.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class MainScreen extends StatefulWidget {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  MainScreen({this.analytics, this.observer});
+
   @override
-  State<StatefulWidget> createState() => _MainScreenState();
+  State<StatefulWidget> createState() =>
+      _MainScreenState(analytics: analytics, observer: observer);
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
+
+  _MainScreenState({this.analytics, this.observer});
+
   int _selectedIndex = 0;
-  List<Widget> _widgets = <Widget>[
-    Home(),
-    SubjectOverview(),
-    Settings(),
-    HmMap(),
-  ];
+  List<Widget> _widgets;
 
   @override
   Widget build(BuildContext context) {
+    if (_widgets == null) {
+      _widgets = <Widget>[
+        Home(analytics: analytics, observer: observer),
+        SubjectOverview(),
+        Settings(),
+        HmMap(),
+      ];
+    }
     return new StoreConnector<AppState, Store>(
       converter: (store) => store,
       builder: (context, callback) {
         return new Scaffold(
-            appBar: AppBar(title: Text("Exam Planer")),
+            appBar: AppBar(
+              title: Text("Exam Planer"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: _showDialog,
+                  child: Text("Privacy"),
+                  textColor: Colors.white,
+                )
+              ],
+            ),
             bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) => _changeView(index, callback),
                 type: BottomNavigationBarType.fixed,
@@ -58,11 +84,33 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  void _showDialog() async {
+    var html = await DefaultAssetBundle.of(context)
+        .loadString('privacy/privacy_policy.html');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("Privacy Policy"),
+              content: Scrollbar(
+                  child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                ),
+              )));
+        });
+  }
+
   void _changeView(int index, Store callback) {
     setState(() {
       _selectedIndex = index;
     });
+    _logScreenChange(_widgets.elementAt(index).toStringShort());
     callback.dispatch(ChangeView(_widgets.elementAt(index)));
+  }
+
+  Future<void> _logScreenChange(String screen) async {
+    await analytics.setCurrentScreen(screenName: screen);
   }
 }
 
