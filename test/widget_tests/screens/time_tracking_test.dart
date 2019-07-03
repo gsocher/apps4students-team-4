@@ -8,8 +8,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 void main() {
   testWidgets('test functionality of time tracking', (tester) async {
-    var createApp = TestHelper.createApp(
-        TimeTracking(subject: TestHelper.getDummySubject(), analytics: FirebaseAnalytics(),));
+    var createApp = TestHelper.createApp(TimeTracking(
+      subject: TestHelper.getDummySubject(),
+      analytics: FirebaseAnalytics(),
+    ));
     await tester.pumpWidget(createApp);
     await tester.tap(find.byIcon(Icons.play_arrow));
     await tester.pump();
@@ -18,8 +20,8 @@ void main() {
   });
 
   testWidgets('test functionality of time tracking 2', (tester) async {
-    var createApp = TestHelper.createApp(
-        TimeTracking(subject: TestHelper.getDummySubject(), analytics: FirebaseAnalytics()));
+    var createApp = TestHelper.createApp(TimeTracking(
+        subject: TestHelper.getDummySubject(), analytics: FirebaseAnalytics()));
     await tester.pumpWidget(createApp);
     await tester.tap(find.byIcon(Icons.play_arrow));
     await tester.pump();

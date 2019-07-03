@@ -1,6 +1,5 @@
 import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/testhelper/test_helper.dart';
-import 'package:easy_study/view/subject_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,7 +19,5 @@ void main() {
     //await tester.enterText(find.bySemanticsLabel('HOURS_PER_WEEK'),'12');
     await tester.tap(find.byIcon((Icons.save)));
     //await tester.tap(find.byIcon((Icons.save)));
-
-
   });
 }
