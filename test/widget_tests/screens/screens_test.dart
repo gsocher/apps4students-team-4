@@ -48,8 +48,8 @@ void main() {
     await tester.pump();
     final imageFinder = find.byType(PhotoView);
     expect(imageFinder, findsOneWidget);
-    final scafffinder = find.byType(Scaffold);
-    expect(scafffinder, isNotNull);
+    final scaFinder = find.byType(Scaffold);
+    expect(scaFinder, isNotNull);
   });
 
   testWidgets('show home', (tester) async {
