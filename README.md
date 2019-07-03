@@ -22,7 +22,7 @@ The overview is the main screen of the app. You can find there the different sta
 The progress summary combines all the time spent of every subject. The progess is calculated in function of the settings of the hours/week and the due date in order to let the user know his progress.
 You can track your time by pressing the subject card and starting the chronometer.
 ![homescreen](screenshot/IMG_4423.PNG)
-![overview](screenshot/IMG_4426.PNG)
+![overview](screenshot/IMG_4427.PNG)
 ![]
 ## Add / Edit / Delete
 You can add/edit/delete in this view. In order to add a subject, press the add button. Then you have to enter a title, room, description, exam type, priority, hours/week, due date and a color. You have to press the save button one time to confirm the input and a second press will save the subject.
