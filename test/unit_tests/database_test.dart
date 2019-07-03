@@ -43,18 +43,20 @@ verifyNever(sut.initDB());
     DBHelper sut = DBHelper();
     sut.database;
   });
+  
+  test('database: addNewSubject', () async {
+    var dbHelper = DBHelper();
+    var have = await dbHelper.addNewSubject(null);
+    var want = -1;
+    expect(have, want);
+  });
 
-
-
-//  test('database: addNewSubject', () async {
-//    var dbHelper = DBHelper();
-//    var i = await dbHelper.addNewSubject(_getDummySubject());
-//  });
-//
-//  test('database: updateSubject', () async {
-//    var dbHelper = DBHelper();
-//    var i = await dbHelper.updateSubject(_getDummySubject());
-//  });
+  test('database: updateSubject', () async {
+    var dbHelper = DBHelper();
+    var have = await dbHelper.updateSubject(null);
+    var want = -1;
+    expect(have, want);
+  });
 //
 //  test('database: deleteSubject', () async {
 //    var dbHelper = DBHelper();
