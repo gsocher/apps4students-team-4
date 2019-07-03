@@ -4,11 +4,12 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/subject_overview.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 class MainScreen extends StatefulWidget {
   final FirebaseAnalytics analytics;
@@ -44,7 +45,16 @@ class _MainScreenState extends State<MainScreen> {
       converter: (store) => store,
       builder: (context, callback) {
         return new Scaffold(
-            appBar: AppBar(title: Text("Exam Planer")),
+            appBar: AppBar(
+              title: Text("Exam Planer"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: _showDialog,
+                  child: Text("Privacy"),
+                  textColor: Colors.white,
+                )
+              ],
+            ),
             bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) => _changeView(index, callback),
                 type: BottomNavigationBarType.fixed,
@@ -72,6 +82,23 @@ class _MainScreenState extends State<MainScreen> {
             ));
       },
     );
+  }
+
+  void _showDialog() async {
+    var html = await DefaultAssetBundle.of(context)
+        .loadString('privacy/privacy_policy.html');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("Privacy Policy"),
+              content: Scrollbar(
+                  child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                ),
+              )));
+        });
   }
 
   void _changeView(int index, Store callback) {

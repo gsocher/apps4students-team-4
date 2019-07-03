@@ -43,4 +43,18 @@ class TestHelper {
     subject.timeSpent = 1000;
     return subject;
   }
+
+  static Subject getDummySubject3() {
+    Subject subject = new Subject.name(
+        "Software Engineering II",
+        ExamType.WRITTEN_EXAM,
+        "T1.011",
+        Priority.MINIMALISM,
+        "A funny subject.",
+        5,
+        DateTime.parse('2020-06-10 16:27:46.371368'),
+        DateTime.parse('2019-05-13 09:06:27.669877'));
+    subject.timeSpent = 1000;
+    return subject;
+  }
 }
