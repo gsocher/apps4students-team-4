@@ -39,7 +39,6 @@ void main() {
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
-    // TODO: 22.05.2019 how to test this?
   });
 
   testWidgets('show hm map', (tester) async {
