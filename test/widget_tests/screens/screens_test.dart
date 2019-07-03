@@ -48,8 +48,8 @@ void main() {
     await tester.pump();
     final imageFinder = find.byType(PhotoView);
     expect(imageFinder, findsOneWidget);
-    final scaffoldfinder = find.byType(Scaffold);
-    expect(scaffoldfinder, isNotNull);
+    final scafffinder = find.byType(Scaffold);
+    expect(scafffinder, isNotNull);
   });
 
   testWidgets('show home', (tester) async {
@@ -71,11 +71,11 @@ void main() {
     var createApp = TestHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
-    final textfieldFinder = find.byType(TextFormField);
-    await tester.enterText(textfieldFinder.at(0), "Test1");
-    await tester.enterText(textfieldFinder.at(1), "Test2");
-    await tester.enterText(textfieldFinder.at(2), "Test3");
-    await tester.enterText(textfieldFinder.at(3), "5");
+    final textFinder = find.byType(TextFormField);
+    await tester.enterText(textFinder.at(0), "Test1");
+    await tester.enterText(textFinder.at(1), "Test2");
+    await tester.enterText(textFinder.at(2), "Test3");
+    await tester.enterText(textFinder.at(3), "5");
     final buttonFinder = find.byType(DropdownButton);
     expect(find.text("Test1"), findsOneWidget);
     expect(find.text("Test2"), findsOneWidget);
