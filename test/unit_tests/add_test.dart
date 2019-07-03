@@ -10,5 +10,6 @@ void main() {
     await tester.pump();
     await tester.tap(find.byIcon(Icons.add));
     await tester.tap(find.byIcon((Icons.save)));
+    await tester.tap(find.byIcon((Icons.save)));
   });
 }
