@@ -4,12 +4,12 @@ import 'package:easy_study/presenter/subject_add.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/subject_overview.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 class MainScreen extends StatefulWidget {
   final FirebaseAnalytics analytics;
