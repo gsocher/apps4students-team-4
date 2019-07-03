@@ -94,34 +94,6 @@ void main() {
     await tester.tap(submit);
   });
 
-//  testWidgets('add Subject', (tester) async {
-//    var createApp = TestHelper.createApp(SubjectAdd());
-//    SubjectAddState app = new SubjectAddState();
-//    app.initState();
-//    expect(app.isValidated, false);
-//
-//    app.title = "Mobile";
-//    app.description = "Alpha";
-//    app.room = "R1.010";
-//    app.hoursPerWeek = "5";
-//    app.priority = Priority.NORMAL;
-//    app.type = ExamType.WRITTEN_EXAM;
-//    app.dateTime = DateTime.now();
-  //    app.checkIfInputIsValid();
-//    expect(
-//        app.submit(),
-//        new Subject.name(
-//            "Mobile",
-//            ExamType.WRITTEN_EXAM,
-//            "R1.010",
-//            Priority.NORMAL,
-//            "Alpha",
-//            int.parse("5"),
-//            DateTime.now(),
-//            DateTime.now()));
-//
-//  });
-
   testWidgets('show subject edit or delete', (tester) async {
     var createApp = TestHelper.createApp(SubjectEditOrDelete(
       subject: TestHelper.getDummySubject(),
