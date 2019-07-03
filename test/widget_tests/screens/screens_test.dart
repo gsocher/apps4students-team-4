@@ -1,3 +1,4 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/presenter/hm_map.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
@@ -8,8 +9,9 @@ import 'package:easy_study/view/home.dart';
 import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_card.dart';
 import 'package:easy_study/view/subject_overview.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:photo_view/photo_view.dart';
 
 void main() {
   testWidgets('show subject overview', (tester) async {
@@ -37,13 +39,16 @@ void main() {
     ));
     await tester.pumpWidget(createApp);
     await tester.pump();
-    // TODO: 22.05.2019 how to test this?
   });
 
   testWidgets('show hm map', (tester) async {
     var createApp = TestHelper.createApp(HmMap());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final imageFinder = find.byType(PhotoView);
+    expect(imageFinder, findsOneWidget);
+    final scaFinder = find.byType(Scaffold);
+    expect(scaFinder, isNotNull);
   });
 
   testWidgets('show home', (tester) async {
@@ -56,12 +61,36 @@ void main() {
     var createApp = TestHelper.createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final buttonFinder = find.byType(RaisedButton);
+    await tester.tap(buttonFinder);
+    expect(buttonFinder, isNotNull);
   });
 
-  testWidgets('show subject add', (tester) async {
+  testWidgets('show subject add and test function', (tester) async {
     var createApp = TestHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
+    final textFinder = find.byType(TextFormField);
+    await tester.enterText(textFinder.at(0), "Test1");
+    await tester.enterText(textFinder.at(1), "Test2");
+    await tester.enterText(textFinder.at(2), "Test3");
+    await tester.enterText(textFinder.at(3), "5");
+    final buttonFinder = find.byType(DropdownButton);
+    expect(find.text("Test1"), findsOneWidget);
+    expect(find.text("Test2"), findsOneWidget);
+    expect(find.text("Test3"), findsOneWidget);
+    expect(find.text("5"), findsOneWidget);
+    expect(buttonFinder.at(0), isNotNull);
+    expect(buttonFinder.at(1), isNotNull);
+    final dateFinder = find.byType(DateTimePickerFormField);
+    expect(dateFinder, isNotNull);
+    await tester.tap(dateFinder);
+    var submit = find.byType(IconButton);
+    expect(submit, findsOneWidget);
+    await tester.tap(submit);
+    submit = find.byType(IconButton);
+    expect(submit, findsOneWidget);
+    await tester.tap(submit);
   });
 
   testWidgets('show subject edit or delete', (tester) async {

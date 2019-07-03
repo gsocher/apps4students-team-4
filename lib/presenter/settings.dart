@@ -61,6 +61,7 @@ class SettingsPageState extends State<Settings> {
           SnackBar(content: Text('Successfully added to calendar'));
       Scaffold.of(context).showSnackBar(snackBar);
     }
+    return true;
   }
 
   void _retrieveCalendars() async {
@@ -89,6 +90,8 @@ class SettingsPageState extends State<Settings> {
       setState(() {
         calendars = calendarsResult?.data;
       });
+
+      print(calendars);
     } on Exception catch (e) {
       print(e);
     }
