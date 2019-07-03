@@ -1,10 +1,8 @@
 import 'dart:ui' show lerpDouble;
-
 import 'package:date_format/date_format.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-
 import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
@@ -31,7 +29,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
@@ -97,7 +95,6 @@ class SubjectCardProgressBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

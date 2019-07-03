@@ -21,7 +21,7 @@ class SubjectAddState extends State<SubjectAdd> {
 
   static const String TITLE = 'title';
   static const String ROOM = 'room';
-  static const String DESCRIPTION = 'descprition';
+  static const String DESCRIPTION = 'description';
   static const String HOURS_PER_WEEK = 'hours per week';
   static const String DUE_DATE = 'Due Date';
   static const String PRIORITY = 'Priority';
@@ -261,7 +261,7 @@ class SubjectAddState extends State<SubjectAdd> {
             visible: isValidated,
             child:
                 new StoreConnector<AppState, VoidCallback>(converter: (store) {
-              return () => store..dispatch(AddNewSubject(submit()));
+              return () => store.dispatch(AddNewSubject(submit()));
             }, builder: (context, callback) {
               return new IconButton(
                 icon: Icon(

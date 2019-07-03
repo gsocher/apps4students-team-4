@@ -26,7 +26,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
 
   static const String TITLE = 'title';
   static const String ROOM = 'room';
-  static const String DESCRIPTION = 'descprition';
+  static const String DESCRIPTION = 'description';
   static const String HOURS_PER_WEEK = 'hours per week';
   static const String DUE_DATE = 'Due Date';
   final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
