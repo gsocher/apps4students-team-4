@@ -31,7 +31,8 @@ class SettingsPageState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     List<Subject> events = new List<Subject>();
-    final Future<List<Subject>> subjects = DBHelper(DBCreator().database).getSubjects();
+    final Future<List<Subject>> subjects =
+        DBHelper(DBCreator().database).getSubjects();
     subjects.then((value) {
       for (var subject in value) {
         events.add(subject);

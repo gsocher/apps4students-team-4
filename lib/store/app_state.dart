@@ -12,8 +12,8 @@ class AppState {
 
   AppState({this.widget, this.dbHelper});
 
-  factory AppState.initial() =>
-      new AppState(dbHelper: DBHelper(DBCreator().database), widget: new Home());
+  factory AppState.initial() => new AppState(
+      dbHelper: DBHelper(DBCreator().database), widget: new Home());
 }
 
 final searchReducer = combineReducers<AppState>([

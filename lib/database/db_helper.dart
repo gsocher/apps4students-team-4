@@ -26,7 +26,7 @@ class DBHelper {
 
   Future<Database> _database;
 
-  DBHelper(Future<Database> inputDatabase){
+  DBHelper(Future<Database> inputDatabase) {
     this._database = inputDatabase;
   }
 

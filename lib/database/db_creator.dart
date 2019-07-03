@@ -4,7 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class DBCreator {
-
   static const String TABLE_NAME = 'Subject';
   static const String ID = 'id';
   static const String TITLE = 'title';
@@ -25,9 +24,9 @@ class DBCreator {
   static DBCreator _databaseCreator; // Singleton DatabaseHelper
   static Database _database; //Singleton Database
 
-   DBCreator._createInstance(); // Named constructor to create instance of DatabaseHelper
+  DBCreator._createInstance(); // Named constructor to create instance of DatabaseHelper
 
-   factory DBCreator() {
+  factory DBCreator() {
     if (_databaseCreator == null) {
       _databaseCreator = DBCreator
           ._createInstance(); // This is executed only once, singleton object
@@ -42,30 +41,28 @@ class DBCreator {
     return _database;
   }
 
-   Future<Database> initDB() async {
+  Future<Database> initDB() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = documentsDirectory.path + '/subject_35.db';
     var db = await openDatabase(path, version: 1, onCreate: createDB);
     return db;
   }
 
-   void createDB(Database db, int version) async {
+  void createDB(Database db, int version) async {
     // Create Table
     await db.execute(
         'CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT, '
-            ' $TITLE TEXT, $TYPE TEXT, $ROOM TEXT,'
-            ' $PRIORITY TEXT,'
-            ' $DESCRIPTION TEXT,'
-            ' $HOURS_WEEK INTEGER,'
-            ' $COLOR_ALPHA INTEGER,'
-            ' $COLOR_RED INTEGER,'
-            ' $COLOR_GREEN INTEGER,'
-            ' $COLOR_BLUE INTEGER,'
-            ' $STARTED_TIMETRACKING_AT TEXT,'
-            ' $DUE_DATE TEXT,'
-            ' $TIME_SPENT INTEGER,'
-            ' $DATE_OF_CREATION TEXT);');
+        ' $TITLE TEXT, $TYPE TEXT, $ROOM TEXT,'
+        ' $PRIORITY TEXT,'
+        ' $DESCRIPTION TEXT,'
+        ' $HOURS_WEEK INTEGER,'
+        ' $COLOR_ALPHA INTEGER,'
+        ' $COLOR_RED INTEGER,'
+        ' $COLOR_GREEN INTEGER,'
+        ' $COLOR_BLUE INTEGER,'
+        ' $STARTED_TIMETRACKING_AT TEXT,'
+        ' $DUE_DATE TEXT,'
+        ' $TIME_SPENT INTEGER,'
+        ' $DATE_OF_CREATION TEXT);');
   }
-
-
 }
