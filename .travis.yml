@@ -17,7 +17,7 @@ jobs:
       before_script:
         #- chmod 777 ./.no_camel.sh
         #- ./.no_camel.sh # file names are not allowed to include capital letters
-        - git clone https://github.com/flutter/flutter.git ../flutter -b beta --depth 1
+        - git clone https://github.com/flutter/flutter.git ../flutter -b stable --depth 1
         - ../flutter/bin/flutter doctor
         - $(../flutter/bin/cache/dart-sdk/bin/dartfmt -n lib) # check if files are formatted according to dartfmt
         - ../flutter/bin/flutter analyze
@@ -37,7 +37,7 @@ jobs:
           - android-28
       jdk: oraclejdk8
       before_script:
-        - git clone https://github.com/flutter/flutter.git ../flutter -b beta --depth 1
+        - git clone https://github.com/flutter/flutter.git ../flutter -b stable --depth 1
         - yes|/usr/local/android-sdk/tools/bin/sdkmanager --update
         - yes|../flutter/bin/flutter doctor --android-licenses
       script:
@@ -52,7 +52,7 @@ jobs:
     #        - brew install --HEAD libimobiledevice
     #        - brew install ideviceinstaller
     #        - brew install ios-deploy
-    #        - git clone https://github.com/flutter/flutter.git ../flutter -b beta --depth 1
+    #        - git clone https://github.com/flutter/flutter.git ../flutter -b stable --depth 1
     #        - ../flutter/bin/flutter doctor
     #      script:
     #        - ../flutter/bin/flutter -v build ios --no-codesign
