@@ -67,7 +67,7 @@ void main() {
     expect(buttonFinder, isNotNull);
   });
 
-  testWidgets('show subject add', (tester) async {
+  testWidgets('show subject add and test function', (tester) async {
     var createApp = TestHelper.createApp(SubjectAdd());
     await tester.pumpWidget(createApp);
     await tester.pump();
