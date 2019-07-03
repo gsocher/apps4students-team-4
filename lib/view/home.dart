@@ -3,11 +3,11 @@ import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/main_screen.dart';
 import 'package:easy_study/view/progress_summary.dart';
 import 'package:easy_study/view/subject_progress_bar.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 
 class Home extends StatefulWidget {
   final FirebaseAnalytics analytics;
