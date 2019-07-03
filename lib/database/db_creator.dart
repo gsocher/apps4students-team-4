@@ -1,4 +1,4 @@
-import 'dart:io' as io;
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -42,7 +42,7 @@ class DBCreator {
   }
 
   Future<Database> initDB() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = documentsDirectory.path + '/subject_35.db';
     var db = await openDatabase(path, version: 1, onCreate: createDB);
     return db;
