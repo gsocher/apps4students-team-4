@@ -78,22 +78,31 @@ class SubjectAddState extends State<SubjectAdd> {
       setState(() {
         isValidated = true;
       });
-    } else {
-      showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: const Text('Please check your input again'),
-              actions: <Widget>[
-                FlatButton(
-                  child: const Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                )
-              ]);
-        },
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "all inputs are correct!.",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.green,
       );
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
+    } else {
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "please check your input again.",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(hours: 1),
+        action: SnackBarAction(
+            label: 'Ok',
+            onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
+                reason: SnackBarClosedReason.action)),
+        backgroundColor: Colors.red,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
     }
   }
 
@@ -287,7 +296,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 ),
                 onPressed: callback,
               );
-            }))
+            })),
+        SizedBox(height: 25.0),
       ],
     );
   }
