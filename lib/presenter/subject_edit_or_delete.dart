@@ -1,4 +1,5 @@
 import 'dart:core';
+
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
@@ -96,6 +97,8 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
         duration: Duration(seconds: 2),
         backgroundColor: Colors.green,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     } else {
@@ -111,6 +114,8 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                 .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     }

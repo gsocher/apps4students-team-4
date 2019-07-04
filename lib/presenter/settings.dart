@@ -87,6 +87,8 @@ class SettingsPageState extends State<Settings> {
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
       SnackBar snackBar =
           SnackBar(content: Text('Successfully added to calendar'));
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
     }
     return true;
@@ -103,13 +105,11 @@ class SettingsPageState extends State<Settings> {
               "Something went wrong. Please accept the permissions.",
               style: TextStyle(color: Colors.white),
             ),
-            duration: Duration(hours: 1),
-            action: SnackBarAction(
-                label: 'Ok',
-                onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
-                    reason: SnackBarClosedReason.action)),
+            duration: Duration(seconds: 5),
             backgroundColor: Colors.red,
           );
+          Scaffold.of(context)
+              .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
           Scaffold.of(context).showSnackBar(snackBar);
           return;
         }

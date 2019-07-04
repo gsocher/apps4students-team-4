@@ -12,6 +12,7 @@ class SubjectOverview extends StatefulWidget {
 }
 
 class SubjectOverviewState extends State<SubjectOverview> {
+  static bool tipShown = false;
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
@@ -51,14 +52,18 @@ class SubjectOverviewState extends State<SubjectOverview> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (tipShown) {
+        return;
+      }
       SnackBar snackBar = SnackBar(
         content: Text(
-          'Tipp: Longpress a subject to edit or delete it.',
+          'Tip: Longpress a subject to edit or delete it.',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       );
       Scaffold.of(context).showSnackBar(snackBar);
+      tipShown = true;
     });
   }
 }

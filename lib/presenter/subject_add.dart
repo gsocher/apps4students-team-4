@@ -83,6 +83,8 @@ class SubjectAddState extends State<SubjectAdd> {
         duration: Duration(seconds: 2),
         backgroundColor: Colors.green,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     } else {
@@ -98,6 +100,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     }

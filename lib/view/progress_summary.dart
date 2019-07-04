@@ -22,6 +22,8 @@ class ProgressSummaryState extends State<ProgressSummary> {
 
   final double fontSizeNormal = 20.0;
 
+  static bool tipShown = false;
+
   Widget build(BuildContext context) {
     return Container(
       margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
@@ -90,14 +92,18 @@ class ProgressSummaryState extends State<ProgressSummary> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (tipShown) {
+        return;
+      }
       SnackBar snackBar = SnackBar(
         content: Text(
-          "Tipp: Tap a progress bar to start time tracking.",
+          "Tip: Tap a progress bar to start time tracking.",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       );
       Scaffold.of(context).showSnackBar(snackBar);
+      tipShown = true;
     });
   }
 }

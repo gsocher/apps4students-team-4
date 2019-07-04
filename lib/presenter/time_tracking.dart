@@ -140,6 +140,8 @@ class _TimeTracking extends State<TimeTracking> {
             UpdateSubject(subjectBeforeTimeTracking, SubjectOverview())),
       ),
     );
+    Scaffold.of(context)
+        .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
     Scaffold.of(context).showSnackBar(snackBar);
     _logTrackedTIme(widget.subject.id, time);
   }
