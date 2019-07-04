@@ -35,6 +35,23 @@ void main() {
     expect("the date must be ahead of now", validateDueDate2);
   });
 
+  testWidgets('subject add submit subject', (tester) async {
+    var subjectAdd = SubjectAdd();
+    Widget query = MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(home: subjectAdd),
+    );
+    await tester.pumpWidget(query);
+    await tester.enterText(find.byKey(new Key('title')), 'title');
+    await tester.enterText(find.byKey(new Key('description')), 'description');
+    await tester.enterText(find.byKey(new Key('room')), 'room');
+    await tester.enterText(find.byKey(new Key('hours per week')), '3');
+
+    await tester.tap(find.byKey(new Key('save false')));
+    await tester.pump();
+    expect(find.byKey(new Key('save false')), findsOneWidget);
+  });
+
   test('subject add validateDueDate with date before now', () {
     var subjectAdd = SubjectAdd();
     SubjectAddState createState = subjectAdd.createState();

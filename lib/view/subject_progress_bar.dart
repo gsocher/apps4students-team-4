@@ -114,7 +114,6 @@ class SubjectProgressBar extends StatelessWidget {
     } else {
       timeUntilDD = "Due date has passed";
     }
-
     return timeUntilDD;
   }
 

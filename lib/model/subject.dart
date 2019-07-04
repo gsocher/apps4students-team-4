@@ -24,7 +24,6 @@ class Subject {
   DateTime dueDate;
   DateTime dateOfCreation;
 
-  // TODO: 02.05.2019 refactor to initialization and naming
   Subject.name(this.title, this.type, this.room, this.priority,
       this.description, this.hoursWeek, this.dueDate, this.dateOfCreation);
 

@@ -1,8 +1,10 @@
 import 'dart:ui' show lerpDouble;
+
 import 'package:date_format/date_format.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+
 import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
@@ -19,6 +21,8 @@ class ProgressSummaryState extends State<ProgressSummary> {
   ProgressSummaryState(this._subjects);
 
   final double fontSizeNormal = 20.0;
+
+  static bool tipShown = false;
 
   Widget build(BuildContext context) {
     return Container(
@@ -88,14 +92,18 @@ class ProgressSummaryState extends State<ProgressSummary> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (tipShown) {
+        return;
+      }
       SnackBar snackBar = SnackBar(
         content: Text(
-          "Tipp: Tap a progress bar to start time tracking.",
+          "Tip: Tap a progress bar to start time tracking.",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       );
       Scaffold.of(context).showSnackBar(snackBar);
+      tipShown = true;
     });
   }
 }

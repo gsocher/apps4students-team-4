@@ -1,4 +1,5 @@
 import 'dart:core';
+
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
@@ -66,7 +67,7 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                     scrollDirection: Axis.vertical))));
   }
 
-  Subject _submit() {
+  Subject submit() {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
@@ -82,7 +83,7 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     return result;
   }
 
-  void _checkIfInputIsValid() {
+  void checkIfInputIsValid() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       setState(() {
@@ -96,6 +97,8 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
         duration: Duration(seconds: 2),
         backgroundColor: Colors.green,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     } else {
@@ -111,6 +114,8 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                 .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     }
@@ -297,14 +302,14 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                   color: Colors.grey,
                   size: 30,
                 ),
-                onPressed: () => _checkIfInputIsValid(),
+                onPressed: () => checkIfInputIsValid(),
               )),
           Visibility(
               visible: isValidated,
               child: new StoreConnector<AppState, VoidCallback>(
                   converter: (store) {
                 return () => store
-                  ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
+                  ..dispatch(UpdateSubject(submit(), new SubjectOverview()));
               }, builder: (context, callback) {
                 return new IconButton(
                   icon: Icon(

@@ -42,9 +42,6 @@ class SubjectAddState extends State<SubjectAdd> {
     _type = ExamType.WRITTEN_EXAM;
   }
 
-  // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
-  // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
-  // TODO: 16.05.2019 if the dropdown is not chosen, it wont work. Fix it.
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -86,6 +83,8 @@ class SubjectAddState extends State<SubjectAdd> {
         duration: Duration(seconds: 2),
         backgroundColor: Colors.green,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     } else {
@@ -101,6 +100,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
       return;
     }
@@ -134,6 +135,7 @@ class SubjectAddState extends State<SubjectAdd> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         TextFormField(
+          key: new Key('title'),
           validator: (String input) =>
               input.length <= 0 ? 'please enter a  $TITLE' : null,
           onFieldSubmitted: (String value) {
@@ -152,6 +154,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('room'),
           validator: (String input) =>
               input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
           onFieldSubmitted: (String value) {
@@ -171,6 +174,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('description'),
           validator: (String input) => input.length >= MAXINPUTLENGTH
               ? 'the $DESCRIPTION is too long.'
               : null,
@@ -216,6 +220,7 @@ class SubjectAddState extends State<SubjectAdd> {
                 })),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('hours per week'),
           validator: validateHoursPerWeek,
           onFieldSubmitted: (String value) {
             setState(() {
@@ -275,7 +280,8 @@ class SubjectAddState extends State<SubjectAdd> {
         SizedBox(height: 15.0),
         Visibility(
             visible: !isValidated,
-            child: new IconButton(
+            child: IconButton(
+              key: Key('save false'),
               icon: Icon(
                 Icons.save,
                 color: Colors.grey,
@@ -289,7 +295,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 new StoreConnector<AppState, VoidCallback>(converter: (store) {
               return () => store.dispatch(AddNewSubject(submit()));
             }, builder: (context, callback) {
-              return new IconButton(
+              return IconButton(
+                key: Key('save true'),
                 icon: Icon(
                   Icons.save,
                   size: 30,

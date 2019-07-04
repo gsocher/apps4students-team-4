@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/home.dart';
+import 'package:easy_study/view/subject_overview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +127,7 @@ class _TimeTracking extends State<TimeTracking> {
   void stopTimer(Store callback) {
     int time = DateTime.now().difference(elapsedTime).inSeconds;
     var savedSubject = _stopWatch();
-    var subjectBeforeTimeTracking = savedSubject;
+    var subjectBeforeTimeTracking = Subject.copy(savedSubject);
     subjectBeforeTimeTracking.timeSpent -= time;
     callback.dispatch(UpdateSubject(savedSubject, Home()));
     String timeString =
@@ -134,11 +135,13 @@ class _TimeTracking extends State<TimeTracking> {
     SnackBar snackBar = SnackBar(
       content: Text(timeString),
       action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () => callback
-              .dispatch(UpdateSubject(subjectBeforeTimeTracking, null))),
-      duration: Duration(seconds: 6),
+        label: 'Undo',
+        onPressed: () => callback.dispatch(
+            UpdateSubject(subjectBeforeTimeTracking, SubjectOverview())),
+      ),
     );
+    Scaffold.of(context)
+        .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
     Scaffold.of(context).showSnackBar(snackBar);
     _logTrackedTIme(widget.subject.id, time);
   }

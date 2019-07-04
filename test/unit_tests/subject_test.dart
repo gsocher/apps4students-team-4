@@ -45,6 +45,30 @@ void main() {
     expect(map, compare);
   });
 
+  test('subject to map with id != null', () {
+    Subject subject = _getDummySubject();
+    subject.id = 3;
+    var map = subject.toMap();
+    var compare = <String, dynamic>{
+      'id': 3,
+      'title': 'Software Engineering II',
+      'type': 'Written exam',
+      'room': 'T1.011',
+      'priority': 'Minimalism',
+      'description': 'A funny subject.',
+      'hoursWeek': 5,
+      'color_alpha': 255,
+      'color_red': 0,
+      'color_green': 0,
+      'color_blue': 0,
+      'started_timetracking_at': null,
+      'due_date': '2019-06-10 16:27:46.371368',
+      'time_spent': 0,
+      'date_of_creation': '2019-06-13 09:06:27.669877'
+    };
+    expect(map, compare);
+  });
+
   test('subject copy', () {
     Subject subject = _getDummySubject();
     Subject subject2 = Subject.copy(subject);

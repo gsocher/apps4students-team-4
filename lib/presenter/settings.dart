@@ -3,6 +3,7 @@ import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class Settings extends StatefulWidget {
   Settings();
@@ -41,13 +42,38 @@ class SettingsPageState extends State<Settings> {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            // TODO: 03.05.2019 what could be good settings to set?
-            child: RaisedButton(
-              child: Text('Export to Calendar'),
-              onPressed: () {
-                addEventsToCalendar(events);
-              },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text('Privacy'),
+                  onPressed: _showDialog,
+                ),
+                RaisedButton(
+                  child: Text('Export to Calendar'),
+                  onPressed: () => addEventsToCalendar(events),
+                )
+              ],
             )));
+  }
+
+  void _showDialog() async {
+    var html = await DefaultAssetBundle.of(context)
+        .loadString('privacy/privacy_policy.html');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("Privacy Policy"),
+              content: Scrollbar(
+                  child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                ),
+              )));
+        });
   }
 
   Future addEventsToCalendar(List<Subject> events) async {
@@ -61,6 +87,8 @@ class SettingsPageState extends State<Settings> {
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
       SnackBar snackBar =
           SnackBar(content: Text('Successfully added to calendar'));
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
       Scaffold.of(context).showSnackBar(snackBar);
     }
     return true;
@@ -77,13 +105,11 @@ class SettingsPageState extends State<Settings> {
               "Something went wrong. Please accept the permissions.",
               style: TextStyle(color: Colors.white),
             ),
-            duration: Duration(hours: 1),
-            action: SnackBarAction(
-                label: 'Ok',
-                onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
-                    reason: SnackBarClosedReason.action)),
+            duration: Duration(seconds: 5),
             backgroundColor: Colors.red,
           );
+          Scaffold.of(context)
+              .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
           Scaffold.of(context).showSnackBar(snackBar);
           return;
         }

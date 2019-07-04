@@ -11,7 +11,7 @@ description: An app which will ease your life
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 3.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -23,6 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  font_awesome_flutter: "^8.0.1"
   path_provider: any
   sqflite: any
   fluttertoast: any
@@ -43,7 +44,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
+  flutter_launcher_icons: "^0.7.0"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "graphics/launcher_2.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -63,6 +71,8 @@ flutter:
   assets:
     - graphics/
     - privacy/
+    - graphics/launcher.png
+    - graphics/launcher_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
