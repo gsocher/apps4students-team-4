@@ -51,4 +51,47 @@ void main() {
     await tester.pump();
     expect(find.byKey(new Key('save false')), findsOneWidget);
   });
+
+  test('subject add validateDueDate with date before now', () {
+    var subjectAdd = SubjectAdd();
+    SubjectAddState createState = subjectAdd.createState();
+    String input = "0";
+    String want = 'the hours cant be negative nor 0';
+    String have = createState.validateHoursPerWeek(input);
+    expect(have, want);
+  });
+
+  test('subject add validateHoursPerWeek input is 0', () {
+    var subjectAdd = SubjectAdd();
+    SubjectAddState createState = subjectAdd.createState();
+    String input = "0";
+    String want = 'the hours cant be negative nor 0';
+    String have = createState.validateHoursPerWeek(input);
+    expect(have, want);
+  });
+
+  test('subject add validateHoursPerWeek', () {
+    var subjectAdd = SubjectAdd();
+    SubjectAddState createState = subjectAdd.createState();
+    String want = SubjectAddState.HOURS_PER_WEEK + ' must not be empty.';
+    String have = createState.validateHoursPerWeek(null);
+    expect(have, want);
+  });
+
+  test('subject add validateHoursPerWeek normal input', () {
+    var subjectAdd = SubjectAdd();
+    SubjectAddState createState = subjectAdd.createState();
+    String input = "20";
+    String have = createState.validateHoursPerWeek(input);
+    expect(have, null);
+  });
+
+  test('subject add validateHoursPerWeek no input', () {
+    var subjectAdd = SubjectAdd();
+    SubjectAddState createState = subjectAdd.createState();
+    String want = "please enter hours per week";
+    String input = "";
+    String have = createState.validateHoursPerWeek(input);
+    expect(have, want);
+  });
 }

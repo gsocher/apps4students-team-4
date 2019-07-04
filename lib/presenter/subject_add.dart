@@ -19,6 +19,7 @@ class SubjectAddState extends State<SubjectAdd> {
 
   void onChanged(HSVColor value) => this.color = value;
 
+  static const int MAXINPUTLENGTH = 50;
   static const String TITLE = 'title';
   static const String ROOM = 'room';
   static const String DESCRIPTION = 'description';
@@ -27,18 +28,18 @@ class SubjectAddState extends State<SubjectAdd> {
   static const String PRIORITY = 'Priority';
   static const String TYPE = 'Type';
   final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
-  static final formKey = GlobalKey<FormState>();
-  String title, room, description, hoursPerWeek;
-  Priority priority;
-  ExamType type;
-  DateTime dateTime;
+  final formKey = GlobalKey<FormState>();
+  String _title, _room, _description, _hoursPerWeek;
+  Priority _priority;
+  ExamType _type;
+  DateTime _dateTime;
   bool isValidated;
 
   void initState() {
     super.initState();
     isValidated = false;
-    priority = Priority.NORMAL;
-    type = ExamType.WRITTEN_EXAM;
+    _priority = Priority.NORMAL;
+    _type = ExamType.WRITTEN_EXAM;
   }
 
   @override
@@ -58,8 +59,8 @@ class SubjectAddState extends State<SubjectAdd> {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      result = new Subject.name(title, type, room, priority, description,
-          int.parse(hoursPerWeek), dateTime, DateTime.now());
+      result = new Subject.name(_title, _type, _room, _priority, _description,
+          int.parse(_hoursPerWeek), _dateTime, DateTime.now());
       result.color = color.toColor();
       setState(() {
         isValidated = false;
@@ -74,22 +75,31 @@ class SubjectAddState extends State<SubjectAdd> {
       setState(() {
         isValidated = true;
       });
-    } else {
-      showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: const Text('Please check your input again'),
-              actions: <Widget>[
-                FlatButton(
-                  child: const Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                )
-              ]);
-        },
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "All inputs are correct!",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.green,
       );
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
+    } else {
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "Please check your input again.",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(hours: 1),
+        action: SnackBarAction(
+            label: 'Ok',
+            onPressed: () => Scaffold.of(context)
+                .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
+        backgroundColor: Colors.red,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
     }
   }
 
@@ -99,6 +109,19 @@ class SubjectAddState extends State<SubjectAdd> {
     }
     if (duedate.isBefore(DateTime.now())) {
       return 'the date must be ahead of now';
+    }
+    return null;
+  }
+
+  String validateHoursPerWeek(String hoursperweek) {
+    if (hoursperweek == null) {
+      return '$HOURS_PER_WEEK must not be empty.';
+    }
+    if (hoursperweek.length == 0) {
+      return "please enter hours per week";
+    }
+    if (int.parse(hoursperweek) <= 0) {
+      return 'the hours cant be negative nor 0';
     }
     return null;
   }
@@ -116,7 +139,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) => title = value,
+          onSaved: (String value) => _title = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -129,13 +152,14 @@ class SubjectAddState extends State<SubjectAdd> {
         TextFormField(
           key: new Key('room'),
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a $ROOM' : null,
+              input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => room = value,
+          onSaved: (String value) =>
+              value.length == 0 ? _room = "$ROOM not choosen" : _room = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -147,14 +171,17 @@ class SubjectAddState extends State<SubjectAdd> {
         SizedBox(height: 15.0),
         TextFormField(
           key: new Key('description'),
-          validator: (String input) =>
-              input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+          validator: (String input) => input.length >= MAXINPUTLENGTH
+              ? 'the $DESCRIPTION is too long.'
+              : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => description = value,
+          onSaved: (String value) => value.length == 0
+              ? _description = "no $DESCRIPTION yet."
+              : _description = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -165,7 +192,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         DropdownButton<ExamType>(
-            value: type,
+            value: _type,
             items: ExamType.VALUES
                 .map((value) => new DropdownMenuItem<ExamType>(
                       child: Text(value.toString()),
@@ -173,11 +200,11 @@ class SubjectAddState extends State<SubjectAdd> {
                     ))
                 .toList(),
             onChanged: (ExamType value) => setState(() {
-                  type = value;
+                  _type = value;
                 })),
         SizedBox(height: 15.0),
         DropdownButton<Priority>(
-            value: priority,
+            value: _priority,
             items: Priority.VALUES
                 .map((value) => new DropdownMenuItem<Priority>(
                       child: Text(value.toString()),
@@ -185,19 +212,18 @@ class SubjectAddState extends State<SubjectAdd> {
                     ))
                 .toList(),
             onChanged: (Priority value) => setState(() {
-                  priority = value;
+                  _priority = value;
                 })),
         SizedBox(height: 15.0),
         TextFormField(
           key: new Key('hours per week'),
-          validator: (String input) =>
-              input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+          validator: validateHoursPerWeek,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => hoursPerWeek = value,
+          onSaved: (String value) => _hoursPerWeek = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -225,7 +251,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onChanged: (dueDate) => setState(() => dateTime = dueDate),
+          onChanged: (dueDate) => setState(() => _dateTime = dueDate),
         )),
         SizedBox(height: 15.0),
         Container(
@@ -273,7 +299,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 ),
                 onPressed: callback,
               );
-            }))
+            })),
+        SizedBox(height: 25.0),
       ],
     );
   }
