@@ -34,4 +34,16 @@ void main() {
     var validateDueDate2 = createState.validateDueDate(dateTime);
     expect("the date must be ahead of now", validateDueDate2);
   });
+
+  testWidgets('subject add submit subject', (tester) async {
+    var subjectAdd = SubjectAdd();
+    Widget query = MediaQuery(
+      data: MediaQueryData(),
+      child: MaterialApp(home: subjectAdd),
+    );
+    await tester.pumpWidget(query);
+    var saveButton = find.byType(IconButton);
+    await tester.tap(saveButton);
+    await tester.pump();
+  });
 }

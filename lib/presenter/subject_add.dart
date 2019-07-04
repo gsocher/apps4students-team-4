@@ -27,23 +27,20 @@ class SubjectAddState extends State<SubjectAdd> {
   static const String PRIORITY = 'Priority';
   static const String TYPE = 'Type';
   final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
-  final formKey = GlobalKey<FormState>();
-  String _title, _room, _description, _hoursPerWeek;
-  Priority _priority;
-  ExamType _type;
-  DateTime _dateTime;
+  static final formKey = GlobalKey<FormState>();
+  String title, room, description, hoursPerWeek;
+  Priority priority;
+  ExamType type;
+  DateTime dateTime;
   bool isValidated;
 
   void initState() {
     super.initState();
     isValidated = false;
-    _priority = Priority.NORMAL;
-    _type = ExamType.WRITTEN_EXAM;
+    priority = Priority.NORMAL;
+    type = ExamType.WRITTEN_EXAM;
   }
 
-  // TODO: 03.05.2019 rework the whole build method. Most code is used twice.
-  // TODO: 03.05.2019 Is there a strings.xml? If yes use it.
-  // TODO: 16.05.2019 if the dropdown is not chosen, it wont work. Fix it.
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -61,8 +58,8 @@ class SubjectAddState extends State<SubjectAdd> {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-      result = new Subject.name(_title, _type, _room, _priority, _description,
-          int.parse(_hoursPerWeek), _dateTime, DateTime.now());
+      result = new Subject.name(title, type, room, priority, description,
+          int.parse(hoursPerWeek), dateTime, DateTime.now());
       result.color = color.toColor();
       setState(() {
         isValidated = false;
@@ -118,7 +115,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _title = value,
+          onSaved: (String value) => title = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -136,7 +133,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _room = value,
+          onSaved: (String value) => room = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -154,7 +151,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _description = value,
+          onSaved: (String value) => description = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -165,7 +162,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         DropdownButton<ExamType>(
-            value: _type,
+            value: type,
             items: ExamType.VALUES
                 .map((value) => new DropdownMenuItem<ExamType>(
                       child: Text(value.toString()),
@@ -173,11 +170,11 @@ class SubjectAddState extends State<SubjectAdd> {
                     ))
                 .toList(),
             onChanged: (ExamType value) => setState(() {
-                  _type = value;
+                  type = value;
                 })),
         SizedBox(height: 15.0),
         DropdownButton<Priority>(
-            value: _priority,
+            value: priority,
             items: Priority.VALUES
                 .map((value) => new DropdownMenuItem<Priority>(
                       child: Text(value.toString()),
@@ -185,7 +182,7 @@ class SubjectAddState extends State<SubjectAdd> {
                     ))
                 .toList(),
             onChanged: (Priority value) => setState(() {
-                  _priority = value;
+                  priority = value;
                 })),
         SizedBox(height: 15.0),
         TextFormField(
@@ -196,7 +193,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _hoursPerWeek = value,
+          onSaved: (String value) => hoursPerWeek = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -224,7 +221,7 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onChanged: (dueDate) => setState(() => _dateTime = dueDate),
+          onChanged: (dueDate) => setState(() => dateTime = dueDate),
         )),
         SizedBox(height: 15.0),
         Container(

@@ -41,7 +41,6 @@ class SettingsPageState extends State<Settings> {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            // TODO: 03.05.2019 what could be good settings to set?
             child: RaisedButton(
               child: Text('Export to Calendar'),
               onPressed: () {

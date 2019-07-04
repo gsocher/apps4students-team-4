@@ -18,7 +18,6 @@ class ExamType {
 
   static const VALUES = [ORAL_EXAM, PRESENTATION, WRITTEN_EXAM];
 
-  // TODO: 03.05.2019 Are there more types?
   static const PRESENTATION = const ExamType._internal("Presentation");
   static const ORAL_EXAM = const ExamType._internal("Oral exam");
   static const WRITTEN_EXAM = const ExamType._internal("Written exam");
