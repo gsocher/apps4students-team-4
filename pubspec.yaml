@@ -38,6 +38,7 @@ dependencies:
   firebase_core: ^0.4.0+6
   firebase_analytics: ^3.0.3
   flutter_html: ^0.8.2
+  mockito: ^4.1.0
 
 dev_dependencies:
   flutter_test:

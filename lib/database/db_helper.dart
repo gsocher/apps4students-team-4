@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:io' as io;
 import 'dart:ui';
 
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
@@ -26,49 +24,14 @@ class DBHelper {
   static const String DUE_DATE = 'due_date';
   static const String DATE_OF_CREATION = 'date_of_creation';
 
-  static DBHelper _databaseHelper; // Singleton DatabaseHelper
-  static Database _database; //Singleton Database
+  Future<Database> _database;
 
-  DBHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
-
-  factory DBHelper() {
-    if (_databaseHelper == null) {
-      _databaseHelper = DBHelper
-          ._createInstance(); // This is executed only once, singleton object
-    }
-    return _databaseHelper;
+  DBHelper(Future<Database> inputDatabase) {
+    this._database = inputDatabase;
   }
 
   Future<Database> get database async {
-    if (_database == null) {
-      _database = await initDB();
-    }
     return _database;
-  }
-
-  Future<Database> initDB() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_34.db';
-    var db = await openDatabase(path, version: 1, onCreate: _createDB);
-    return db;
-  }
-
-  void _createDB(Database db, int version) async {
-    // Create Table
-    await db.execute(
-        'CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT, '
-        ' $TITLE TEXT, $TYPE TEXT, $ROOM TEXT,'
-        ' $PRIORITY TEXT,'
-        ' $DESCRIPTION TEXT,'
-        ' $HOURS_WEEK INTEGER,'
-        ' $COLOR_ALPHA INTEGER,'
-        ' $COLOR_RED INTEGER,'
-        ' $COLOR_GREEN INTEGER,'
-        ' $COLOR_BLUE INTEGER,'
-        ' $STARTED_TIMETRACKING_AT TEXT,'
-        ' $DUE_DATE TEXT,'
-        ' $TIME_SPENT INTEGER,'
-        ' $DATE_OF_CREATION TEXT);');
   }
 
   /*

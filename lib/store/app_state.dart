@@ -1,3 +1,4 @@
+import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/view/home.dart';
@@ -11,8 +12,8 @@ class AppState {
 
   AppState({this.widget, this.dbHelper});
 
-  factory AppState.initial() =>
-      new AppState(dbHelper: DBHelper(), widget: new Home());
+  factory AppState.initial() => new AppState(
+      dbHelper: DBHelper(DBCreator().database), widget: new Home());
 }
 
 final searchReducer = combineReducers<AppState>([

@@ -36,12 +36,6 @@ void main() {
         DateTime.now());
   }
 
-  test('reducer changes view to subject overview', () {
-    final widget = new SubjectOverview();
-    final state = searchReducer(new AppState.initial(), ChangeView(widget));
-    expect(state.widget, widget);
-  });
-
   testWidgets('reducer updates subject', (tester) async {
     var createApp = _createApp();
     createApp.store
@@ -64,5 +58,11 @@ void main() {
     createApp.store.dispatch(DeleteSubject(_getDummySubject().id));
     await tester.pumpWidget(createApp);
     await tester.pump();
+  });
+
+  test('reducer changes view to subject overview', () {
+    final widget = new SubjectOverview();
+    final state = searchReducer(new AppState.initial(), ChangeView(widget));
+    expect(state.widget, widget);
   });
 }
