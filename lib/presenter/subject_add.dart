@@ -97,8 +97,8 @@ class SubjectAddState extends State<SubjectAdd> {
         duration: Duration(hours: 1),
         action: SnackBarAction(
             label: 'Ok',
-            onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
-                reason: SnackBarClosedReason.action)),
+            onPressed: () => Scaffold.of(context)
+                .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
       Scaffold.of(context).showSnackBar(snackBar);

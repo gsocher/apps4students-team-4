@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
@@ -108,8 +107,8 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
         duration: Duration(hours: 1),
         action: SnackBarAction(
             label: 'Ok',
-            onPressed: () => Scaffold.of(context).removeCurrentSnackBar(
-                reason: SnackBarClosedReason.action)),
+            onPressed: () => Scaffold.of(context)
+                .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
         backgroundColor: Colors.red,
       );
       Scaffold.of(context).showSnackBar(snackBar);
