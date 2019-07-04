@@ -7,7 +7,6 @@ import 'package:easy_study/view/subject_overview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
@@ -41,64 +40,72 @@ class _MainScreenState extends State<MainScreen> {
         HmMap(),
       ];
     }
-    return new StoreConnector<AppState, Store>(
-      converter: (store) => store,
-      builder: (context, callback) {
-        return new Scaffold(
-            appBar: AppBar(
-              title: Text("Exam Planer"),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: _showDialog,
-                  child: Text("Privacy"),
-                  textColor: Colors.white,
-                )
-              ],
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-                onTap: (index) => _changeView(index, callback),
-                type: BottomNavigationBarType.fixed,
-                selectedItemColor: Colors.blue,
-                unselectedItemColor: Colors.black,
-                currentIndex: _selectedIndex,
-                elevation: 20,
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.storage), title: Text('Overview')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.add), title: Text('Add')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.settings), title: Text('Settings')),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.map), title: Text('Map'))
-                ]),
-            body: callback.state.widget,
-            floatingActionButton: Visibility(
-              visible: ChangeView(callback.state.widget).showFAB(),
-              child: FloatingActionButton(
-                onPressed: () => callback..dispatch(ChangeView(SubjectAdd())),
-                child: Icon(Icons.add),
-              ),
-            ));
-      },
-    );
+    return WillPopScope(
+        onWillPop: onWillPop,
+        child: new StoreConnector<AppState, Store>(
+          converter: (store) => store,
+          builder: (context, callback) {
+            return new Scaffold(
+                appBar: AppBar(
+                  title: Text("Exam Planer"),
+                ),
+                bottomNavigationBar: BottomNavigationBar(
+                    onTap: (index) => _changeView(index, callback),
+                    type: BottomNavigationBarType.fixed,
+                    selectedItemColor: Colors.blue,
+                    unselectedItemColor: Colors.black,
+                    currentIndex: _selectedIndex,
+                    elevation: 20,
+                    items: [
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.storage), title: Text('Overview')),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.add), title: Text('Add')),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.settings), title: Text('Settings')),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.map), title: Text('Map'))
+                    ]),
+                body: callback.state.widget,
+                floatingActionButton: Visibility(
+                  visible: ChangeView(callback.state.widget).showFAB(),
+                  child: FloatingActionButton(
+                    onPressed: () =>
+                        callback..dispatch(ChangeView(SubjectAdd())),
+                    child: Icon(Icons.add),
+                  ),
+                ));
+          },
+        ));
   }
 
-  void _showDialog() async {
-    var html = await DefaultAssetBundle.of(context)
-        .loadString('privacy/privacy_policy.html');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: Text("Privacy Policy"),
-              content: Scrollbar(
-                  child: SingleChildScrollView(
-                child: Html(
-                  data: html,
-                ),
-              )));
-        });
+  Future<bool> onWillPop() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+                title: new Text('Exit Easy Study?'),
+                elevation: 20.0,
+                content: new Text('Are you sure you want to exit Easy Study?'),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    shape: Border.all(
+                        color: Colors.blue,
+                        style: BorderStyle.solid,
+                        width: 1.0),
+                    child: new Text('Cancel'),
+                  ),
+                  new RaisedButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: new Text(
+                      'Yes',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+        ) ??
+        false;
   }
 
   void _changeView(int index, Store callback) {

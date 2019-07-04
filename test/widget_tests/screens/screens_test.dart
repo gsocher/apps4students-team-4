@@ -61,7 +61,9 @@ void main() {
     await tester.pumpWidget(createApp);
     await tester.pump();
     final buttonFinder = find.byType(RaisedButton);
-    await tester.tap(buttonFinder);
+    await tester.tap(buttonFinder.at(0));
+    expect(buttonFinder, isNotNull);
+    await tester.tap(buttonFinder.at(1));
     expect(buttonFinder, isNotNull);
   });
 
@@ -82,7 +84,7 @@ void main() {
   });
 
   testWidgets('show privacy policy', (tester) async {
-    var createApp = TestHelper.createApp(Home());
+    var createApp = TestHelper.createApp(Settings());
     await tester.pumpWidget(createApp);
     await tester.tap(find.text("Privacy"));
     await tester.pump();

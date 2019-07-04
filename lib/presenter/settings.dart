@@ -3,6 +3,7 @@ import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class Settings extends StatefulWidget {
   Settings();
@@ -41,12 +42,38 @@ class SettingsPageState extends State<Settings> {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            child: RaisedButton(
-              child: Text('Export to Calendar'),
-              onPressed: () {
-                addEventsToCalendar(events);
-              },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text('Privacy'),
+                  onPressed: _showDialog,
+                ),
+                RaisedButton(
+                  child: Text('Export to Calendar'),
+                  onPressed: () => addEventsToCalendar(events),
+                )
+              ],
             )));
+  }
+
+  void _showDialog() async {
+    var html = await DefaultAssetBundle.of(context)
+        .loadString('privacy/privacy_policy.html');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("Privacy Policy"),
+              content: Scrollbar(
+                  child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                ),
+              )));
+        });
   }
 
   Future addEventsToCalendar(List<Subject> events) async {
