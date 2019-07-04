@@ -12,14 +12,25 @@ class SubjectOverview extends StatefulWidget {
 }
 
 class SubjectOverviewState extends State<SubjectOverview> {
+
+  SnackBar snackBar = SnackBar(
+    content: Text(
+      "Tipp: longpress a subject to edit or delete it.",
+      style: TextStyle(color: Colors.white),
+    ),
+    duration: Duration(seconds: 5),
+    backgroundColor: Colors.black,
+  );
+
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
       converter: (store) {
+        Scaffold.of(context).showSnackBar(snackBar);
         return new AppStateViewModel(store.state);
       },
       builder: (BuildContext context, AppStateViewModel vm) {
-        return new Container(
+         Container(
           child: FutureBuilder<List<Subject>>(
             future: vm.state.dbHelper.getSubjects(),
             builder: (context, snapshot) {
