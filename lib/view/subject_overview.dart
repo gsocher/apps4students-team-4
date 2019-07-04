@@ -46,4 +46,13 @@ class SubjectOverviewState extends State<SubjectOverview> {
       },
     );
   }
+
+//  @override
+//  void initState() {
+//    super.initState();
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+//      SnackBar snackbar = SnackBar(content: Text('test'));
+//      Scaffold.of(context).showSnackBar(snackbar);
+//    });
+//  }
 }
