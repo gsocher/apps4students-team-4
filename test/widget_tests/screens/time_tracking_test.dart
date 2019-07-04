@@ -40,7 +40,7 @@ void main() {
     var subject = TestHelper.getDummySubject();
     subject.startedTimetrackingAt = "2019-07-04 17:01:03.375203";
     var createApp = TestHelper.createApp(TimeTracking(
-      subject: TestHelper.getDummySubject(),
+      subject: subject,
       analytics: FirebaseAnalytics(),
     ));
     await tester.pumpWidget(createApp);
