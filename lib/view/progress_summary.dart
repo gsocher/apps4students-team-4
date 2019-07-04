@@ -1,8 +1,10 @@
 import 'dart:ui' show lerpDouble;
+
 import 'package:date_format/date_format.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+
 import 'tween.dart';
 
 class ProgressSummary extends StatefulWidget {
