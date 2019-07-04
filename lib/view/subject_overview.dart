@@ -8,10 +8,10 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectOverview extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SubjectOverviewState();
+  State<StatefulWidget> createState() => SubjectOverviewState();
 }
 
-class _SubjectOverviewState extends State<SubjectOverview> {
+class SubjectOverviewState extends State<SubjectOverview> {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(

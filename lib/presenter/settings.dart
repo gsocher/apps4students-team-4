@@ -1,4 +1,5 @@
 import 'package:device_calendar/device_calendar.dart';
+import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class SettingsPageState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     List<Subject> events = new List<Subject>();
-    final Future<List<Subject>> subjects = DBHelper().getSubjects();
+    final Future<List<Subject>> subjects =
+        DBHelper(DBCreator().database).getSubjects();
     subjects.then((value) {
       for (var subject in value) {
         events.add(subject);
@@ -61,6 +63,7 @@ class SettingsPageState extends State<Settings> {
           SnackBar(content: Text('Successfully added to calendar'));
       Scaffold.of(context).showSnackBar(snackBar);
     }
+    return true;
   }
 
   void _retrieveCalendars() async {
@@ -89,6 +92,8 @@ class SettingsPageState extends State<Settings> {
       setState(() {
         calendars = calendarsResult?.data;
       });
+
+      print(calendars);
     } on Exception catch (e) {
       print(e);
     }
