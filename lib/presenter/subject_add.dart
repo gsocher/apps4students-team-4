@@ -108,6 +108,7 @@ class SubjectAddState extends State<SubjectAdd> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         TextFormField(
+          key: new Key('title'),
           validator: (String input) =>
               input.length <= 0 ? 'please enter a  $TITLE' : null,
           onFieldSubmitted: (String value) {
@@ -126,6 +127,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('room'),
           validator: (String input) =>
               input.length <= 0 ? 'please enter a $ROOM' : null,
           onFieldSubmitted: (String value) {
@@ -144,6 +146,7 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('description'),
           validator: (String input) =>
               input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
           onFieldSubmitted: (String value) {
@@ -186,6 +189,7 @@ class SubjectAddState extends State<SubjectAdd> {
                 })),
         SizedBox(height: 15.0),
         TextFormField(
+          key: new Key('hours per week'),
           validator: (String input) =>
               input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
           onFieldSubmitted: (String value) {
@@ -246,7 +250,8 @@ class SubjectAddState extends State<SubjectAdd> {
         SizedBox(height: 15.0),
         Visibility(
             visible: !isValidated,
-            child: new IconButton(
+            child: IconButton(
+              key: Key('save false'),
               icon: Icon(
                 Icons.save,
                 color: Colors.grey,
@@ -260,7 +265,8 @@ class SubjectAddState extends State<SubjectAdd> {
                 new StoreConnector<AppState, VoidCallback>(converter: (store) {
               return () => store.dispatch(AddNewSubject(submit()));
             }, builder: (context, callback) {
-              return new IconButton(
+              return IconButton(
+                key: Key('save true'),
                 icon: Icon(
                   Icons.save,
                   size: 30,

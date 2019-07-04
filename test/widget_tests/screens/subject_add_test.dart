@@ -42,8 +42,13 @@ void main() {
       child: MaterialApp(home: subjectAdd),
     );
     await tester.pumpWidget(query);
-    var saveButton = find.byType(IconButton);
-    await tester.tap(saveButton);
+    await tester.enterText(find.byKey(new Key('title')), 'title');
+    await tester.enterText(find.byKey(new Key('description')), 'description');
+    await tester.enterText(find.byKey(new Key('room')), 'room');
+    await tester.enterText(find.byKey(new Key('hours per week')), '3');
+
+    await tester.tap(find.byKey(new Key('save false')));
     await tester.pump();
+    expect(find.byKey(new Key('save false')), findsOneWidget);
   });
 }
