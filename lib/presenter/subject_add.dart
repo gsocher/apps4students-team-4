@@ -97,7 +97,7 @@ class SubjectAddState extends State<SubjectAdd> {
     }
   }
 
-  String _validateDueDate(DateTime duedate) {
+  String validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
@@ -147,9 +147,8 @@ class SubjectAddState extends State<SubjectAdd> {
               isValidated = false;
             });
           },
-          onSaved: (String value) =>  value.length == 0 ?
-          _room = "$ROOM not choosen" :
-          _room = value,
+          onSaved: (String value) =>
+              value.length == 0 ? _room = "$ROOM not choosen" : _room = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -160,16 +159,17 @@ class SubjectAddState extends State<SubjectAdd> {
         ),
         SizedBox(height: 15.0),
         TextFormField(
-          validator: (String input) =>
-              input.length >= MAXINPUTLENGTH ? 'the $DESCRIPTION is too long.' : null,
+          validator: (String input) => input.length >= MAXINPUTLENGTH
+              ? 'the $DESCRIPTION is too long.'
+              : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => value.length == 0 ?
-          _description ="no $DESCRIPTION yet." :
-          _description = value,
+          onSaved: (String value) => value.length == 0
+              ? _description = "no $DESCRIPTION yet."
+              : _description = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -232,7 +232,7 @@ class SubjectAddState extends State<SubjectAdd> {
               filled: true,
               alignLabelWithHint: true,
               labelText: DUE_DATE),
-          validator: _validateDueDate,
+          validator: validateDueDate,
           onFieldSubmitted: (DateTime value) {
             setState(() {
               isValidated = false;

@@ -18,10 +18,10 @@ class SubjectEditOrDelete extends StatefulWidget {
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SubjectEditOrDeleteState();
+  State<StatefulWidget> createState() => SubjectEditOrDeleteState();
 }
 
-class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
+class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void onChanged(HSVColor value) => _color = value.toColor();
 
   static const int MAXINPUTLENGTH = 50;
@@ -108,7 +108,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     }
   }
 
-  String _validateDueDate(DateTime duedate) {
+  String validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
@@ -118,7 +118,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     return null;
   }
 
-  String _validateHoursPerWeek(String hoursperweek) {
+  String validateHoursPerWeek(String hoursperweek) {
     if (hoursperweek == null) {
       return '$HOURS_PER_WEEK must not be empty.';
     }
@@ -153,15 +153,14 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       TextFormField(
         initialValue: _room,
         validator: (String input) =>
-        input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
+            input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
           });
         },
-        onSaved: (String value) => value.length == 0 ?
-        _room = "$ROOM not choosen" :
-        _room = value,
+        onSaved: (String value) =>
+            value.length == 0 ? _room = "$ROOM not choosen" : _room = value,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.black),
@@ -173,16 +172,17 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       SizedBox(height: 15.0),
       TextFormField(
         initialValue: _description,
-        validator: (String input) =>
-        input.length >= MAXINPUTLENGTH ? 'the $DESCRIPTION is too long.' : null,
+        validator: (String input) => input.length >= MAXINPUTLENGTH
+            ? 'the $DESCRIPTION is too long.'
+            : null,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
           });
         },
-        onSaved: (String value) => value.length == 0 ?
-        _description ="no $DESCRIPTION yet." :
-        _description = value,
+        onSaved: (String value) => value.length == 0
+            ? _description = "no $DESCRIPTION yet."
+            : _description = value,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.black),
@@ -218,7 +218,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       SizedBox(height: 15.0),
       TextFormField(
         initialValue: _hoursPerWeek,
-        validator: _validateHoursPerWeek,
+        validator: validateHoursPerWeek,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
@@ -247,7 +247,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
             filled: true,
             alignLabelWithHint: true,
             labelText: DUE_DATE),
-        validator: _validateDueDate,
+        validator: validateDueDate,
         onFieldSubmitted: (DateTime value) {
           setState(() {
             isValidated = false;
