@@ -83,6 +83,21 @@ class ProgressSummaryState extends State<ProgressSummary> {
     sb.writeAll([totalh, "h ", totalmn, "mn ", totalsec, 's']);
     return sb.toString();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "Tipp: Tap a progress bar to start time tracking.",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+    });
+  }
 }
 
 // ignore: must_be_immutable

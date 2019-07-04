@@ -43,7 +43,7 @@ class DBCreator {
 
   Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + '/subject_35.db';
+    String path = documentsDirectory.path + '/subject_36.db';
     var db = await openDatabase(path, version: 1, onCreate: createDB);
     return db;
   }
