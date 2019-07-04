@@ -12,8 +12,8 @@ Easy Study is an Application which supports your time management during/befor ex
 
 # Installation
 Download the App:
-- [Here (iOS)](https://github.com/mobileappdevhm19/apps4students-team-4/wiki/)
-- [Here (Android)](https://github.com/mobileappdevhm19/apps4students-team-4/wiki/)
+- [Here (Android)](https://play.google.com/store/apps/details?id=edu.hm.cs.mobile.easy_study)
+You need to have permission to be a tester to download the app.
 
 # Usage
 
@@ -22,15 +22,12 @@ The overview is the main screen of the app. You can find there the different sta
 The progress summary combines all the time spent of every subject. The progess is calculated in function of the settings of the hours/week and the due date in order to let the user know his progress.
 You can track your time by pressing the subject card and starting the chronometer.
 ![homescreen](screenshot/IMG_4423.PNG)
-
 ![overview](screenshot/IMG_4427.PNG)
 
-![]
 ## Add / Edit / Delete
 You can add/edit/delete in this view. In order to add a subject, press the add button. Then you have to enter a title, room, description, exam type, priority, hours/week, due date and a color. You have to press the save button one time to confirm the input and a second press will save the subject.
 You can modify/delete  the subject input anytime you want by pressing during 1 second the subject card in the add view.
 ![add view](screenshot/IMG_4424.PNG)
-
 ![add view2](screenshot/IMG_4425.PNG)
 
 ## Export to calendar
