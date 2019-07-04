@@ -51,7 +51,8 @@ void main() {
 
   testWidgets('show home', (tester) async {
     var createApp = TestHelper.createApp(Home());
-    await tester.pumpWidget(createApp);
+    await tester.pumpWidget(createApp, Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 1));
     await tester.pump();
   });
 
