@@ -12,7 +12,6 @@ class SubjectOverview extends StatefulWidget {
 }
 
 class SubjectOverviewState extends State<SubjectOverview> {
-
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
@@ -20,7 +19,7 @@ class SubjectOverviewState extends State<SubjectOverview> {
         return new AppStateViewModel(store.state);
       },
       builder: (BuildContext context, AppStateViewModel vm) {
-        Container(
+        return new Container(
           child: FutureBuilder<List<Subject>>(
             future: vm.state.dbHelper.getSubjects(),
             builder: (context, snapshot) {
@@ -47,8 +46,9 @@ class SubjectOverviewState extends State<SubjectOverview> {
       },
     );
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       SnackBar snackBar = SnackBar(
