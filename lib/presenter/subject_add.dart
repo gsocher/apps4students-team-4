@@ -19,6 +19,7 @@ class SubjectAddState extends State<SubjectAdd> {
 
   void onChanged(HSVColor value) => this.color = value;
 
+  static const int MAXINPUTLENGTH = 50;
   static const String TITLE = 'title';
   static const String ROOM = 'room';
   static const String DESCRIPTION = 'description';
@@ -96,12 +97,22 @@ class SubjectAddState extends State<SubjectAdd> {
     }
   }
 
-  String validateDueDate(DateTime duedate) {
+  String _validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
     if (duedate.isBefore(DateTime.now())) {
       return 'the date must be ahead of now';
+    }
+    return null;
+  }
+
+  String validateHoursPerWeek(String hoursperweek) {
+    if (hoursperweek == null) {
+      return '$HOURS_PER_WEEK must not be empty.';
+    }
+    if (int.parse(hoursperweek) <= 0) {
+      return 'the hours cant be negative nor 0';
     }
     return null;
   }
@@ -130,13 +141,15 @@ class SubjectAddState extends State<SubjectAdd> {
         SizedBox(height: 15.0),
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a $ROOM' : null,
+              input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _room = value,
+          onSaved: (String value) =>  value.length == 0 ?
+          _room = "$ROOM not choosen" :
+          _room = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -148,13 +161,15 @@ class SubjectAddState extends State<SubjectAdd> {
         SizedBox(height: 15.0),
         TextFormField(
           validator: (String input) =>
-              input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+              input.length >= MAXINPUTLENGTH ? 'the $DESCRIPTION is too long.' : null,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
             });
           },
-          onSaved: (String value) => _description = value,
+          onSaved: (String value) => value.length == 0 ?
+          _description ="no $DESCRIPTION yet." :
+          _description = value,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
               labelStyle: TextStyle(color: Colors.black),
@@ -189,8 +204,7 @@ class SubjectAddState extends State<SubjectAdd> {
                 })),
         SizedBox(height: 15.0),
         TextFormField(
-          validator: (String input) =>
-              input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+          validator: validateHoursPerWeek,
           onFieldSubmitted: (String value) {
             setState(() {
               isValidated = false;
@@ -218,7 +232,7 @@ class SubjectAddState extends State<SubjectAdd> {
               filled: true,
               alignLabelWithHint: true,
               labelText: DUE_DATE),
-          validator: validateDueDate,
+          validator: _validateDueDate,
           onFieldSubmitted: (DateTime value) {
             setState(() {
               isValidated = false;
