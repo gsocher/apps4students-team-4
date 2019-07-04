@@ -25,13 +25,24 @@ You can track your time by pressing the subject card and starting the chronomete
 ![overview](screenshot/IMG_4427.PNG)
 
 ## Add / Edit / Delete
-You can add/edit/delete in this view. In order to add a subject, press the add button. Then you have to enter a title, room, description, exam type, priority, hours/week, due date and a color. You have to press the save button one time to confirm the input and a second press will save the subject.
-You can modify/delete  the subject input anytime you want by pressing during 1 second the subject card in the add view.
+You can add/edit/delete in this view. 
+* In order to add a subject, press the add button. Then you have to enter a title, room, description, exam type, priority, hours/week, due date and a color. You have to press the save button one time to confirm the input and a second press will save the subject.
+* You can modify/delete the subject with a long touch onto the subject card.
 ![add view](screenshot/IMG_4424.PNG)
 ![add view2](screenshot/IMG_4425.PNG)
 
+## Timetracking
+You are able to track the time you spent learning on a subject. You simply have to touch in the 'Overview' onto the card of a subject and you get directed to the timetracking. By pressing the start button the tracker will track, even when you close the app. When you hit the stop button you will save the time onto your subject. It's also possible to undo the tracked time, if you made it by accident.
+![time tracking](screenshot/Screenshot_20190704-220458.jpg)
+
 ## Export to calendar
-It is possible to export the due date to your personal calendar, it will create events with the subject titles. 
+It is possible to export the due date to your personal calendar, it will create events with the subject titles. Before that you have to accept the permissions. The permissions are needed to access the calendar and write to it. The export to calendar is found under 'settings'. 
+
+## Privacy Policy
+The privacy policy is located under 'settings'. ![See here!](https://github.com/mobileappdevhm19/apps4students-team-4/tree/develop/privacy)
 
 ## Map
-The map of the different campus of Hochschule München is available in this view. 
+The map of the different campus of Hochschule München is available in this view. It shows the location of the Hochschule located in Pasing, Stachus and Lothstraße. You are able to zoom into the map.
+
+# Credits to 
+Created my free logo at LogoMakr.com @logomakr_com stored under https://logomakr.com/9txuR3
