@@ -18,10 +18,10 @@ class SubjectEditOrDelete extends StatefulWidget {
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SubjectEditOrDeleteState();
+  State<StatefulWidget> createState() => SubjectEditOrDeleteState();
 }
 
-class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
+class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void onChanged(HSVColor value) => _color = value.toColor();
 
   static const String TITLE = 'title';
@@ -66,7 +66,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                     scrollDirection: Axis.vertical))));
   }
 
-  Subject _submit() {
+  Subject submit() {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
@@ -82,7 +82,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     return result;
   }
 
-  void _checkIfInputIsValid() {
+  void checkIfInputIsValid() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       setState(() {
@@ -107,7 +107,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     }
   }
 
-  String _validateDueDate(DateTime duedate) {
+  String validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
@@ -233,7 +233,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
             filled: true,
             alignLabelWithHint: true,
             labelText: DUE_DATE),
-        validator: _validateDueDate,
+        validator: validateDueDate,
         onFieldSubmitted: (DateTime value) {
           setState(() {
             isValidated = false;
@@ -272,14 +272,14 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                   color: Colors.grey,
                   size: 30,
                 ),
-                onPressed: () => _checkIfInputIsValid(),
+                onPressed: () => checkIfInputIsValid(),
               )),
           Visibility(
               visible: isValidated,
               child: new StoreConnector<AppState, VoidCallback>(
                   converter: (store) {
                 return () => store
-                  ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
+                  ..dispatch(UpdateSubject(submit(), new SubjectOverview()));
               }, builder: (context, callback) {
                 return new IconButton(
                   icon: Icon(
