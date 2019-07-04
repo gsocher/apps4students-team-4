@@ -48,6 +48,7 @@ The map of the different campus of Hochschule München is available in this view
 ## Architecture
 We used the ![redux](https://pub.dev/packages/flutter_redux) architecture. ![Learn more here!](https://www.youtube.com/watch?v=zKXz3pUkw9A&t=789s)
 It works like a store you put on top of ur app where you save the things you could need everywhere. We decided to save the widget which is displayed to the user, as well as the database helper. Changing the widget results in changing the state of the app which causes the widget tree to redraw. Also it is always nice to have access to the database. We decided to use this architecture, because then we can easily change the actual displayed widget and access the database wherever we need it instead of passing it down the tree.
+Another good thing about the architecture is, that it is easy to test. You just have to create the store and build the app.
 
 ## Things that could be added
 * We wanted to display a feedback on how long the student learned, f.e. 'Great job, now take a break'.
