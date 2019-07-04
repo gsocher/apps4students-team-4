@@ -80,7 +80,7 @@ class SubjectAddState extends State<SubjectAdd> {
       });
       SnackBar snackBar = SnackBar(
         content: Text(
-          "all inputs are correct!.",
+          "All inputs are correct!",
           style: TextStyle(color: Colors.white),
         ),
         duration: Duration(seconds: 2),
@@ -91,7 +91,7 @@ class SubjectAddState extends State<SubjectAdd> {
     } else {
       SnackBar snackBar = SnackBar(
         content: Text(
-          "please check your input again.",
+          "Please check your input again.",
           style: TextStyle(color: Colors.white),
         ),
         duration: Duration(hours: 1),

@@ -84,14 +84,6 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  SnackBar snackBar = SnackBar(
-    content: Text(
-      "Tipp: longpress a subject.",
-      style: TextStyle(color: Colors.white),
-    ),
-    duration: Duration(seconds: 5),
-    backgroundColor: Colors.black,
-  );
   void _showDialog() async {
     var html = await DefaultAssetBundle.of(context)
         .loadString('privacy/privacy_policy.html');
