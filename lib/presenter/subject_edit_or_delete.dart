@@ -122,6 +122,9 @@ class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     if (hoursperweek == null) {
       return '$HOURS_PER_WEEK must not be empty.';
     }
+    if (hoursperweek.length == 0) {
+      return "input cant be empty";
+    }
     if (int.parse(hoursperweek) <= 0) {
       return 'the hours cant be negative nor 0';
     }

@@ -111,6 +111,9 @@ class SubjectAddState extends State<SubjectAdd> {
     if (hoursperweek == null) {
       return '$HOURS_PER_WEEK must not be empty.';
     }
+    if (hoursperweek.length == 0) {
+      return "please enter hours per week";
+    }
     if (int.parse(hoursperweek) <= 0) {
       return 'the hours cant be negative nor 0';
     }

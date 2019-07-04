@@ -59,4 +59,13 @@ void main() {
     String have = createState.validateHoursPerWeek(input);
     expect(have, null);
   });
+
+  test('subject add validateHoursPerWeek no input', () {
+    var subjectAdd = SubjectEditOrDelete();
+    SubjectEditOrDeleteState createState = subjectAdd.createState();
+    String want = "input cant be empty";
+    String input = "";
+    String have = createState.validateHoursPerWeek(input);
+    expect(have, want);
+  });
 }
