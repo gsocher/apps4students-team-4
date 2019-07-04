@@ -76,4 +76,3 @@ gradlew
 gradlew.bat
 .gradle/
 pubspec.lock
-android/key.properties
