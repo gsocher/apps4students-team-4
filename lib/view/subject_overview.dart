@@ -53,7 +53,7 @@ class SubjectOverviewState extends State<SubjectOverview> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       SnackBar snackBar = SnackBar(
         content: Text(
-          "Tipp: longpress a subject to edit or delete it.",
+          'Tipp: longpress a subject to edit or delete it.',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
