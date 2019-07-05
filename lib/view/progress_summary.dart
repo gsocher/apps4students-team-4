@@ -22,6 +22,8 @@ class ProgressSummaryState extends State<ProgressSummary> {
 
   final double fontSizeNormal = 20.0;
 
+  static bool tipShown = false;
+
   Widget build(BuildContext context) {
     return Container(
       margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
@@ -31,7 +33,7 @@ class ProgressSummaryState extends State<ProgressSummary> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         verticalDirection: VerticalDirection.down,
         children: <Widget>[
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
@@ -85,6 +87,25 @@ class ProgressSummaryState extends State<ProgressSummary> {
     sb.writeAll([totalh, "h ", totalmn, "mn ", totalsec, 's']);
     return sb.toString();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (tipShown) {
+        return;
+      }
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "Tip: Tap a progress bar to start time tracking.",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+      tipShown = true;
+    });
+  }
 }
 
 // ignore: must_be_immutable
@@ -97,7 +118,6 @@ class SubjectCardProgressBar extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -11,7 +11,7 @@ description: An app which will ease your life
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 3.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -23,23 +23,35 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  font_awesome_flutter: "^8.0.1"
   path_provider: any
   sqflite: any
   fluttertoast: any
   flutter_hsvcolor_picker: ^0.0.1
   flutter_redux: ^0.5.3
-  device_calendar: ^0.1.1
+  device_calendar: ^0.1.2+2
   date_format: ^1.0.6
   permission_handler: ^3.1.0
   photo_view:
   page_view_indicators:
   flutter_datetime_picker: ^1.2.1
   datetime_picker_formfield: ^0.1.1
+  firebase_core: ^0.4.0+6
+  firebase_analytics: ^3.0.3
+  flutter_html: ^0.8.2
+  mockito: ^4.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
+  flutter_launcher_icons: "^0.7.0"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "graphics/launcher_2.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -58,6 +70,9 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - graphics/
+    - privacy/
+    - graphics/launcher.png
+    - graphics/launcher_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

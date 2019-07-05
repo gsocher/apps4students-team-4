@@ -1,7 +1,9 @@
 import 'package:device_calendar/device_calendar.dart';
+import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class Settings extends StatefulWidget {
   Settings();
@@ -30,7 +32,8 @@ class SettingsPageState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     List<Subject> events = new List<Subject>();
-    final Future<List<Subject>> subjects = DBHelper().getSubjects();
+    final Future<List<Subject>> subjects =
+        DBHelper(DBCreator().database).getSubjects();
     subjects.then((value) {
       for (var subject in value) {
         events.add(subject);
@@ -39,13 +42,38 @@ class SettingsPageState extends State<Settings> {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            // TODO: 03.05.2019 what could be good settings to set?
-            child: RaisedButton(
-              child: Text('Export to Calendar'),
-              onPressed: () {
-                addEventsToCalendar(events);
-              },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text('Privacy'),
+                  onPressed: _showDialog,
+                ),
+                RaisedButton(
+                  child: Text('Export to Calendar'),
+                  onPressed: () => addEventsToCalendar(events),
+                )
+              ],
             )));
+  }
+
+  void _showDialog() async {
+    var html = await DefaultAssetBundle.of(context)
+        .loadString('privacy/privacy_policy.html');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("Privacy Policy"),
+              content: Scrollbar(
+                  child: SingleChildScrollView(
+                child: Html(
+                  data: html,
+                ),
+              )));
+        });
   }
 
   Future addEventsToCalendar(List<Subject> events) async {
@@ -57,7 +85,13 @@ class SettingsPageState extends State<Settings> {
           subject.dueDate.day, subject.dueDate.hour + subject.hoursWeek);
       eventToCreate.description = subject.description;
       await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+      SnackBar snackBar =
+          SnackBar(content: Text('Successfully added to calendar'));
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
+      Scaffold.of(context).showSnackBar(snackBar);
     }
+    return true;
   }
 
   void _retrieveCalendars() async {
@@ -66,6 +100,17 @@ class SettingsPageState extends State<Settings> {
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
         if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+          SnackBar snackBar = SnackBar(
+            content: Text(
+              "Something went wrong. Please accept the permissions.",
+              style: TextStyle(color: Colors.white),
+            ),
+            duration: Duration(seconds: 5),
+            backgroundColor: Colors.red,
+          );
+          Scaffold.of(context)
+              .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
+          Scaffold.of(context).showSnackBar(snackBar);
           return;
         }
       }
@@ -73,6 +118,8 @@ class SettingsPageState extends State<Settings> {
       setState(() {
         calendars = calendarsResult?.data;
       });
+
+      print(calendars);
     } on Exception catch (e) {
       print(e);
     }

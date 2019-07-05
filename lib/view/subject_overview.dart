@@ -8,10 +8,11 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class SubjectOverview extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SubjectOverviewState();
+  State<StatefulWidget> createState() => SubjectOverviewState();
 }
 
-class _SubjectOverviewState extends State<SubjectOverview> {
+class SubjectOverviewState extends State<SubjectOverview> {
+  static bool tipShown = false;
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, AppStateViewModel>(
@@ -45,5 +46,24 @@ class _SubjectOverviewState extends State<SubjectOverview> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (tipShown) {
+        return;
+      }
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          'Tip: Longpress a subject to edit or delete it.',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+      tipShown = true;
+    });
   }
 }

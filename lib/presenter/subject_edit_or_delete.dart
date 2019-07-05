@@ -18,15 +18,16 @@ class SubjectEditOrDelete extends StatefulWidget {
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SubjectEditOrDeleteState();
+  State<StatefulWidget> createState() => SubjectEditOrDeleteState();
 }
 
-class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
+class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
   void onChanged(HSVColor value) => _color = value.toColor();
 
+  static const int MAXINPUTLENGTH = 50;
   static const String TITLE = 'title';
   static const String ROOM = 'room';
-  static const String DESCRIPTION = 'descprition';
+  static const String DESCRIPTION = 'description';
   static const String HOURS_PER_WEEK = 'hours per week';
   static const String DUE_DATE = 'Due Date';
   final dateFormat = DateFormat("EE, yyyy-MM-dd 'at' h:mm a");
@@ -66,7 +67,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                     scrollDirection: Axis.vertical))));
   }
 
-  Subject _submit() {
+  Subject submit() {
     Subject result;
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
@@ -82,37 +83,63 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
     return result;
   }
 
-  void _checkIfInputIsValid() {
+  void checkIfInputIsValid() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       setState(() {
         isValidated = true;
       });
-    } else {
-      showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: const Text('Please check your input again'),
-              actions: <Widget>[
-                FlatButton(
-                  child: const Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                )
-              ]);
-        },
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "All inputs are correct!.",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.green,
       );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
+    } else {
+      SnackBar snackBar = SnackBar(
+        content: Text(
+          "Please check your input again.",
+          style: TextStyle(color: Colors.white),
+        ),
+        duration: Duration(hours: 1),
+        action: SnackBarAction(
+            label: 'Ok',
+            onPressed: () => Scaffold.of(context)
+                .removeCurrentSnackBar(reason: SnackBarClosedReason.action)),
+        backgroundColor: Colors.red,
+      );
+      Scaffold.of(context)
+          .removeCurrentSnackBar(reason: SnackBarClosedReason.remove);
+      Scaffold.of(context).showSnackBar(snackBar);
+      return;
     }
   }
 
-  String _validateDueDate(DateTime duedate) {
+  String validateDueDate(DateTime duedate) {
     if (duedate == null) {
       return '$DUE_DATE must not be empty.';
     }
     if (duedate.isBefore(DateTime.now())) {
       return 'the date must be ahead of now';
+    }
+    return null;
+  }
+
+  String validateHoursPerWeek(String hoursperweek) {
+    if (hoursperweek == null) {
+      return '$HOURS_PER_WEEK must not be empty.';
+    }
+    if (hoursperweek.length == 0) {
+      return "input cant be empty";
+    }
+    if (int.parse(hoursperweek) <= 0) {
+      return 'the hours cant be negative nor 0';
     }
     return null;
   }
@@ -142,13 +169,14 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       TextFormField(
         initialValue: _room,
         validator: (String input) =>
-            input.length <= 0 ? 'please enter a $ROOM' : null,
+            input.length >= MAXINPUTLENGTH ? 'the input is too long.' : null,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
           });
         },
-        onSaved: (String value) => _room = value,
+        onSaved: (String value) =>
+            value.length == 0 ? _room = "$ROOM not choosen" : _room = value,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.black),
@@ -160,14 +188,17 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       SizedBox(height: 15.0),
       TextFormField(
         initialValue: _description,
-        validator: (String input) =>
-            input.length <= 0 ? 'please enter a $DESCRIPTION' : null,
+        validator: (String input) => input.length >= MAXINPUTLENGTH
+            ? 'the $DESCRIPTION is too long.'
+            : null,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
           });
         },
-        onSaved: (String value) => _description = value,
+        onSaved: (String value) => value.length == 0
+            ? _description = "no $DESCRIPTION yet."
+            : _description = value,
         style: TextStyle(fontSize: 20),
         decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.black),
@@ -203,8 +234,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
       SizedBox(height: 15.0),
       TextFormField(
         initialValue: _hoursPerWeek,
-        validator: (String input) =>
-            input.length <= 0 ? 'please enter the $HOURS_PER_WEEK' : null,
+        validator: validateHoursPerWeek,
         onFieldSubmitted: (String value) {
           setState(() {
             isValidated = false;
@@ -233,7 +263,7 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
             filled: true,
             alignLabelWithHint: true,
             labelText: DUE_DATE),
-        validator: _validateDueDate,
+        validator: validateDueDate,
         onFieldSubmitted: (DateTime value) {
           setState(() {
             isValidated = false;
@@ -272,14 +302,14 @@ class _SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {
                   color: Colors.grey,
                   size: 30,
                 ),
-                onPressed: () => _checkIfInputIsValid(),
+                onPressed: () => checkIfInputIsValid(),
               )),
           Visibility(
               visible: isValidated,
               child: new StoreConnector<AppState, VoidCallback>(
                   converter: (store) {
                 return () => store
-                  ..dispatch(UpdateSubject(_submit(), new SubjectOverview()));
+                  ..dispatch(UpdateSubject(submit(), new SubjectOverview()));
               }, builder: (context, callback) {
                 return new IconButton(
                   icon: Icon(

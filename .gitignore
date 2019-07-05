@@ -76,3 +76,5 @@ gradlew
 gradlew.bat
 .gradle/
 pubspec.lock
+android/key.properties
+android/app/build.gradle

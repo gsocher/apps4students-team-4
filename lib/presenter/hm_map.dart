@@ -3,8 +3,8 @@ import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:photo_view/photo_view.dart';
 
 class HmMap extends StatelessWidget {
-  final _controller = PageController(initialPage: 0);
-  final _currentPageNotifier = ValueNotifier<int>(0);
+  final controller = PageController(initialPage: 0);
+  final currentPageNotifier = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class HmMap extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               PageView(
-                  controller: _controller,
+                  controller: controller,
                   children: <Widget>[
                     PhotoView(
                         imageProvider:
@@ -26,7 +26,7 @@ class HmMap extends StatelessWidget {
                         imageProvider: AssetImage('graphics/campus_pasing.jpg'))
                   ],
                   onPageChanged: (int index) {
-                    _currentPageNotifier.value = index;
+                    currentPageNotifier.value = index;
                   }),
               Positioned(
                 left: 0.0,
@@ -36,7 +36,7 @@ class HmMap extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: CirclePageIndicator(
                     itemCount: 3,
-                    currentPageNotifier: _currentPageNotifier,
+                    currentPageNotifier: currentPageNotifier,
                   ),
                 ),
               )
