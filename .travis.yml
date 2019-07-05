@@ -57,21 +57,21 @@ jobs:
     #        - ../flutter/bin/flutter doctor
     #      script:
     #        - ../flutter/bin/flutter -v build ios --no-codesign
-    - stage: Deploying
-      if: branch = master
-      skript: skip
-      before_deploy:
-        - git config --global user.email "builds@travis-ci.com"
-        - git config --global user.name "Travis CI"
-      language: generic
-      deploy:
-        overwrite: true
-        provider: releases
-        api_key: ${GithubToken}
-        file:
-          #          - "/build/app/outputs/ipa/release/app-release.ipa"
-          - "/build/app/outputs/apk/release/app-release.apk"
-        skip_cleanup: true
+#    - stage: Deploying
+#      if: branch = master
+#      skript: skip
+#      before_deploy:
+#        - git config --global user.email "builds@travis-ci.com"
+#        - git config --global user.name "Travis CI"
+#      language: generic
+#      deploy:
+#        overwrite: true
+#        provider: releases
+#        api_key: ${GithubToken}
+#        file:
+#          #          - "/build/app/outputs/ipa/release/app-release.ipa"
+#          - "/build/app/outputs/apk/release/app-release.apk"
+#        skip_cleanup: true
 cache:
   directories:
     - $HOME/.pub-cache
