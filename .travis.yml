@@ -63,10 +63,6 @@ jobs:
       before_deploy:
         - git config --global user.email "builds@travis-ci.com"
         - git config --global user.name "Travis CI"
-        - export GIT_TAG=$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
-        - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-        - git push -q https://$TAGPERM@github.com/mobileappdevhm19/apps4students-team-4 --tags
-        - ls -R
       language: generic
       deploy:
         overwrite: true
