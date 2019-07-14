@@ -1,8 +1,9 @@
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:photo_view/photo_view.dart';
 
-class HmMap extends StatelessWidget {
+class HmMap extends AppBarActionsStateless {
   final controller = PageController(initialPage: 0);
   final currentPageNotifier = ValueNotifier<int>(0);
 
@@ -43,5 +44,10 @@ class HmMap extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
   }
 }

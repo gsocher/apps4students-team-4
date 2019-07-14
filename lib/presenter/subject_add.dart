@@ -1,4 +1,5 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
@@ -9,9 +10,19 @@ import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';
 
-class SubjectAdd extends StatefulWidget {
+class SubjectAdd extends AppBarActionsStateful {
   @override
   State<StatefulWidget> createState() => SubjectAddState();
+
+  @override
+  List<Widget> getAppBarActions() {
+    return [
+      IconButton(
+        icon: Icon(Icons.save),
+        onPressed: () {},
+      )
+    ];
+  }
 }
 
 class SubjectAddState extends State<SubjectAdd> {

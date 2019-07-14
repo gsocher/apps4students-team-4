@@ -1,3 +1,4 @@
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/presenter/hm_map.dart';
 import 'package:easy_study/presenter/settings.dart';
 import 'package:easy_study/presenter/subject_add.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends AppBarActionsStateful {
   final FirebaseAnalytics analytics;
   final FirebaseAnalyticsObserver observer;
 
@@ -19,6 +20,11 @@ class MainScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() =>
       _MainScreenState(analytics: analytics, observer: observer);
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
+  }
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -46,9 +52,7 @@ class _MainScreenState extends State<MainScreen> {
           converter: (store) => store,
           builder: (context, callback) {
             return new Scaffold(
-                appBar: AppBar(
-                  title: Text("Exam Planer"),
-                ),
+                appBar: callback.state.appBar,
                 bottomNavigationBar: BottomNavigationBar(
                     onTap: (index) => _changeView(index, callback),
                     type: BottomNavigationBarType.fixed,

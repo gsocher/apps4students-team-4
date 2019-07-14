@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/exam_type.dart';
 import 'package:easy_study/model/priority.dart';
 import 'package:easy_study/model/subject.dart';
@@ -12,13 +13,18 @@ import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';
 
-class SubjectEditOrDelete extends StatefulWidget {
+class SubjectEditOrDelete extends AppBarActionsStateful {
   final Subject subject;
 
   const SubjectEditOrDelete({Key key, this.subject}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => SubjectEditOrDeleteState();
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
+  }
 }
 
 class SubjectEditOrDeleteState extends State<SubjectEditOrDelete> {

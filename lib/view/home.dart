@@ -1,3 +1,4 @@
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/store/app_state.dart';
 import 'package:easy_study/view/main_screen.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-class Home extends StatefulWidget {
+class Home extends AppBarActionsStateful {
   final FirebaseAnalytics analytics;
   final FirebaseAnalyticsObserver observer;
 
@@ -18,6 +19,11 @@ class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() =>
       _HomeState(analytics: analytics, observer: observer);
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
+  }
 }
 
 class _HomeState extends State<Home> {

@@ -1,3 +1,4 @@
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/presenter/time_tracking.dart';
 import 'package:easy_study/store/app_state.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-class SubjectProgressBar extends StatelessWidget {
+class SubjectProgressBar extends AppBarActionsStateless {
   final Subject subject;
   final double fontSizeNormal = 17.0;
   final Color textColor = Colors.black87;
@@ -128,5 +129,10 @@ class SubjectProgressBar extends StatelessWidget {
           .truncateToDouble();
     }
     return ratio;
+  }
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
   }
 }

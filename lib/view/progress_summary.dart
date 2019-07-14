@@ -1,18 +1,24 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:date_format/date_format.dart';
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 import 'tween.dart';
 
-class ProgressSummary extends StatefulWidget {
+class ProgressSummary extends AppBarActionsStateful {
   final List<Subject> _subjects;
 
   ProgressSummary(this._subjects);
 
   State<StatefulWidget> createState() => ProgressSummaryState(_subjects);
+
+  @override
+  List<Widget> getAppBarActions() {
+    return null;
+  }
 }
 
 class ProgressSummaryState extends State<ProgressSummary> {

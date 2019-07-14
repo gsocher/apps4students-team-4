@@ -1,16 +1,23 @@
 import 'package:device_calendar/device_calendar.dart';
 import 'package:easy_study/database/db_creator.dart';
 import 'package:easy_study/database/db_helper.dart';
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-class Settings extends StatefulWidget {
+class Settings extends AppBarActionsStateful {
   Settings();
 
   @override
   SettingsPageState createState() {
     return new SettingsPageState();
+  }
+
+  @override
+  List<Widget> getAppBarActions() {
+    // TODO: implement getAppBarActions
+    return null;
   }
 }
 

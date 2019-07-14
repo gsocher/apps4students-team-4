@@ -1,4 +1,5 @@
 import 'package:date_format/date_format.dart';
+import 'package:easy_study/interface/AppBarActions.dart';
 import 'package:easy_study/model/subject.dart';
 import 'package:easy_study/presenter/subject_edit_or_delete.dart';
 import 'package:easy_study/store/app_state.dart';
@@ -6,13 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-class SubjectCard extends StatefulWidget {
+class SubjectCard extends AppBarActionsStateful {
   final Subject subject;
 
   const SubjectCard({Key key, this.subject}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SubjectCardState();
+
+  @override
+  List<Widget> getAppBarActions() {
+    // TODO: implement getAppBarActions
+    return null;
+  }
 }
 
 class _SubjectCardState extends State<SubjectCard> {
@@ -75,25 +82,14 @@ class _SubjectCardState extends State<SubjectCard> {
                                   ),
                                 ),
                                 Text(
-                                  formatDate(widget.subject.dueDate, [
-                                    dd,
-                                    '/',
-                                    mm,
-                                    '/',
-                                    yyyy,
-                                    ' ',
-                                    hh,
-                                    ':',
-                                    mm,
-                                    am,
-                                  ]).toString(),
+                                  getCorrelatingFormat(),
                                   style: TextStyle(
                                     color: textColor,
                                     fontSize: fontText,
                                   ),
                                 ),
                                 Text(
-                                  widget.subject.room.toString(),
+                                  widget.subject.room,
                                   style: TextStyle(
                                     color: textColor,
                                     fontSize: fontText,
@@ -137,5 +133,36 @@ class _SubjectCardState extends State<SubjectCard> {
                     ),
                   )));
         });
+  }
+
+  String getCorrelatingFormat() {
+    String nextDays = '';
+    var date = widget.subject.dueDate;
+    var now = DateTime.now();
+    if (now.isAfter(date)) {
+      return 'Over';
+    }
+    var compareDate = DateTime(date.year, date.month, date.day);
+    if (now.isAfter(compareDate)) {
+      nextDays = 'Today, ';
+    } else if (now.add(Duration(days: 1)).isAfter(compareDate)) {
+      nextDays = 'Tomorrow, ';
+    } else if (now.add(Duration(days: 2)).isAfter(compareDate)) {
+      nextDays = 'Overmorrow, ';
+    }
+    if (nextDays.isNotEmpty) {
+      return nextDays + formatDate(date, [HH, ':', nn, ' ', am]);
+    }
+    return formatDate(widget.subject.dueDate, [
+      dd,
+      ' ',
+      M,
+      ', ',
+      HH,
+      ':',
+      nn,
+      ' ',
+      am,
+    ]);
   }
 }
